@@ -5,6 +5,10 @@ import React from "react";
 import LoginForm from "../components/LoginForm";
 import {connect} from 'react-redux';
 import * as types from "../constants/actionTypes";
+import {Row,Col,Container}from 'react-grid-system'
+import MatLoginForm from '../components/MatLoginForm';
+import CompanyRegistrationForm from '../components/CompanyRegisterForm';
+
 
 class LoginPage extends React.Component{
 
@@ -22,7 +26,16 @@ class LoginPage extends React.Component{
     render(){
         return (
             <div style={styles.mainDiv} >
-                            <LoginForm onSubmit = {this.doLogin.bind(this)}/>
+                <Container fluid>
+                    <Row>
+                        <Col lg={4}>
+                        </Col>
+                        <Col  lg={4}>
+                            <MatLoginForm onSubmit = {this.doLogin.bind(this)}/>
+
+                        </Col>
+                    </Row>
+                </Container>
             </div>
 
         );
