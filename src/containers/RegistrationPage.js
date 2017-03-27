@@ -7,6 +7,7 @@ import {connect} from 'react-redux';
 import * as types from "../constants/actionTypes";
 
 
+
 class RegistrationPage extends Component{
     handleEmployer(formData){
         console.log(formData);
