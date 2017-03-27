@@ -64,11 +64,7 @@ const styles = {
 
     },
     bar: {
-
         background:'#37474F',
-
-
-
     },
     mainDiv:{
         marginTop:'50px',
