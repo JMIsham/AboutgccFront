@@ -3,27 +3,31 @@ import reduxImmutableStateInvariant from 'redux-immutable-state-invariant';
 import rootReducer from '../reducers';
 import createSagaMiddleweare, {END}  from 'redux-saga';
 import {createLogger} from 'redux-logger';
+import {loadStore,saveStore} from '../Connectivity/localStorage';
 import sagas from '../sagas';
 
-
+const persistedState = loadStore();
 const loggerMiddleWare  = createLogger();
 const sagaMiddleweare = createSagaMiddleweare();
-function configureStoreProd(initialState) {
+function configureStoreProd() {
   const middlewares = [
     // Add other middleware on this line...
   sagaMiddleweare
   ];
 
-  const store = createStore(rootReducer, initialState, compose(
+  const store = createStore(rootReducer, persistedState, compose(
     applyMiddleware(...middlewares)
     )
   );
+  store.subscribe(()=>{
+    saveStore(store.getState());
+  });
   sagaMiddleweare.run(sagas);
   store.close = () => store.dispatch(END);
   return store;
 }
 
-function configureStoreDev(initialState) {
+function configureStoreDev() {
   const middlewares = [
     // Add other middleware on this line...
 
@@ -35,11 +39,13 @@ function configureStoreDev(initialState) {
   ];
 
   const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; // add support for Redux dev tools
-  const store = createStore(rootReducer, initialState, composeEnhancers(
+  const store = createStore(rootReducer, persistedState, composeEnhancers(
     applyMiddleware(...middlewares)
     )
   );
-
+  store.subscribe(()=>{
+    saveStore(store.getState());
+  });
   if (module.hot) {
     // Enable Webpack hot module replacement for reducers
     module.hot.accept('../reducers', () => {

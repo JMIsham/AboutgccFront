@@ -29,7 +29,7 @@ export default function userReducer(state =initialState.user,action ){
 
         case(actionTypes.LOGOUT_COMPLETED):
             //when logged out returns to thee initial state
-            return initialState.User;
+            return initialState.user;
 
         case (actionTypes.LOGIN_FAILED):
             //when the login is failed change the store accordingly
