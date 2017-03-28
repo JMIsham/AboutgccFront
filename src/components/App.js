@@ -6,6 +6,7 @@ import NavbarButton from '../components/NavbarButton';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import {Col,Row,Container} from 'react-grid-system';
 import LoginPage from '../containers/loginPage';
+import {connect} from 'react-redux';
 import "babel-es6-polyfill";
 injectTapEventPlugin();
 
@@ -20,7 +21,8 @@ class App extends React.Component {
         this.props.router.push("/about");
     }
   render() {
-    return (
+      console.log(this.props);
+      return (
 
       <div>
           <Toolbar style={styles.bar}>
@@ -78,5 +80,12 @@ const styles = {
 App.propTypes = {
   children: PropTypes.element
 };
+function mapStateToProps(state){
+    return {
+        user:state.user
+    }
+}
 
-export default App;
+export default connect(
+    mapStateToProps
+)(App);

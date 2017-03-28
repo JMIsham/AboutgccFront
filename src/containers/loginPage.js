@@ -7,13 +7,20 @@ import {connect} from 'react-redux';
 import * as types from "../constants/actionTypes";
 import {Row,Col,Container}from 'react-grid-system'
 import MatLoginForm from '../components/MatLoginForm';
+var Router = require('react-router');
 import CompanyRegistrationForm from '../components/CompanyRegisterForm';
 
 
 class LoginPage extends React.Component{
+    constructor(props) {
+        super(props);
 
+    }
+    componentWillReceiveProps(nextProps){
+        console.log("login page next props",nextProps);
+    }
     doLogin(formData) {
-        console.log(this.props);
+
         this.props.dispatch({
             type: types.LOGIN_REQUESTED,
             payload: {
@@ -24,6 +31,7 @@ class LoginPage extends React.Component{
 
     }
     render(){
+
         return (
             <div style={styles.mainDiv} >
                 <Container fluid>
@@ -58,6 +66,11 @@ const styles = {
       marginTop:'50px',
     }
 };
+function mapStateToProps(state){
+    return {
+        user:state.user
+    }
+}
 
-export default connect()(LoginPage);
+export default connect(mapStateToProps)(LoginPage);
 // export default LoginPage;
