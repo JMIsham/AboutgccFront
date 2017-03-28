@@ -33,6 +33,7 @@
   "dependencies": {
     "babel-es6-polyfill": "1.1.0",
     "classnames": "2.2.5",
+    "jwt-decode": "2.2.0",
     "lodash": "4.17.4",
     "material-ui": "0.17.1",
     "object-assign": "4.1.0",

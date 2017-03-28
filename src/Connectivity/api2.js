@@ -1,4 +1,4 @@
-
+import ApiError from '../errors/ApiCallError';
 export async  function login(username,password){
     console.log("called!!!!!! :)");
     const url = "http://127.0.0.1/aboutgcc/web/app_dev.php/login";
@@ -13,12 +13,19 @@ export async  function login(username,password){
             'password' : password
         })
     };
+
     const response = await fetch(url,request);
-    const data= response.json();
+    const data= await response.json();
+
     if(response.status==200){
         console.log(data);
         return data;
     }
+    throw new ApiError(
+        data.message||response.statusText,
+        response.status
+    );
+
 
 }
 export async function registerEmployer(formData){

@@ -14,5 +14,10 @@ export default {
       annual: 0,
       threeYear: 0
     }
+  },
+  User: {
+    loggedIn: false,
+    loginRequestPending: false
   }
+
 };
