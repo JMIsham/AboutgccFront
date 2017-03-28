@@ -16,9 +16,7 @@ export const loadStore=()=>{
 };
 export const saveStore =(state)=>{
     try {
-        const serealizeState = JSON.stringify({
-            userData:state.user
-            });
+        const serealizeState = JSON.stringify(state);
         localStorage.setItem('userData',serealizeState);
     }catch (e){
             console.error(e);
