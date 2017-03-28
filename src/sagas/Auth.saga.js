@@ -41,13 +41,13 @@ export function *watchLoginSucceeded(){
     yield takeLatest(types.LOGIN_SUCCEEDED,doLoginSucceeded);
 }
 export function *doLoginSucceeded(action){
-    const {token} = action.payload;
+    const token = action.payload.token;
     const output = yield call(jwtDecode,token);
     const {exp,id,roles,username} = output;
     yield put(
         {
             type:types.LOGIN_COMPLETED,
-            payload:{exp,id,roles,username}
+            payload:{exp,id,roles,username,token}
         }
     );
 }

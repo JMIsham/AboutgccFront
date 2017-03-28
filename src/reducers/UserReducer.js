@@ -4,7 +4,7 @@
 import initialState from './initialState';
 import * as actionTypes from '../constants/actionTypes';
 import objectAssign from 'object-assign';
-export default function userReducer(state =initialState.User,action ){
+export default function userReducer(state =initialState.user,action ){
     let newState;
     switch (action.type){
 
@@ -24,6 +24,7 @@ export default function userReducer(state =initialState.User,action ){
             newState.loginRequestPending=false;
             newState.loggedIn=true;
             newState.roles=action.payload.roles;
+            newState.token = action.payload.token;
             return newState;
 
         case(actionTypes.LOGOUT_COMPLETED):

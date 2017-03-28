@@ -14,10 +14,11 @@ import CompanyRegistrationForm from '../components/CompanyRegisterForm';
 class LoginPage extends React.Component{
     constructor(props) {
         super(props);
+        // console.log("constructor is been called!!");
 
     }
     componentWillReceiveProps(nextProps){
-        console.log("login page next props",nextProps);
+        // console.log("login page next props",nextProps);
     }
     doLogin(formData) {
 

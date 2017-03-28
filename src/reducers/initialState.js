@@ -15,7 +15,7 @@ export default {
       threeYear: 0
     }
   },
-  User: {
+  user: {
     loggedIn: false,
     loginRequestPending: false
   }

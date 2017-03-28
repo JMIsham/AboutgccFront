@@ -1,13 +1,13 @@
 import React, { PropTypes } from 'react';
-import { Link, IndexLink } from 'react-router';
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
 import FlatButton from 'material-ui/FlatButton';
 import NavbarButton from '../components/NavbarButton';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import {Col,Row,Container} from 'react-grid-system';
-import LoginPage from '../containers/loginPage';
 import {connect} from 'react-redux';
+import * as types from '../constants/actionTypes';
 import "babel-es6-polyfill";
+var Router = require('react-router');
 injectTapEventPlugin();
 
 // This is a class-based component because the current
@@ -20,8 +20,32 @@ class App extends React.Component {
     handleAboutUs(){
         this.props.router.push("/about");
     }
+    handlelogin(){
+        this.props.router.push("/login");
+    }
+    handlelogout(){
+        this.props.dispatch({
+            //when this method is called the reducer will be reset and all the tokens will be forgoten
+            type: types.LOGOUT_COMPLETED,
+
+        });
+    }
+    componentWillReceiveProps(nextProps){
+        // if(nextProps.user.loggedIn) Router.browserHistory.push("/about");
+
+    }
+
+    button(){
+        if(this.props.user.loggedIn){
+            return(
+                <NavbarButton lable="Logout" handle={this.handlelogout.bind(this)}/>
+        );
+        }
+        return(
+            <NavbarButton lable="Login" handle={this.handlelogin.bind(this)}/>
+        )
+    }
   render() {
-      console.log(this.props);
       return (
 
       <div>
@@ -45,7 +69,6 @@ class App extends React.Component {
                       backgroundColor: "#607d8b",
                       marginLeft:'2px',
 
-
                   }}/>
                   <NavbarButton lable="About Us" handle={this.handleAboutUs.bind(this)}/>
                   <ToolbarSeparator style={{
@@ -55,6 +78,7 @@ class App extends React.Component {
 
                   }}/>
 
+                  {this.button()}
 
 
               </ToolbarGroup>
