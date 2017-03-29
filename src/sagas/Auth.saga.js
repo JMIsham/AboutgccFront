@@ -2,6 +2,7 @@ import * as types from '../constants/actionTypes';
 import * as api2 from "../Connectivity/api2";
 import {call,put} from 'redux-saga/effects';
 import {takeLatest} from "redux-saga/effects";
+import {push} from 'react-router-redux'
 import jwtDecode from 'jwt-decode';
 
 
@@ -50,5 +51,19 @@ export function *doLoginSucceeded(action){
             payload:{exp,id,roles,username,token}
         }
     );
+    yield put(push('/profile'));
+
+}
+
+
+export function *watchLogoutCalled(){
+    yield takeLatest(types.LOGOUT_REQUESTED,doLogoutCalled);
+}
+
+export function *doLogoutCalled(){
+    yield put({
+            type:types.LOGOUT_COMPLETED
+        });
+    yield put(push('/about'));
 }
 

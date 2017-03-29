@@ -6,6 +6,8 @@ export default function* rootSaga(){
     yield [
         fork(authSaga.watchLogin),
         fork(authSaga.watchLoginSucceeded),
+        fork(authSaga.watchLogoutCalled),
         fork(register.watchEmployerRegister),
+
     ];
 }

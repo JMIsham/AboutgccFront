@@ -5,13 +5,19 @@ import createSagaMiddleweare, {END}  from 'redux-saga';
 import {createLogger} from 'redux-logger';
 import {loadStore,saveStore} from '../Connectivity/localStorage';
 import sagas from '../sagas';
+import {routerMiddleware} from 'react-router-redux';
+import {browserHistory} from "react-router";
+import _ from 'lodash';
 
+
+const routerMW = routerMiddleware(browserHistory);
 const persistedState = loadStore();
 const loggerMiddleWare  = createLogger();
 const sagaMiddleweare = createSagaMiddleweare();
 function configureStoreProd() {
   const middlewares = [
     // Add other middleware on this line...
+    routerMW,
   sagaMiddleweare
   ];
 
@@ -20,7 +26,9 @@ function configureStoreProd() {
     )
   );
   store.subscribe(()=>{
-    saveStore(store.getState());
+    saveStore({
+      user:store.getState().user,
+    });
   });
   sagaMiddleweare.run(sagas);
   store.close = () => store.dispatch(END);
@@ -33,6 +41,7 @@ function configureStoreDev() {
 
     // Redux middleware that spits an error on you when you try to mutate your state either inside a dispatch or between dispatches.
     reduxImmutableStateInvariant(),
+    routerMW,
     sagaMiddleweare,
     loggerMiddleWare
 
@@ -44,7 +53,9 @@ function configureStoreDev() {
     )
   );
   store.subscribe(()=>{
-    saveStore(store.getState());
+    saveStore({
+      user:store.getState().user,
+        });
   });
   if (module.hot) {
     // Enable Webpack hot module replacement for reducers

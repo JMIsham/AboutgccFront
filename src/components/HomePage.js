@@ -1,12 +1,10 @@
 import React from 'react';
-import {Link} from 'react-router';
-import Loginpage from '../containers/loginPage'
+
 
 const HomePage = () => {
   return (
     <div>
-      <Loginpage/>
-
+        <h1>this is the homepage</h1>
     </div>
   );
 };

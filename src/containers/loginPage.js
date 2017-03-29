@@ -9,16 +9,20 @@ import {Row,Col,Container}from 'react-grid-system'
 import MatLoginForm from '../components/MatLoginForm';
 var Router = require('react-router');
 import CompanyRegistrationForm from '../components/CompanyRegisterForm';
-
+import {withRouter} from 'react-router';
 
 class LoginPage extends React.Component{
-    constructor(props) {
-        super(props);
-        // console.log("constructor is been called!!");
+
+    componentWillMount(){
+        if(this.props.user.loggedIn){
+            this.props.router.replace("/profile");
+        }
 
     }
     componentWillReceiveProps(nextProps){
-        // console.log("login page next props",nextProps);
+        if(this.props.user.loggedIn){
+            this.props.router.replace("/profile");
+        }
     }
     doLogin(formData) {
 
@@ -72,6 +76,6 @@ function mapStateToProps(state){
         user:state.user
     }
 }
-
+LoginPage = withRouter(LoginPage);
 export default connect(mapStateToProps)(LoginPage);
 // export default LoginPage;

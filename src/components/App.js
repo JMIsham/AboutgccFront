@@ -24,11 +24,7 @@ class App extends React.Component {
         this.props.router.push("/login");
     }
     handlelogout(){
-        this.props.dispatch({
-            //when this method is called the reducer will be reset and all the tokens will be forgoten
-            type: types.LOGOUT_COMPLETED,
-
-        });
+        this.props.router.push("/logout");
     }
     componentWillReceiveProps(nextProps){
         // if(nextProps.user.loggedIn) Router.browserHistory.push("/about");
