@@ -20,6 +20,7 @@ class LoginPage extends React.Component{
 
     }
     componentWillReceiveProps(nextProps){
+        console.log("next props in login page",nextProps);
         if(this.props.user.loggedIn){
             this.props.router.replace("/profile");
         }
@@ -35,6 +36,11 @@ class LoginPage extends React.Component{
         });
 
     }
+    handleLoginDataChange(){
+       this.props.dispatch({
+           type:types.LOGOUT_FORM_CHANGED_AFTER_ERROR
+       })
+    }
     render(){
 
         return (
@@ -44,7 +50,7 @@ class LoginPage extends React.Component{
                         <Col lg={4}>
                         </Col>
                         <Col  lg={4}>
-                            <MatLoginForm onSubmit = {this.doLogin.bind(this)}/>
+                            <MatLoginForm onSubmit = {this.doLogin.bind(this)} handleFormChange={this.handleLoginDataChange.bind(this)} hasError={this.props.user.loginError}/>
 
                         </Col>
                     </Row>

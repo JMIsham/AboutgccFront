@@ -14,6 +14,25 @@ const username = value => value && !/^[A-Z0-9._%+-@]{3,100}$/i.test(value) ? 'in
 
 
 class Form extends Component {
+    validateLoginError(){
+        if(this.props.hasError){
+            return "Invalid username password combination!";
+        }
+        return undefined;
+    }
+    handleChange(){
+        if(this.props.hasError){
+            console.log("form data is been changed");
+            this.props.handleFormChange();
+        }
+
+    }
+    errorMessage(){
+        if(this.props.hasError){
+            return (<h4 style={{color:"red"}}>Invalid username password combination</h4>);
+        }
+        return undefined;
+    }
 
     render() {
         const { handleSubmit   , submitting } = this.props;
@@ -36,10 +55,13 @@ class Form extends Component {
                                component={TextField}
                                hintText="Password"
                                floatingLabelText="password"
-                               validate={required}/>
+                               validate={[required]}
+                        />
+
+
                     </div>
                     <br/>
-
+                    {this.errorMessage()}
                     <div>
                         <FlatButton type="submit"  labelStyle = {{color :"#2196f3"}} disabled={submitting} label="login" className="button-submit" />
                         <Link to="/register"><FlatButton label="Register"    labelStyle = {{color :"#2196f3"}} style={{marginLeft:'10px'}}></FlatButton></Link>

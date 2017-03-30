@@ -6,3 +6,4 @@ export const LOGIN_FAILED = 'login-failed';
 export const LOGIN_COMPLETED = 'login-completed';
 export const LOGOUT_COMPLETED = 'logout-completed';
 export const LOGOUT_REQUESTED='logout-requested';
+export const LOGOUT_FORM_CHANGED_AFTER_ERROR='login-form-changed-after-error';

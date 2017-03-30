@@ -39,6 +39,12 @@ export default function userReducer(state =initialState.user,action ){
                 loginRequestPending: false,
                 loginError:true
             });
+        case (actionTypes.LOGOUT_FORM_CHANGED_AFTER_ERROR):
+            return ({
+                loggedIn: false,
+                loginRequestPending: false,
+                loginError:false
+            });
 
         default:
             return state
