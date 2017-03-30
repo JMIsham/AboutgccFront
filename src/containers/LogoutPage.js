@@ -8,7 +8,6 @@ import * as actionTypes from '../constants/actionTypes'
 class LogoutPage extends Component{
 
     componentWillMount(){
-        console.log("LogoutPage componentWillMount",this.props);
         this.props.dispatch({
            type: actionTypes.LOGOUT_REQUESTED
         });

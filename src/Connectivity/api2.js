@@ -54,3 +54,22 @@ export async function registerEmployer(formData){
     const data= response.json();
     return data;
 }
+
+export async function adminGetAllEmployer(token){
+    const url="http://127.0.0.1/aboutgcc/web/app_dev.php/admin/employer";
+    const request={
+        method:"GET",
+        mode:"cors",
+        headers:{
+            'Content-Type': 'application/json',
+            'Authorization':'Bearer '+token
+        }
+    };
+    const response= await fetch(url,request);
+    const data=await response.json();
+    console.log(data);
+    return data;
+
+
+
+}
