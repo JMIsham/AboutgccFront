@@ -28,7 +28,7 @@ class UserPage extends Component{
         if(roles.indexOf("ROLE_SUPER_ADMIN")!= -1) return <AdminPage/>;
         if(roles.indexOf("ROLE_EMPLOYEE") != -1) return <JobseekerPage/>;
         else{
-            this.props.router.replace("/login");
+            this.props.router.replace("/logout");
         }
     }
 
