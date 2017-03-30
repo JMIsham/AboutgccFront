@@ -8,6 +8,7 @@ import NotFoundPage from './components/NotFoundPage';
 import LoginPage from './containers/loginPage';
 import LogoutPage from './containers/LogoutPage';
 import RegistrationPage from './containers/RegistrationPage';
+import UserPage from './containers/UserPage';
 
 export default (
   <Route path="/" component={App}>
@@ -15,6 +16,7 @@ export default (
       <Route path="about" component={AboutPage}/>
       <Route path="login" component ={LoginPage}/>
       <Route path="logout" component={LogoutPage}/>
+      <Route path="mypage" component={UserPage}/>
       <Route path="register" components={RegistrationPage}/>
     <Route path="*" component={NotFoundPage}/>
   </Route>

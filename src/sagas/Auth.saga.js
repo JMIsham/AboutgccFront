@@ -45,13 +45,14 @@ export function *doLoginSucceeded(action){
     const token = action.payload.token;
     const output = yield call(jwtDecode,token);
     const {exp,id,roles,username} = output;
+
     yield put(
         {
             type:types.LOGIN_COMPLETED,
-            payload:{exp,id,roles,username,token}
+            payload:{exp,id,roles,username,token,}
         }
     );
-    yield put(push('/profile'));
+    yield put(push('/mypage'));
 
 }
 
@@ -64,6 +65,6 @@ export function *doLogoutCalled(){
     yield put({
             type:types.LOGOUT_COMPLETED
         });
-    yield put(push('/about'));
+    yield put(push('/'));
 }
 

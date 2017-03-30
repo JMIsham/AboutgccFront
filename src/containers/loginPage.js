@@ -15,14 +15,14 @@ class LoginPage extends React.Component{
 
     componentWillMount(){
         if(this.props.user.loggedIn){
-            this.props.router.replace("/profile");
+            this.props.router.replace("/mypage");
         }
 
     }
     componentWillReceiveProps(nextProps){
         console.log("next props in login page",nextProps);
         if(this.props.user.loggedIn){
-            this.props.router.replace("/profile");
+            this.props.router.replace("/mypage");
         }
     }
     doLogin(formData) {

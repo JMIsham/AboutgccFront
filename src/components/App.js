@@ -26,6 +26,9 @@ class App extends React.Component {
     handlelogout(){
         this.props.router.push("/logout");
     }
+    handleMyPage(){
+        this.props.router.push("/mypage");
+    }
     componentWillReceiveProps(nextProps){
         // if(nextProps.user.loggedIn) Router.browserHistory.push("/about");
 
@@ -41,6 +44,29 @@ class App extends React.Component {
             <NavbarButton lable="Login" handle={this.handlelogin.bind(this)}/>
         )
     }
+    profilebutton(){
+        if(this.props.user.loggedIn){
+            return(
+                <div>
+                    <NavbarButton lable="MyPage" handle={this.handleMyPage.bind(this)}/>
+                </div>
+
+            );
+        }
+    }
+    profileDivider(){
+        if(this.props.user.loggedIn){
+            return(
+                <ToolbarSeparator style={{
+                    backgroundColor: "#607d8b",
+                    marginLeft:'2px',
+                    marginLeft:"0px",
+
+                }}/>
+            );
+        }
+    }
+
   render() {
       return (
 
@@ -74,7 +100,10 @@ class App extends React.Component {
 
                   }}/>
 
+                  {this.profilebutton()}
+                  {this.profileDivider()}
                   {this.button()}
+
 
 
               </ToolbarGroup>

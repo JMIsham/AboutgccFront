@@ -14,22 +14,10 @@ const username = value => value && !/^[A-Z0-9._%+-@]{3,100}$/i.test(value) ? 'in
 
 
 class Form extends Component {
-    validateLoginError(){
-        if(this.props.hasError){
-            return "Invalid username password combination!";
-        }
-        return undefined;
-    }
-    handleChange(){
-        if(this.props.hasError){
-            console.log("form data is been changed");
-            this.props.handleFormChange();
-        }
 
-    }
     errorMessage(){
         if(this.props.hasError){
-            return (<h4 style={{color:"red"}}>Invalid username password combination</h4>);
+            return (<h4 style={{color:"red"}}>Invalid username password combination!!</h4>);
         }
         return undefined;
     }
