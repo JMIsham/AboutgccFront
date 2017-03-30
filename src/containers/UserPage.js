@@ -7,6 +7,7 @@ import AdminPage from './AdminPage';
 import CompanyPage from './CompanyPage';
 import JobseekerPage from './JobseekerPage';
 import {withRouter} from 'react-router';
+import jwtDecode from 'jwt-decode';
 class UserPage extends Component{
 
     componentWillMount(){
@@ -21,8 +22,8 @@ class UserPage extends Component{
 
     }
     loadPage(){
-        const roles=this.props.user.roles;
-        console.log();
+        const roles=(jwtDecode(this.props.user.token)).roles;
+        console.log(roles);
         if(roles.indexOf("ROLE_EMPLOYER") != -1) return <CompanyPage/>;
         if(roles.indexOf("ROLE_SUPER_ADMIN")!= -1) return <AdminPage/>;
         if(roles.indexOf("ROLE_EMPLOYEE") != -1) return <JobseekerPage/>;
