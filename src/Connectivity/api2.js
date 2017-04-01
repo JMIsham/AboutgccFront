@@ -56,7 +56,7 @@ export async function registerEmployer(formData){
 }
 
 export async function adminGetAllEmployer(token){
-    const url="http://127.0.0.1/aboutgcc/web/app_dev.php/admin/employer";
+    const url="http://127.0.0.1/aboutgcc/web/app_dev.php/admin/employers";
     const request={
         method:"GET",
         mode:"cors",

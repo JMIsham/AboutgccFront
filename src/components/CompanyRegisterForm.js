@@ -3,6 +3,7 @@
  */
 import React, { Component } from 'react'
 import { Field, reduxForm } from 'redux-form'
+import {Flag} from 'semantic-ui-react';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/RaisedButton';
 import MenuItem from 'material-ui/MenuItem'
@@ -66,14 +67,14 @@ class Form extends Component {
 
 
                         >
-                            <MenuItem value={1} primaryText="Bahrain" />
-                            <MenuItem value={2} primaryText="Iran" />
-                            <MenuItem value={3} primaryText="Iraq"/>
-                            <MenuItem value={4} primaryText="Kuwait"/>
-                            <MenuItem value={5} primaryText="Oman"/>
-                            <MenuItem value={6} primaryText="Qatar"/>
-                            <MenuItem value={7} primaryText="Saudi Arabia"/>
-                            <MenuItem value={8} primaryText="United Arab Emirates"/>
+                            <MenuItem value={1} primaryText="Bahrain" leftIcon={<Flag name='bh' className="flag"/>} ></MenuItem>
+                            <MenuItem value={2} primaryText="Iran" leftIcon={<Flag name='ir' className="flag"/>}/>
+                            <MenuItem value={3} primaryText="Iraq" leftIcon={<Flag name='iq' className="flag"/>}/>
+                            <MenuItem value={4} primaryText="Kuwait" leftIcon={<Flag name='kw' className="flag"/>}/>
+                            <MenuItem value={5} primaryText="Oman" leftIcon={<Flag name='om' className="flag"/>}/>
+                            <MenuItem value={6} primaryText="Qatar" leftIcon={<Flag name='qa' className="flag"/>}/>
+                            <MenuItem value={7} primaryText="Saudi Arabia" leftIcon={<Flag name='sa' className="flag"/>}/>
+                            <MenuItem value={8} primaryText="United Arab Emirates" leftIcon={<Flag name='ae' className="flag"/>}/>
                         </Field>
                     </div>
                     <div>

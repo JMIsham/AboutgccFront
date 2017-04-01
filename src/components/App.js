@@ -3,6 +3,7 @@ import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui
 import FlatButton from 'material-ui/FlatButton';
 import NavbarButton from '../components/NavbarButton';
 import injectTapEventPlugin from 'react-tap-event-plugin';
+import { Flag, Segment } from 'semantic-ui-react'
 import {Col,Row,Container} from 'react-grid-system';
 import {connect} from 'react-redux';
 import * as types from '../constants/actionTypes';
@@ -73,6 +74,7 @@ class App extends React.Component {
       <div>
           <Toolbar style={styles.bar}>
               <ToolbarGroup>
+
                   <FlatButton
                       primary={true}
                       label="AboutGCC"
