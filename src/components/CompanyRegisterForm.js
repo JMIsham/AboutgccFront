@@ -30,7 +30,12 @@ class Form extends Component {
         if(this.refs.password.value==undefined) return "Please Enter a Password First";
         return value.toString() == this.refs.password.value.toString() ? undefined : "Password Mismatch"
     }
+    checkUsername(value){
 
+    }
+    checkEmail(value){
+
+    }
     render() {
 
         const { handleSubmit, pristine, reset, submitting } = this.props;
@@ -120,7 +125,7 @@ class Form extends Component {
                                hintText="username"
                                id = "Username"
                                floatingLabelText="username"
-                               validate={[required,username]}
+                               validate={[required,username,this.checkUsername.bind(this)]}
                         />
                     </div>
                     <div>

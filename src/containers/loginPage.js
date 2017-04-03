@@ -50,7 +50,7 @@ class LoginPage extends React.Component{
                         <Col lg={4}>
                         </Col>
                         <Col  lg={4}>
-                            <MatLoginForm onSubmit = {this.doLogin.bind(this)} handleFormChange={this.handleLoginDataChange.bind(this)} hasError={this.props.user.loginError}/>
+                            <MatLoginForm onSubmit = {this.doLogin.bind(this)} handleFormChange={this.handleLoginDataChange.bind(this)} hasError={this.props.loginForm.loginError}/>
 
                         </Col>
                     </Row>
@@ -79,7 +79,8 @@ const styles = {
 };
 function mapStateToProps(state){
     return {
-        user:state.user
+        user:state.user,
+        loginForm:state.loginForm
     }
 }
 LoginPage = withRouter(LoginPage);
