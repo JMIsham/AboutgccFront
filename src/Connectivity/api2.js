@@ -68,8 +68,16 @@ export async function adminGetAllEmployer(token){
     const response= await fetch(url,request);
     const data=await response.json();
     console.log(data);
-    return data;
-
-
+    if(response.status==200){
+        console.log(data);
+        return data;
+    }
+    else if(response.status==204){
+        return false;
+    }
+    throw new ApiError(
+        data.message||response.statusText,
+        response.status
+    );
 
 }

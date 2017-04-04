@@ -11,11 +11,26 @@ export function* doGetAllEmployers(action){
     try{
         const token=action.payload.token;
         const response=yield call(api.adminGetAllEmployer,token);
-        console.log(response);
+        if(!response){
+            yield put(
+                {
+                    type:actionTypes.ALL_EMPLOYER_SUCCESS,
+                    payload:[]
+                }
+            )
+        }
+        else{
+            yield put(
+                {
+                    type:actionTypes.ALL_EMPLOYER_SUCCESS,
+                    payload:response
+                }
+            )
+        }
 
 
     }catch(e){
-
+        yield put(push('/logout'));
     }
 
 }

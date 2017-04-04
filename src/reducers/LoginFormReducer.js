@@ -7,7 +7,6 @@ import objectAssign from 'object-assign';
 export default function loginFormReducer(state={},action){
     let newState;
     switch (action.type){
-
         case (actionTypes.LOGIN_REQUESTED):
             //changes the user status to pending to show loading window
             newState=objectAssign({},state);

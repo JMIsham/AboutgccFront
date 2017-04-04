@@ -7,6 +7,7 @@ import {Flag} from 'semantic-ui-react';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/RaisedButton';
 import MenuItem from 'material-ui/MenuItem'
+import {connect} from 'react-redux';
 
 import {
     SelectField,
@@ -31,13 +32,21 @@ class Form extends Component {
         return value.toString() == this.refs.password.value.toString() ? undefined : "Password Mismatch"
     }
     checkUsername(value){
-
+        this.props.checkUsername(value);
+        console.log("checking username",this.props);
     }
     checkEmail(value){
-
+        console.log("checking email",this.props);
+        // this.props.checkEmail(value);
+    }
+    username(){
+        return this.props.usernameError;
+    }
+    email(){
+        return this.props.emailError;
     }
     render() {
-
+        //
         const { handleSubmit, pristine, reset, submitting } = this.props;
         return (
             <div>
@@ -98,7 +107,7 @@ class Form extends Component {
                                component={TextField}
                                hintText="Email"
                                floatingLabelText="Email"
-                               validate={[ required, email ]}/>
+                               validate={[ required, email,this.checkEmail.bind(this),this.email.bind(this)]}/>
                     </div>
                     <div>
                         <Field name="contactNumber"
@@ -125,7 +134,7 @@ class Form extends Component {
                                hintText="username"
                                id = "Username"
                                floatingLabelText="username"
-                               validate={[required,username,this.checkUsername.bind(this)]}
+                               validate={[required,username,this.checkUsername.bind(this),this.username.bind(this)]}
                         />
                     </div>
                     <div>
@@ -168,6 +177,7 @@ class Form extends Component {
 const style = {
     textAlign : "center"
 };
+
 export default reduxForm({
     form: 'employeeRegistration'
 })(Form)

@@ -10,6 +10,8 @@ export default function* rootSaga(){
         fork(authSaga.watchLogoutCalled),
         fork(register.watchEmployerRegister),
         fork(Admin.watchGetAllEmployers),
+        fork(register.watchEmployerUsername),
+        fork(register.watchEmployerEmail),
 
     ];
 }

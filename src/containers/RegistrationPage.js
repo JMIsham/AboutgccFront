@@ -30,6 +30,23 @@ class RegistrationPage extends Component{
             }
         );
     }
+
+    handleEmployerUsernameCheck(username){
+        // this.props.dispatch(
+        //     {
+        //         type:types.EMPLOYER_USERNAME_REQUESTED,
+        //         payload:username
+        //     }
+        // );
+    }
+    handleEmployerEmailCheck(email){
+        // this.props.dispatch(
+        //     {
+        //         type:types.EMPLOYER_EMAIL_REQUESTED,
+        //         payload:email
+        //     }
+        // )
+    }
     render(){
 
 
@@ -46,7 +63,13 @@ class RegistrationPage extends Component{
                             </Tabs>
                             <SwipeableViews index={this.state.slideIndex} onChangeIndex={this.handleSwipe.bind(this)}>
                                 <div>
-                                    <Employer onSubmit={this.handleEmployer.bind(this)}/>
+                                    <Employer
+                                        onSubmit={this.handleEmployer.bind(this)}
+                                        checkUsername = {this.handleEmployerUsernameCheck.bind(this)}
+                                        checkEmail = {this.handleEmployerEmailCheck.bind(this)}
+                                        usernameError = {this.props.employerForm.usernameValid}
+                                        emailError = {this.props.employerForm.emailValid}
+                                    />
                                 </div>
                                 <div>
                                     Under Construction
@@ -79,4 +102,11 @@ const styles = {
         background:'#37474F',
     },
 };
-export default connect()(RegistrationPage);
+const mapStateToProps=(state)=>{
+  return(
+      {
+          employerForm:state.employerForm
+      }
+  );
+};
+export default connect(mapStateToProps)(RegistrationPage);

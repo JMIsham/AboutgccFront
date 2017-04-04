@@ -14,6 +14,9 @@ class UserPage extends Component{
         if(!this.props.user.loggedIn){
             this.props.router.replace("/login");
         }
+        const roles=(jwtDecode(this.props.user.token)).roles;
+        console.log(roles);
+        if(roles.indexOf("ROLE_SUPER_ADMIN")!= -1) this.props.router.replace("/admin");;
     }
     componentWillReceiveProps(nextProps){
         if(!this.props.user.loggedIn){
