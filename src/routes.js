@@ -14,6 +14,7 @@ import AdminApplications from './containers/AdminApplications';
 import AdminEmployers from './containers/AdminEmployers';
 import AdminJobseekers from './containers/AdminJobseekers';
 import AdminPosts from './containers/AdminPosts';
+import AdminMoreEmployer from './containers/AdminMoreEmployer';
 
 export default (
   <Route path="/" component={App}>
@@ -27,6 +28,7 @@ export default (
           <Route path="employers" component={AdminEmployers}/>
           <Route path="jobseekers" component={AdminJobseekers}/>
           <Route path="posts" component={AdminPosts}/>
+          <Route path="employer/:id" component={AdminMoreEmployer}/>
       </Route>
       <Route path="register" components={RegistrationPage}/>
       <Route path="*" component={NotFoundPage}/>

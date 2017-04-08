@@ -10,6 +10,9 @@ import Divider from 'material-ui/Divider';
 import MenuItem from 'material-ui/MenuItem';
 import {Link} from 'react-router';
 import FlatButton from 'material-ui/FlatButton';
+import IconButton from 'material-ui/IconButton';
+import ActionHome from 'material-ui/svg-icons/action/home';
+
 
 class AdminPanal extends Component{
     loadPage(){
@@ -36,7 +39,11 @@ class AdminPanal extends Component{
                             <Link to="/admin/jobseekers"><FlatButton label="Job Seekers"    labelStyle = {{color :"#00bcd4"}} style={{width:'100%',height:'55px'}}></FlatButton></Link>
                         </div>
                 </Drawer>
-                {this.props.children}
+                <div style={{maxWidth:"850px",padding:'20px'}}>
+                    {this.props.children}
+
+                </div>
+
             </div>
         );
     }

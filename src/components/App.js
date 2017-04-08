@@ -38,18 +38,18 @@ class App extends React.Component {
     button(){
         if(this.props.user.loggedIn){
             return(
-                <NavbarButton lable="Logout" handle={this.handlelogout.bind(this)}/>
+                <NavbarButton lable="Logout" Icon={<i className="sign out icon"></i>} handle={this.handlelogout.bind(this)}/>
         );
         }
         return(
-            <NavbarButton lable="Login" handle={this.handlelogin.bind(this)}/>
+            <NavbarButton lable="Login" Icon={<i className="sign in calendar icon"></i>} handle={this.handlelogin.bind(this)}/>
         )
     }
     profilebutton(){
         if(this.props.user.loggedIn){
             return(
                 <div>
-                    <NavbarButton lable="MyPage" handle={this.handleMyPage.bind(this)}/>
+                    <NavbarButton lable="MyPage" Icon={<i className="user icon"></i>} handle={this.handleMyPage.bind(this)}/>
                 </div>
 
             );
@@ -77,7 +77,7 @@ class App extends React.Component {
 
                   <FlatButton
                       primary={true}
-                      label="AboutGCC"
+
                       labelStyle={{textTransform:'none',
                           fontSize :'20px',
                           paddingLeft:'0px',
@@ -85,16 +85,15 @@ class App extends React.Component {
                       }}
                       disableTouchRipple = {true}
                       hoverColor="#37474f"
-
                       onTouchTap = {this.handleHome.bind(this)}
-                  />
-                  <NavbarButton lable="Home" handle={this.handleHome.bind(this)}/>
+                  ><i className="home icon large"></i></FlatButton>
+                  <NavbarButton lable="Home" Icon={<i className="home icon"></i>} handle={this.handleHome.bind(this)}/>
                   <ToolbarSeparator style={{
                       backgroundColor: "#607d8b",
                       marginLeft:'2px',
 
                   }}/>
-                  <NavbarButton lable="About Us" handle={this.handleAboutUs.bind(this)}/>
+                  <NavbarButton lable="About Us" handle={this.handleAboutUs.bind(this)} Icon={<i className="info icon"></i>}><i className="add to calendar icon"></i></NavbarButton>
                   <ToolbarSeparator style={{
                       backgroundColor: "#607d8b",
                       marginLeft:'2px',

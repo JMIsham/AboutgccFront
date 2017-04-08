@@ -12,6 +12,9 @@ export default function* rootSaga(){
         fork(Admin.watchGetAllEmployers),
         fork(register.watchEmployerUsername),
         fork(register.watchEmployerEmail),
+        fork(Admin.watchSpecificEmployer),
+        fork(Admin.watchBlockUser),
+        fork(Admin.watchUnblockUser),
 
     ];
 }

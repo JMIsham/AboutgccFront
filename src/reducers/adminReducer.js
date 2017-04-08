@@ -9,6 +9,7 @@ export default function adminReducer(state={},action){
         case actionTypes.ALL_EMPLOYER_REQUESTED:
             newState=objectAssign({},state);
             newState.employersRequestPending=true;
+            newState.employers=undefined;
             return newState;
 
         case actionTypes.ALL_EMPLOYER_SUCCESS:
@@ -16,6 +17,15 @@ export default function adminReducer(state={},action){
             newState=objectAssign({},state);
             newState.employersRequestPending=false;
             newState.employers=action.payload;
+            return newState;
+        case actionTypes.GET_SPECIFIC_EMPLOUER_REQUESTED:
+            newState=objectAssign({},state);
+            newState.currentemployer=undefined;
+            return newState;
+
+        case actionTypes.GET_SPECIFIC_EMPLOUER_SUCCEEDED:
+            newState=objectAssign({},state);
+            newState.currentemployer=action.payload;
             return newState;
         default:
             return state;

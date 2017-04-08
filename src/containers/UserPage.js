@@ -3,7 +3,7 @@
  */
 import React , {Component} from "react";
 import {connect} from 'react-redux';
-import AdminPage from './AdminPage';
+import AdminPage from './AdminMoreEmployer';
 import CompanyPage from './CompanyPage';
 import JobseekerPage from './JobseekerPage';
 import {withRouter} from 'react-router';
@@ -28,7 +28,7 @@ class UserPage extends Component{
         const roles=(jwtDecode(this.props.user.token)).roles;
         console.log(roles);
         if(roles.indexOf("ROLE_EMPLOYER") != -1) return <CompanyPage/>;
-        if(roles.indexOf("ROLE_SUPER_ADMIN")!= -1) return <AdminPage/>;
+        if(roles.indexOf("ROLE_SUPER_ADMIN")!= -1) return undefined;
         if(roles.indexOf("ROLE_EMPLOYEE") != -1) return <JobseekerPage/>;
         else{
             this.props.router.replace("/logout");

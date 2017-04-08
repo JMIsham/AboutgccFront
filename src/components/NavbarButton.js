@@ -10,6 +10,7 @@ export default class NavbarButton extends React.Component{
     }
 
     render(){
+
        return( <FlatButton
             primary={true}
             label={this.props.lable}
@@ -25,6 +26,7 @@ export default class NavbarButton extends React.Component{
                 paddingLeft:'3px',
             }}
             rippleColor="#00bcd4"
+            children={this.props.Icon}
             onTouchTap = {this.handle.bind(this)}
         />);
     }

@@ -29,4 +29,13 @@ export const EMPLOYER_EMAIL_FAILED="employer-email-failed";
 export const ALL_EMPLOYER_REQUESTED="all-employer-requested";
 export const ALL_EMPLOYER_SUCCESS='all-employer-success';
 
+export const GET_SPECIFIC_EMPLOUER_REQUESTED="get-specific-employer-requested";
+export const GET_SPECIFIC_EMPLOUER_SUCCEEDED="get-specific-employer-succeeded";
+export const GET_SPECIFIC_EMPLOUER_FAILED="get-specific-employer-failed";
+
+export const BLOCK_USER_REQUESTED='block-user-requested';
+export const BLOCK_USER_SUCCEEDED='block-user-succeeded';
+export const UNBLOCK_USER_REQUESTED='unblock-user-requested';
+export const UNBLOCK_USER_SUCCEEDED='unblock-user-succeeded';
+
 
