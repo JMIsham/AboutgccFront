@@ -5,6 +5,7 @@ import userReducer from './UserReducer';
 import loginFormReducer from './LoginFormReducer';
 import employerForm from './EmployerFormReducer';
 import adminReducer from './adminReducer';
+import EmployerReducer from './EmployerReducer';
 
 const rootReducer = combineReducers({
   form: fromReducer,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   routing: routerReducer,
   employerForm:employerForm,
   adminData:adminReducer,
+  employerReducer:EmployerReducer,
 
 });
 

@@ -18,6 +18,17 @@ export const ERROR_GET_ALL_EMPLOYER = 'get-all-employer-error';
 export const SUCCESS_GET_ALL_EMPLOYER = 'get-all-employer-success';
 export const UNAUTHERIZED_GET_ALL_EMPLOYER = 'get-all-employer-unautherized';
 
+export const EMPLOYER_MORE_INFO_REQUESTED = "employer-more-info-requested";
+export const EMPLOYER_MORE_INFO_SUCCEEDED = "employer-more-info-succeeded";
+export const EMPLOYER_MORE_INFO_FAILED = "employer-more-info-failed";
+export const EMPLOYER_MORE_INFO_UNAUTHERIZED = "employer-more-info-unautherized";
+
+export const EMPLOYER_ALL_POSTS_REQUESTED="employer-all-post-requested";
+export const EMPLOYER_ALL_POSTS_SUCCEEDED="employer-all-post-succeeded";
+export const EMPLOYER_ALL_POSTS_NO_CONTENT="employer-all-post-no-content";
+export const EMPLOYER_ALL_POSTS_FAILED="employer-all-post-failed";
+export const EMPLOYER_ALL_POSTS_UNAUTHERIZED="employer-all-post-unautherized";
+
 export const EMPLOYER_USERNAME_REQUESTED="employer-username-requested";
 export const EMPLOYER_USERNAME_PASSED="employer-username-passed";
 export const EMPLOYER_USERNAME_FAILED="employer-username-failed";

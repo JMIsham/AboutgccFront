@@ -5,8 +5,9 @@ import React from "react";
 import LoginForm from "../components/LoginForm";
 import {connect} from 'react-redux';
 import * as types from "../constants/actionTypes";
-import {Row,Col,Container}from 'react-grid-system'
+import {Row,Col,Container}from 'react-grid-system';
 import MatLoginForm from '../components/MatLoginForm';
+import moment from 'moment';
 var Router = require('react-router');
 import CompanyRegistrationForm from '../components/CompanyRegisterForm';
 import {withRouter} from 'react-router';
@@ -26,7 +27,7 @@ class LoginPage extends React.Component{
         }
     }
     doLogin(formData) {
-
+        // console.log(moment(formData.when).format('MM-DD-YYYY'));
         this.props.dispatch({
             type: types.LOGIN_REQUESTED,
             payload: {

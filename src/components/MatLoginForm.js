@@ -3,9 +3,11 @@
  */
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
+import moment from 'moment';
 import FlatButton from 'material-ui/FlatButton';
 import {
     TextField,
+    DatePicker,
 } from 'redux-form-material-ui';
 import {Link} from 'react-router';
 // validation functions
@@ -45,9 +47,17 @@ class Form extends Component {
                                floatingLabelText="password"
                                validate={[required]}
                         />
-
-
                     </div>
+                    {/*<div>*/}
+                        {/*<Field name="when"*/}
+                               {/*component={DatePicker}*/}
+                               {/*format={null}*/}
+                               {/*onChange={(value) => {*/}
+                                   {/*console.log('date changed ',value); // eslint-disable-line no-console*/}
+                               {/*}}*/}
+                               {/*hintText="Day of delivery?"*/}
+                               {/*validate={required}/>*/}
+                    {/*</div>*/}
                     <br/>
                     {this.errorMessage()}
                     <div>

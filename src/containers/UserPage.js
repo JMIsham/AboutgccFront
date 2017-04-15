@@ -16,7 +16,8 @@ class UserPage extends Component{
         }
         const roles=(jwtDecode(this.props.user.token)).roles;
         console.log(roles);
-        if(roles.indexOf("ROLE_SUPER_ADMIN")!= -1) this.props.router.replace("/admin");;
+        if(roles.indexOf("ROLE_SUPER_ADMIN")!= -1) this.props.router.replace("/admin");
+        if(roles.indexOf("ROLE_EMPLOYER")!= -1) this.props.router.replace("/employer");
     }
     componentWillReceiveProps(nextProps){
         if(!this.props.user.loggedIn){
@@ -27,7 +28,7 @@ class UserPage extends Component{
     loadPage(){
         const roles=(jwtDecode(this.props.user.token)).roles;
         console.log(roles);
-        if(roles.indexOf("ROLE_EMPLOYER") != -1) return <CompanyPage/>;
+        if(roles.indexOf("ROLE_EMPLOYER") != -1) return undefined;
         if(roles.indexOf("ROLE_SUPER_ADMIN")!= -1) return undefined;
         if(roles.indexOf("ROLE_EMPLOYEE") != -1) return <JobseekerPage/>;
         else{
@@ -37,8 +38,8 @@ class UserPage extends Component{
 
     render(){
         return (
-            <div >
-                <h1>this is the profile page</h1>
+            <div  >
+
                 {this.loadPage()}
             </div>
         );

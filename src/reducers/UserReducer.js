@@ -42,6 +42,10 @@ export default function userReducer(state =initialState.user,action ){
                 loggedIn: false
 
             });
+        case (actionTypes.EMPLOYER_MORE_INFO_SUCCEEDED):
+            newState=objectAssign({},state);
+            newState.moreInfo=action.payload[0];
+            return newState;
 
         default:
             return state
