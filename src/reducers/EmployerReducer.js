@@ -17,6 +17,10 @@ export default function EmployerReducer(state={},action){
             newState = objectAssign({}, state);
             newState.AllPosts = [];
             return newState;
+        case actionTypes.EMPLOYER_MORE_POST_REQUESTED:
+            newState = objectAssign({}, state);
+            newState.currentPost=action.payload;
+            return newState;
         default:
             return state;
     }

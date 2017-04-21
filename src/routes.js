@@ -17,6 +17,7 @@ import AdminPosts from './containers/AdminPosts';
 import AdminMoreEmployer from './containers/AdminMoreEmployer';
 import CompanyPage from './containers/CompanyPage';
 import CompanyPosts from './containers/CompanyJobPosts';
+import CompanyPostMore from './containers/CompanyPostMore';
 
 export default (
   <Route path="/" component={App}>
@@ -34,6 +35,8 @@ export default (
       </Route>
       <Route path="employer" component={CompanyPage} >
           <IndexRoute component={CompanyPosts}/>
+          <Route path="posts" component={CompanyPosts}/>
+          <Route path="post-more" component={CompanyPostMore}/>
       </Route>
       <Route path="register" components={RegistrationPage}/>
       <Route path="*" component={NotFoundPage}/>

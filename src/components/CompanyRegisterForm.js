@@ -58,6 +58,7 @@ class Form extends Component {
                                hintText="CompanyName"
                                floatingLabelText="Company Name"
                                validate={required}
+                               defaultValue="test"
                                ref="name" withRef/>
                     </div>
                     <div>
@@ -133,6 +134,7 @@ class Form extends Component {
                                component={TextField}
                                hintText="username"
                                id = "Username"
+                               defaultValue="Default Value"
                                floatingLabelText="username"
                                validate={[required,username,this.checkUsername.bind(this),this.username.bind(this)]}
                         />
@@ -178,6 +180,12 @@ const style = {
     textAlign : "center"
 };
 
-export default reduxForm({
-    form: 'employeeRegistration'
-})(Form)
+Form = reduxForm({form: 'employeeRegistration'})(Form);
+// Form=connect(state => ({
+//     initialValues: {
+//         companyName:state.user.id
+//     }
+//
+// }))(Form);
+
+export default Form;

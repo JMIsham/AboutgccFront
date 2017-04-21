@@ -1,4 +1,6 @@
 import ApiError from '../errors/ApiCallError';
+import moment from 'moment';
+
 export async  function login(username,password){
     console.log("called!!!!!! :)");
     const url = "http://127.0.0.1/aboutgcc/web/app_dev.php/login";
@@ -193,6 +195,79 @@ export async function employerAllPosts(token){
             'Authorization':'Bearer '+token
         }
     };
+    const response= await fetch(url,request);
+    const data=await response.json();
+    if(response.status==200){
+        return data;
+    }
+    else if(response.status==204){
+        return "NO_CONTENT";
+    }
+    else if(response.status==401){
+        return false;
+    }
+    throw new ApiError(
+        data.message||response.statusText,
+        response.status
+    );
+}
+export async function employerCreatePost(token,formData){
+    const expDate=moment(formData.exp_date).format('DD-MM-YYYY');
+    const url = "http://127.0.0.1/aboutgcc/web/app_dev.php/post-employer";
+    const request={
+        method:"POST",
+        mode:"cors",
+        headers:{
+            'Content-Type': 'application/json',
+            'Authorization':'Bearer '+token
+        },
+        body: JSON.stringify({
+            "subject":formData.subject,
+            "aboutJob":formData.about_job,
+            "aboutSalary":formData.about_salary,
+            "aboutSkill":formData.about_skill,
+            "country":formData.location,
+            "eDate":expDate
+        })
+    };
+    console.log(request);
+    const response= await fetch(url,request);
+    const data=await response.json();
+    if(response.status==200){
+        return data;
+    }
+    else if(response.status==204){
+        return "NO_CONTENT";
+    }
+    else if(response.status==401){
+        return false;
+    }
+    throw new ApiError(
+        data.message||response.statusText,
+        response.status
+    );
+}
+export async function employerUpdatePost(token,formData,id){
+    const expDate=moment(formData.exp_date).format('DD-MM-YYYY');
+    const url = "http://127.0.0.1/aboutgcc/web/app_dev.php/post-employer";
+    const request={
+        method:"PUT",
+        mode:"cors",
+        headers:{
+            'Content-Type': 'application/json',
+            'Authorization':'Bearer '+token
+        },
+        body: JSON.stringify({
+            "subject":formData.subject,
+            "aboutJob":formData.about_job,
+            "aboutSalary":formData.about_salary,
+            "aboutSkill":formData.about_skill,
+            "country":formData.location,
+            "eDate":expDate,
+            "id":id
+        })
+    };
+    console.log(request);
     const response= await fetch(url,request);
     const data=await response.json();
     if(response.status==200){

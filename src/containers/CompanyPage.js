@@ -69,6 +69,7 @@ class CompanyPage extends Component{
                             <i className="suitcase icon"></i>
                             Job Posts
                         </a>
+                        <div className="floating ui red label">20</div>
                     </div>
                     <div style={{textAlign:"center",padding:"10px"}}>
                         <a>
@@ -82,8 +83,6 @@ class CompanyPage extends Component{
                             Login Details
                         </a>
                     </div>
-
-
                 </div>
             </div>
 
@@ -100,8 +99,9 @@ class CompanyPage extends Component{
                 <Container fluid>
                     <Row>
                         <Col lg={3} xs={4} >
+                            <div className="ui sticky" style={{width:"670.72px !important",height: "42px !important", left: "272.32px"}}>
                             {this.prepareProfileSection()}
-
+                            </div>
                         </Col>
                         <Col lg={6} xs={8} >
                             <Paper zDepth={1}>

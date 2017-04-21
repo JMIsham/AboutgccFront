@@ -23,11 +23,37 @@ export const EMPLOYER_MORE_INFO_SUCCEEDED = "employer-more-info-succeeded";
 export const EMPLOYER_MORE_INFO_FAILED = "employer-more-info-failed";
 export const EMPLOYER_MORE_INFO_UNAUTHERIZED = "employer-more-info-unautherized";
 
-export const EMPLOYER_ALL_POSTS_REQUESTED="employer-all-post-requested";
-export const EMPLOYER_ALL_POSTS_SUCCEEDED="employer-all-post-succeeded";
-export const EMPLOYER_ALL_POSTS_NO_CONTENT="employer-all-post-no-content";
-export const EMPLOYER_ALL_POSTS_FAILED="employer-all-post-failed";
-export const EMPLOYER_ALL_POSTS_UNAUTHERIZED="employer-all-post-unautherized";
+export const EMPLOYER_ALL_POSTS_REQUESTED="employer-all-posts-requested";
+export const EMPLOYER_ALL_POSTS_SUCCEEDED="employer-all-posts-succeeded";
+export const EMPLOYER_ALL_POSTS_NO_CONTENT="employer-all-posts-no-content";
+export const EMPLOYER_ALL_POSTS_FAILED="employer-all-posts-failed";
+export const EMPLOYER_ALL_POSTS_UNAUTHERIZED="employer-all-posts-unautherized";
+
+export const EMPLOYER_MORE_POST_REQUESTED="employer-more-post-requested";
+
+export const EMPLOYER_NEW_POST_REQUESTED="employer-new-post-requested";
+export const EMPLOYER_NEW_POST_SUCCEEDED="employer-new-post-succeeded";
+export const EMPLOYER_NEW_POST_NO_CONTENT="employer-new-post-no-content";
+export const EMPLOYER_NEW_POST_FAILED="employer-new-post-failed";
+export const EMPLOYER_NEW_POST_UNAUTHERIZED="employer-new-post-unautherized";
+
+export const EMPLOYER_EDIT_POST_REQUESTED="employer-edit-post-requested";
+export const EMPLOYER_EDIT_POST_SUCCEEDED="employer-edit-post-succeeded";
+export const EMPLOYER_EDIT_POST_NO_CONTENT="employer-edit-post-no-content";
+export const EMPLOYER_EDIT_POST_FAILED="employer-new-edit-failed";
+export const EMPLOYER_EDIT_POST_UNAUTHERIZED="employer-edit-post-unautherized";
+
+export const EMPLOYER_POST_DELETE_REQUESTED="employer-post-delete-requested";
+export const EMPLOYER_POST_DELETE_SUCCEEDED="employer-post-delete-succeeded";
+export const EMPLOYER_POST_DELETE_FAILED="employer-post-delete-failed";
+export const EMPLOYER_POST_DELETE_UNAUTHERIZED="employer-post-delete-unautherized";
+export const EMPLOYER_POST_DELETE_NO_CONTENT="employer-post-delete-no-content";
+
+export const EMPLOYER_POST_TOGGLE_VISIBILITY_REQUESTED="employer-post-toggle-visibility-requested";
+export const EMPLOYER_POST_TOGGLE_VISIBILITY_SUCCEEDED="employer-post-toggle-visibility-succeeded";
+export const EMPLOYER_POST_TOGGLE_VISIBILITY_FAILED="employer-post-toggle-visibility-failed";
+export const EMPLOYER_POST_TOGGLE_VISIBILITY_UNAUTHERIZED="employer-post-toggle-visibility-unautherized";
+export const EMPLOYER_POST_TOGGLE_VISIBILITY_NO_CONTENT="employer-post-toggle-visibility-no-content";
 
 export const EMPLOYER_USERNAME_REQUESTED="employer-username-requested";
 export const EMPLOYER_USERNAME_PASSED="employer-username-passed";

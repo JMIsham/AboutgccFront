@@ -18,6 +18,8 @@ export default function* rootSaga(){
         fork(Admin.watchUnblockUser),
         fork(Employer.watchMoreInfo),
         fork(Employer.watchAllPosts),
+        fork(Employer.watchCreatePost),
+        fork(Employer.watchEditPost),
 
     ];
 }
