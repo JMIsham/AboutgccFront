@@ -40,7 +40,6 @@ export default function userReducer(state =initialState.user,action ){
         case (actionTypes.LOGOUT_FORM_CHANGED_AFTER_ERROR):
             return ({
                 loggedIn: false
-
             });
         case (actionTypes.EMPLOYER_MORE_INFO_SUCCEEDED):
             newState=objectAssign({},state);

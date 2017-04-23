@@ -3,6 +3,7 @@ import * as authSaga from "./Auth.saga";
 import * as register from './Registration.Saga';
 import * as Admin from './AdminSaga';
 import * as Employer from './EmployerSaga';
+import * as Common from './CommonSaga';
 import {fork} from 'redux-saga/effects';
 export default function* rootSaga(){
     yield [
@@ -20,6 +21,7 @@ export default function* rootSaga(){
         fork(Employer.watchAllPosts),
         fork(Employer.watchCreatePost),
         fork(Employer.watchEditPost),
+        fork(Common.watchTags),
 
     ];
 }

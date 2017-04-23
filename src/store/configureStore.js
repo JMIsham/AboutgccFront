@@ -28,6 +28,7 @@ function configureStoreProd() {
   store.subscribe(()=>{
     saveStore({
       user:store.getState().user,
+      common:store.getState().common,
     });
   });
   sagaMiddleweare.run(sagas);
@@ -55,6 +56,7 @@ function configureStoreDev() {
   store.subscribe(()=>{
     saveStore({
       user:store.getState().user,
+      common:store.getState().common,
         });
   });
   if (module.hot) {

@@ -37,6 +37,10 @@ export const EMPLOYER_NEW_POST_NO_CONTENT="employer-new-post-no-content";
 export const EMPLOYER_NEW_POST_FAILED="employer-new-post-failed";
 export const EMPLOYER_NEW_POST_UNAUTHERIZED="employer-new-post-unautherized";
 
+export const FETCH_TAGS_REQUSTED="fetch-tags-requested";
+export const FETCH_TAGS_SUCCEEDED="fetch-tags-succeeded";
+export const FETCH_TAGS_FAILED="fetch-tags-failed";
+
 export const EMPLOYER_EDIT_POST_REQUESTED="employer-edit-post-requested";
 export const EMPLOYER_EDIT_POST_SUCCEEDED="employer-edit-post-succeeded";
 export const EMPLOYER_EDIT_POST_NO_CONTENT="employer-edit-post-no-content";

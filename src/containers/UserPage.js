@@ -8,9 +8,13 @@ import CompanyPage from './CompanyPage';
 import JobseekerPage from './JobseekerPage';
 import {withRouter} from 'react-router';
 import jwtDecode from 'jwt-decode';
+import * as actionTypes from '../constants/actionTypes';
 class UserPage extends Component{
 
     componentWillMount(){
+        this.props.dispatch({
+            type:actionTypes.FETCH_TAGS_REQUSTED
+        });
         if(!this.props.user.loggedIn){
             this.props.router.replace("/login");
         }

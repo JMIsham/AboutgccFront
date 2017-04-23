@@ -10,6 +10,8 @@ import ModeEdit from 'material-ui/svg-icons/editor/mode-edit';
 import EditPost from '../components/EditPostForm';
 import FlatButton from 'material-ui/FlatButton';
 import Dialog from 'material-ui/Dialog';
+import DropDownMenu from 'material-ui/DropDownMenu';
+import MenuItem from 'material-ui/MenuItem';
 
 class CompanyPostMore extends Component{
 

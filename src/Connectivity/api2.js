@@ -284,3 +284,26 @@ export async function employerUpdatePost(token,formData,id){
         response.status
     );
 }
+export async function tags(){
+    const url = "http://127.0.0.1/aboutgcc/web/app_dev.php/tags";
+    const request={
+        method:"GET",
+        mode:"cors",
+        headers:{
+            'Content-Type': 'application/json',
+        }
+    };
+    const response= await fetch(url,request);
+    const data=await response.json();
+    if(response.status==200){
+        console.log(data);
+        return data;
+    }
+    else if(response.status==204){
+        return false;
+    }
+    throw new ApiError(
+        data.message||response.statusText,
+        response.status
+    );
+}
