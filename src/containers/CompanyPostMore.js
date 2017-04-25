@@ -10,8 +10,14 @@ import ModeEdit from 'material-ui/svg-icons/editor/mode-edit';
 import EditPost from '../components/EditPostForm';
 import FlatButton from 'material-ui/FlatButton';
 import Dialog from 'material-ui/Dialog';
-import DropDownMenu from 'material-ui/DropDownMenu';
+import _ from "underscore";
+import Chip from 'material-ui/Chip';
+import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
+import IconButton from 'material-ui/IconButton';
+import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
+
+var $ = require ('jquery');
 
 class CompanyPostMore extends Component{
 
@@ -21,6 +27,34 @@ class CompanyPostMore extends Component{
             open: false,
         };
     }
+    handleChange(event,val){
+        console.log(val);
+        var arr = this.props.unselectedTags;
+
+        // console.log("tast####",this.props.post.tags);
+        arr = _.reject(arr,function (el) {
+            return (el.id).toString()===val.toString() ;});
+        this.props.dispatch({
+            type: actionTypes.EMPLOYER_POST_MORE_REQUESTED,
+            payload:arr
+        });
+    }
+
+    componentWillMount(){
+        var arr = this.props.tags;
+        var cTags = this.props.post.tags;
+        // console.log("tast####",this.props.post.tags);
+        arr = _.reject(arr,function (el) {
+            for (var i = 0, len = cTags.length; i < len; i++) {
+                if(cTags[i].tag_id===el.id) return true;
+            }
+            return false ;});
+        this.props.dispatch({
+           type: actionTypes.EMPLOYER_POST_MORE_REQUESTED,
+            payload:arr
+        });
+    }
+
     handleSubmit(formData){
         this.props.dispatch({
             type:actionTypes.EMPLOYER_EDIT_POST_REQUESTED,
@@ -38,6 +72,9 @@ class CompanyPostMore extends Component{
 
     handleClose (){
         this.setState({open: false});
+    }
+    handleDelete(value){
+        console.log("testing testing testing testing",value);
     }
     setStatus(){
         switch (this.props.post.status){
@@ -176,6 +213,11 @@ class CompanyPostMore extends Component{
                     <div className="ui raised segment">
                         {post.tags.map((tag)=><span key={post.id+""+tag.tag_id} className="ui tag label">{tag.name}</span>)}
                     </div>
+                    <Chip
+                        onRequestDelete={this.handleDelete.bind(this)}
+                    >
+                        test
+                    </Chip>
                 </div>
 
 
@@ -209,6 +251,13 @@ class CompanyPostMore extends Component{
                <EditPost onSubmit={this.handleSubmit.bind(this)}/>
 
            </Dialog>
+           <IconMenu
+               iconButtonElement={<IconButton><MoreVertIcon /></IconButton>}
+               onChange={this.handleChange.bind(this)}
+
+           >
+               {this.props.unselectedTags.map((tag)=><MenuItem key={tag.id} value={tag.id} primaryText={tag.name} />)}
+           </IconMenu>
 
            </div>);
 
@@ -217,7 +266,9 @@ class CompanyPostMore extends Component{
 const mapStateToProps = (state)=>{
     return({
         user:state.user,
-        post:state.employerReducer.currentPost
+        post:state.employerReducer.currentPost,
+        tags:state.common.allTags,
+        unselectedTags:state.employerReducer.currentTags
     });
 };
 CompanyPostMore = withRouter(CompanyPostMore);

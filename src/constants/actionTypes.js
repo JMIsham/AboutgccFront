@@ -41,6 +41,8 @@ export const FETCH_TAGS_REQUSTED="fetch-tags-requested";
 export const FETCH_TAGS_SUCCEEDED="fetch-tags-succeeded";
 export const FETCH_TAGS_FAILED="fetch-tags-failed";
 
+export const EMPLOYER_POST_MORE_REQUESTED = "employer-post-more-requested";
+
 export const EMPLOYER_EDIT_POST_REQUESTED="employer-edit-post-requested";
 export const EMPLOYER_EDIT_POST_SUCCEEDED="employer-edit-post-succeeded";
 export const EMPLOYER_EDIT_POST_NO_CONTENT="employer-edit-post-no-content";
