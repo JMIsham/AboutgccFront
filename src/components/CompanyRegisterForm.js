@@ -31,18 +31,17 @@ class Form extends Component {
         if(this.refs.password.value==undefined) return "Please Enter a Password First";
         return value.toString() == this.refs.password.value.toString() ? undefined : "Password Mismatch"
     }
-    checkUsername(value){
-        this.props.checkUsername(value);
-        console.log("checking username",this.props);
+    userNameChanged(){
+         this.props.handleUserNameChange();
     }
-    checkEmail(value){
-        console.log("checking email",this.props);
-        // this.props.checkEmail(value);
+    emailChanged(){
+
+        this.props.handleEmailChanged();
     }
-    username(){
+    usernameExistance(){
         return this.props.usernameError;
     }
-    email(){
+    emailExistance(){
         return this.props.emailError;
     }
     render() {
@@ -108,13 +107,16 @@ class Form extends Component {
                                component={TextField}
                                hintText="Email"
                                floatingLabelText="Email"
-                               validate={[ required, email,this.checkEmail.bind(this),this.email.bind(this)]}/>
+                               errorText = {this.props.emailError}
+                               onChange={this.emailChanged.bind(this)}
+                               validate={[ required, email]}/>
                     </div>
                     <div>
                         <Field name="contactNumber"
                                component={TextField}
                                hintText="778696585"
                                floatingLabelText="Contact Number"
+
                                validate={[required,number]}
                                />
                     </div>
@@ -135,10 +137,13 @@ class Form extends Component {
                                hintText="username"
                                id = "Username"
                                defaultValue="Default Value"
+                               onChange={this.userNameChanged.bind(this)}
                                floatingLabelText="username"
-                               validate={[required,username,this.checkUsername.bind(this),this.username.bind(this)]}
+                               errorText = {this.props.usernameError}
+                               validate={[required,username]}
                         />
                     </div>
+
                     <div>
                         <Field name="password"
                                id = "password"
@@ -179,13 +184,7 @@ class Form extends Component {
 const style = {
     textAlign : "center"
 };
-
 Form = reduxForm({form: 'employeeRegistration'})(Form);
-// Form=connect(state => ({
-//     initialValues: {
-//         companyName:state.user.id
-//     }
-//
-// }))(Form);
+
 
 export default Form;

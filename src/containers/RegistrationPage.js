@@ -31,21 +31,20 @@ class RegistrationPage extends Component{
         );
     }
 
-    handleEmployerUsernameCheck(username){
-        // this.props.dispatch(
-        //     {
-        //         type:types.EMPLOYER_USERNAME_REQUESTED,
-        //         payload:username
-        //     }
-        // );
+    handleEmployerUsernameChange(){
+        this.props.dispatch(
+            {
+                type:types.EMPLOYER_USERNAME_CHANGED,
+
+            }
+        );
     }
-    handleEmployerEmailCheck(email){
-        // this.props.dispatch(
-        //     {
-        //         type:types.EMPLOYER_EMAIL_REQUESTED,
-        //         payload:email
-        //     }
-        // )
+    handleEmployerEmailChange(){
+        this.props.dispatch(
+            {
+                type:types.EMPLOYER_EMAIL_CHANGED,
+            }
+        )
     }
     render(){
 
@@ -65,10 +64,10 @@ class RegistrationPage extends Component{
                                 <div>
                                     <Employer
                                         onSubmit={this.handleEmployer.bind(this)}
-                                        checkUsername = {this.handleEmployerUsernameCheck.bind(this)}
-                                        checkEmail = {this.handleEmployerEmailCheck.bind(this)}
-                                        usernameError = {this.props.employerForm.usernameValid}
-                                        emailError = {this.props.employerForm.emailValid}
+                                        handleUserNameChange = {this.handleEmployerUsernameChange.bind(this)}
+                                        handleEmailChanged = {this.handleEmployerEmailChange.bind(this)}
+                                        usernameError = {this.props.employerForm.usrnameError}
+                                        emailError = {this.props.employerForm.emailError}
                                     />
                                 </div>
                                 <div>

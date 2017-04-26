@@ -10,7 +10,7 @@ export default function EmployerReducer(state={},action){
         case actionTypes.EMPLOYER_ALL_POSTS_SUCCEEDED:
             //listen to the username checking action and enables the loading near username
             newState = objectAssign({}, state);
-            newState.AllPosts = action.payload;
+            newState.AllPosts = action.payload == 204 ? []:action.payload;
             return newState;
 
         case actionTypes.EMPLOYER_ALL_POSTS_NO_CONTENT:

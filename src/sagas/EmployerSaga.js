@@ -59,6 +59,7 @@ export function * doAllPosts(action){
             payload:response
         });
     }}catch(e){
+        console.log(e);
         yield put({
            type:actionTypes.EMPLOYER_ALL_POSTS_FAILED
         });

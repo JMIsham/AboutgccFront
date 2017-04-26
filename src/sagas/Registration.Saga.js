@@ -7,8 +7,20 @@ import * as api from '../Connectivity/api2';
 import * as formValidation from '../Connectivity/form.api';
 
 export function* doEmployerRegister(action){
-    const response = yield call(api.registerEmployer,action.payload);
-    console.log(response);
+    const responses = yield call(api.registerEmployer,action.payload);
+    if(responses[0].status===406){
+        if(responses[1].indexOf("USERNAME_EXISTS")!=-1){
+            yield put({
+                type:types.EMPLOYER_USERNAME_FAILED
+            })
+        }
+        if(responses[1].indexOf("EMAIL_EXISTS")!=-1){
+            yield put({
+                type:types.EMPLOYER_EMAIL_FAILED
+            })
+        }
+    }
+
 }
 
 export function* watchEmployerRegister(){

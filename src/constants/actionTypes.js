@@ -85,4 +85,8 @@ export const BLOCK_USER_SUCCEEDED='block-user-succeeded';
 export const UNBLOCK_USER_REQUESTED='unblock-user-requested';
 export const UNBLOCK_USER_SUCCEEDED='unblock-user-succeeded';
 
+export const EMPLOYER_EMAIL_INVALID = "employer-email-invalid";
+export const EMPLOYER_EMAIL_CHANGED = "employer-email-changed";
+export const EMPLOYER_USERNAME_INVALID = "employer-username-invalid";
+export const EMPLOYER_USERNAME_CHANGED = "employer-username-changed";
 

@@ -51,10 +51,10 @@ export async function registerEmployer(formData){
                 "aboutUs":formData.aboutUs
             })
     };
+    console.log(request);
     const response = await fetch(url,request);
-    console.log(response);
-    const data= response.json();
-    return data;
+    const data= await response.json();
+    return [response,data];
 }
 
 export async function adminGetAllEmployer(token){
@@ -206,6 +206,7 @@ export async function employerAllPosts(token){
     else if(response.status==401){
         return false;
     }
+    console.log(response);
     throw new ApiError(
         data.message||response.statusText,
         response.status

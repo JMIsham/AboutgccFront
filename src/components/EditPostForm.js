@@ -34,6 +34,9 @@ class Form extends Component {
     }
     render() {
         //
+        const minDate = new Date();
+        minDate.setFullYear(minDate.getFullYear() - 1);
+        minDate.setHours(0, 0, 0, 0);
         const { handleSubmit, pristine, reset, submitting } = this.props;
         return (
             <div>
@@ -109,6 +112,7 @@ class Form extends Component {
                             name="exp_date"
                             component={DatePicker}
                             format={null}
+                            minDate={minDate}
                             hintText="Apply Before"
                             validate={required}
                         />
@@ -131,7 +135,8 @@ const style = {
 
 
 Form = reduxForm({form: 'editPostForm'})(Form);
-Form=connect(state => ({
+Form=connect(state => (
+    {
     initialValues: {
         subject:state.employerReducer.currentPost.subject,
         location:parseInt(state.employerReducer.currentPost.country_id),
