@@ -89,7 +89,7 @@ class EmployerPostsItem extends Component{
                 </div>
                 <div className="description">
                     <i className="tags icon"></i>
-                    {post.tags.map((tag)=><span key={post.id+""+tag.tag_id} className="ui label">{tag.name}</span>)}
+                    {post.tags.map((tag)=><span style={{margin:"5px"}} key={post.id+""+tag.tag_id} className="ui label">{tag.name}</span>)}
                 </div>
             </div>
             <div className="extra content">

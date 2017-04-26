@@ -11,7 +11,7 @@ import EditPost from '../components/EditPostForm';
 import FlatButton from 'material-ui/FlatButton';
 import Dialog from 'material-ui/Dialog';
 import _ from "underscore";
-import Chip from 'material-ui/Chip';
+import TagChip from "../components/TagChips";
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import IconButton from 'material-ui/IconButton';
@@ -24,35 +24,53 @@ class CompanyPostMore extends Component{
     constructor(props){
         super(props);
         this.state = {
-            open: false,
+            DetailsEdtOpen: false,
+            TagEdtOpen: false,
         };
     }
     handleChange(event,val){
         console.log(val);
         var arr = this.props.unselectedTags;
-
+        var usdtgs = this.props.selectedTags.slice(0);
         // console.log("tast####",this.props.post.tags);
         arr = _.reject(arr,function (el) {
-            return (el.id).toString()===val.toString() ;});
+            if( (el.id).toString()===val.toString()){
+                usdtgs.push({
+                    tag_id:el.id,
+                    name:el.name
+                });
+                return true;
+            } ;});
         this.props.dispatch({
             type: actionTypes.EMPLOYER_POST_MORE_REQUESTED,
-            payload:arr
+            payload:{
+                unUsedTags:arr,
+                usedTags:usdtgs
+            }
         });
     }
 
     componentWillMount(){
-        var arr = this.props.tags;
-        var cTags = this.props.post.tags;
-        // console.log("tast####",this.props.post.tags);
-        arr = _.reject(arr,function (el) {
-            for (var i = 0, len = cTags.length; i < len; i++) {
-                if(cTags[i].tag_id===el.id) return true;
-            }
-            return false ;});
-        this.props.dispatch({
-           type: actionTypes.EMPLOYER_POST_MORE_REQUESTED,
-            payload:arr
-        });
+        try{
+            var arr = this.props.tags;
+            var cTags = this.props.post.tags.slice(0);
+            // console.log("tast####",this.props.post.tags);
+            arr = _.reject(arr,function (el) {
+                for (var i = 0, len = cTags.length; i < len; i++) {
+                    if(cTags[i].tag_id===el.id) return true;
+                }
+                return false ;});
+            this.props.dispatch({
+                type: actionTypes.EMPLOYER_POST_MORE_REQUESTED,
+                payload:{
+                    unUsedTags:arr,
+                    usedTags:cTags
+                }
+            });
+        }catch (e){
+            this.props.router.replace("/employer/posts");
+        }
+
     }
 
     handleSubmit(formData){
@@ -65,16 +83,75 @@ class CompanyPostMore extends Component{
             }
         });
     }
-
+    handleTagUpdate(){
+        var tagIds = [];
+        const selectedTags =this.props.selectedTags;
+        for(var i=0 ;i<selectedTags.length;i++){
+            tagIds.push(parseInt(selectedTags[i].tag_id));
+        }
+        var data = {
+            "id":parseInt(this.props.post.id),
+            "tags":tagIds.slice(0)
+        };
+        this.props.dispatch({
+            type:actionTypes.UPDATE_TAGS_REQUSTED,
+            payload:{
+                token:this.props.user.token,
+                body:data
+            }
+        });
+        console.log(data);
+        this.handleTagClose();
+    }
     handleOpen () {
-        this.setState({open: true});
+        this.setState({DetailsEdtOpen: true});
     }
 
     handleClose (){
-        this.setState({open: false});
+        this.setState({DetailsEdtOpen: false});
     }
-    handleDelete(value){
-        console.log("testing testing testing testing",value);
+    handleTagOpen () {
+        var arr = this.props.tags;
+        var cTags = this.props.post.tags.slice(0);
+        // console.log("tast####",this.props.post.tags);
+        arr = _.reject(arr,function (el) {
+            for (var i = 0, len = cTags.length; i < len; i++) {
+                if(cTags[i].tag_id===el.id) return true;
+            }
+            return false ;});
+        this.props.dispatch({
+            type: actionTypes.EMPLOYER_POST_MORE_REQUESTED,
+            payload:{
+                unUsedTags:arr,
+                usedTags:cTags
+            }
+        });
+        this.setState({TagEdtOpen: true});
+    }
+
+    handleTagClose (){
+        this.setState({TagEdtOpen: false});
+    }
+    handleDelete(val){
+        console.log(val);
+        var arr = this.props.unselectedTags.slice(0);
+        var usdtgs = this.props.selectedTags.slice(0);
+        // console.log("tast####",this.props.post.tags);
+        usdtgs = _.reject(usdtgs,function (el) {
+            if( (el.tag_id).toString()===val.toString()){
+                arr.push({
+                    id:el.tag_id,
+                    name:el.name
+                });
+                return true;
+            } ;});
+        this.props.dispatch({
+            type: actionTypes.EMPLOYER_POST_MORE_REQUESTED,
+            payload:{
+                unUsedTags:arr,
+                usedTags:usdtgs
+            }
+        });
     }
     setStatus(){
         switch (this.props.post.status){
@@ -162,6 +239,25 @@ class CompanyPostMore extends Component{
     }
     generatePage(){
         try{
+            const EditDetailsActions = [
+                <FlatButton
+                    label="Cancel"
+                    primary={true}
+                    onTouchTap={this.handleClose.bind(this)}
+                />
+            ];
+            const EditTagActions = [
+                <FlatButton
+                    label="Cancel"
+                    primary={true}
+                    onTouchTap={this.handleTagClose.bind(this)}
+                />,
+                <FlatButton
+                    label="Update Tags"
+                    primary={true}
+                    onTouchTap={this.handleTagUpdate.bind(this)}
+                />
+            ];
             console.log("props at ",this.props.post);
             var post = this.props.post;
             return (
@@ -206,18 +302,46 @@ class CompanyPostMore extends Component{
                         </div>
                     </h4>
                     <div data-tooltip="Edit Tags" data-position="right center" style={{maxWidth:"40px"}}>
-                    <FloatingActionButton mini={true} backgroundColor={"#37474f"} >
+                    <FloatingActionButton mini={true} backgroundColor={"#37474f"} onTouchTap={this.handleTagOpen.bind(this)}>
                         <ModeEdit />
                     </FloatingActionButton>
                         </div>
                     <div className="ui raised segment">
-                        {post.tags.map((tag)=><span key={post.id+""+tag.tag_id} className="ui tag label">{tag.name}</span>)}
+                        {post.tags.map((tag)=><span style={{margin:"5px"}} key={post.id+""+tag.tag_id} className="ui tag label">{tag.name}</span>)}
                     </div>
-                    <Chip
-                        onRequestDelete={this.handleDelete.bind(this)}
+                    <div style={{maxWidth:"400px",margin:"20px"}}>
+                    </div>
+                    <Dialog
+                        title="New Post"
+                        actions={EditDetailsActions}
+                        modal={false}
+                        open={this.state.DetailsEdtOpen}
+                        onRequestClose={this.handleClose.bind(this)}
+                        autoScrollBodyContent={true}
                     >
-                        test
-                    </Chip>
+                        All fields are required
+                        <EditPost onSubmit={this.handleSubmit.bind(this)}/>
+
+                    </Dialog>
+                    <Dialog
+                        title="Edit Tags"
+                        actions={EditTagActions}
+                        modal={false}
+                        open={this.state.TagEdtOpen}
+                        onRequestClose={this.handleTagClose.bind(this)}
+                        autoScrollBodyContent={true}
+                    >
+                        <div style={{ display:'flex', flexWrap: 'wrap',}}>
+                            {this.props.selectedTags.map((tag)=><TagChip handleDelete={this.handleDelete.bind(this)} key = {tag.tag_id+"t"} tag={tag}/>)}
+                        </div>
+                        <IconMenu
+                            iconButtonElement={<IconButton><MoreVertIcon /></IconButton>}
+                            onChange={this.handleChange.bind(this)}
+                        >
+                            {this.props.unselectedTags.map((tag)=><MenuItem key={tag.id} value={tag.id} primaryText={tag.name} />)}
+                        </IconMenu>
+
+                    </Dialog>
                 </div>
 
 
@@ -228,36 +352,10 @@ class CompanyPostMore extends Component{
 
     }
     render(){
-        const actions = [
-            <FlatButton
-                label="Cancel"
-                primary={true}
-                onTouchTap={this.handleClose.bind(this)}
-            />
-        ];
+
        return(<div >
            {this.generatePage()}
-           <div style={{maxWidth:"400px",margin:"20px"}}>
-           </div>
-           <Dialog
-               title="New Post"
-               actions={actions}
-               modal={false}
-               open={this.state.open}
-               onRequestClose={this.handleClose.bind(this)}
-               autoScrollBodyContent={true}
-           >
-               All fields are required
-               <EditPost onSubmit={this.handleSubmit.bind(this)}/>
 
-           </Dialog>
-           <IconMenu
-               iconButtonElement={<IconButton><MoreVertIcon /></IconButton>}
-               onChange={this.handleChange.bind(this)}
-
-           >
-               {this.props.unselectedTags.map((tag)=><MenuItem key={tag.id} value={tag.id} primaryText={tag.name} />)}
-           </IconMenu>
 
            </div>);
 
@@ -268,7 +366,8 @@ const mapStateToProps = (state)=>{
         user:state.user,
         post:state.employerReducer.currentPost,
         tags:state.common.allTags,
-        unselectedTags:state.employerReducer.currentTags
+        unselectedTags:state.employerReducer.unUsedTags,
+        selectedTags:state.employerReducer.UsedTags
     });
 };
 CompanyPostMore = withRouter(CompanyPostMore);

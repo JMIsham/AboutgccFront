@@ -21,7 +21,11 @@ export default function* rootSaga(){
         fork(Employer.watchAllPosts),
         fork(Employer.watchCreatePost),
         fork(Employer.watchEditPost),
+        fork(Employer.watchUpdateTags),
+        fork(Employer.watchPostDelete),
+        fork(Employer.watchPostToggleView),
         fork(Common.watchTags),
+
 
     ];
 }

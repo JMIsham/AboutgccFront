@@ -307,3 +307,86 @@ export async function tags(){
         response.status
     );
 }
+export async function employerUpdateTags(token,body){
+    const url = "http://127.0.0.1/aboutgcc/web/app_dev.php/post-employer/set-tags";
+    const request={
+        method:"PUT",
+        mode:"cors",
+        headers:{
+            'Content-Type': 'application/json',
+            'Authorization':'Bearer '+token
+        },
+        body: JSON.stringify(body)
+    };
+    console.log(request);
+    const response= await fetch(url,request);
+    const data=await response.json();
+    if(response.status==200){
+        return data;
+    }
+    else if(response.status==204){
+        return "NO_CONTENT";
+    }
+    else if(response.status==401){
+        return false;
+    }
+    throw new ApiError(
+        data.message||response.statusText,
+        response.status
+    );
+}
+export async function employerDeletePost(token,id){
+    const url = "http://127.0.0.1/aboutgcc/web/app_dev.php/post-employer/delete/"+id;
+    const request={
+        method:"GET",
+        mode:"cors",
+        headers:{
+            'Content-Type': 'application/json',
+            'Authorization':'Bearer '+token
+        }
+    };
+    console.log(request);
+    const response= await fetch(url,request);
+    const data=await response.json();
+    if(response.status==200){
+        return data;
+    }
+    else if(response.status==204){
+        return "NO_CONTENT";
+    }
+    else if(response.status==401){
+        return false;
+    }
+    throw new ApiError(
+        data.message||response.statusText,
+        response.status
+    );
+}
+export async function employerPostToggleView(token,id,status){
+    const url = status===1 ? "http://127.0.0.1/aboutgcc/web/app_dev.php/post-employer/suspend/"+id : "http://127.0.0.1/aboutgcc/web/app_dev.php/post-employer/activate/"+id;
+    const request={
+        method:"GET",
+        mode:"cors",
+        headers:{
+            'Content-Type': 'application/json',
+            'Authorization':'Bearer '+token
+        }
+    };
+    console.log(request);
+    const response= await fetch(url,request);
+    const data=await response.json();
+    console.log(response,"fdfs",data);
+    if(data===200){
+        return true;
+    }
+    else if(response.status===204){
+        return "NO_CONTENT";
+    }
+    else if(response.status===401){
+        return false;
+    }
+    throw new ApiError(
+        data.message||response.statusText,
+        response.status
+    );
+}

@@ -133,7 +133,6 @@ class CompanyJobPosts extends Component{
                 >
                     All fields are required
                     <PostForm onSubmit={this.handleSubmit.bind(this)}/>
-
                 </Dialog>
             </div>
 
