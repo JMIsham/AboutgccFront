@@ -1,5 +1,5 @@
 /**
- * Created by Isham on 3/11/2017.
+ * Created by Isham on 4/30/2017.
  */
 import React, { Component } from 'react'
 import { Field, reduxForm } from 'redux-form'
@@ -19,6 +19,8 @@ const required = value => value == null ? 'Required' : undefined;
 const email = value => value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value) ? 'Invalid email' : undefined;
 const number = value => value && !/^[.+]+[0-9]{11,20}$/i.test(value) ? 'invalid contact number' : undefined;
 const username = value => value && !/^[A-Z0-9._%+-@]{3,100}$/i.test(value) ? 'invalid username' : undefined;
+const nic = value => value && !/^[0-9.v]{10}$/i.test(value) ? 'invalid nic' : undefined;
+
 
 class Form extends Component {
 
@@ -32,17 +34,17 @@ class Form extends Component {
         return value.toString() == this.refs.password.value.toString() ? undefined : "Password Mismatch"
     }
     userNameChanged(){
-         this.props.handleUserNameChange();
+        this.props.handleUserNameChange();
     }
     emailChanged(){
 
         this.props.handleEmailChanged();
     }
-    usernameExistance(){
-        return this.props.usernameError;
+    nicChanged(){
+        this.props.handleNicChanged();
     }
-    emailExistance(){
-        return this.props.emailError;
+    contactNumChanged(){
+        this.props.handleContactNumChange();
     }
     render() {
         //
@@ -52,21 +54,31 @@ class Form extends Component {
                 <form onSubmit={handleSubmit}>
 
                     <div>
-                        <Field name="companyName"
+                        <Field name="firstName"
                                component={TextField}
-                               hintText="CompanyName"
-                               floatingLabelText="Company Name"
+                               hintText="First Name"
+                               floatingLabelText="First Name"
                                validate={required}
                                defaultValue="test"
                                ref="name" withRef/>
                     </div>
                     <div>
-                        <Field name="registrationNumber"
+                        <Field name="lastName"
                                component={TextField}
-                               hintText="RegistrationNumber"
-                               floatingLabelText="Company Registration Number"
-                               validate={[required]}
-                               />
+                               hintText="LastName"
+                               floatingLabelText="Last Name"
+                               validate={required}
+                                />
+                    </div>
+                    <div>
+                        <Field name="nic"
+                               component={TextField}
+                               hintText="999999999v"
+                               floatingLabelText="NIC Number"
+                               errorText = {this.props.nicError}
+                               onChange = {this.nicChanged.bind(this)}
+                               validate={[required,nic]}
+                        />
                     </div>
                     <div>
                         <Field
@@ -76,7 +88,6 @@ class Form extends Component {
                             floatingLabelText="Location"
                             validate={required}
                             value = {1}
-
                             ref = "country" withRef
 
 
@@ -116,15 +127,16 @@ class Form extends Component {
                                component={TextField}
                                hintText="778696585"
                                floatingLabelText="Contact Number"
-
+                               errorText={this.props.contactNumError}
+                               onChange = {this.contactNumChanged.bind(this)}
                                validate={[required,number]}
-                               />
+                        />
                     </div>
                     <div>
-                        <Field name="aboutUs"
+                        <Field name="aboutMe"
                                component={TextField}
-                               hintText="Brief the company hear..."
-                               floatingLabelText="About Us"
+                               hintText="Brief yourself hear..."
+                               floatingLabelText="About Me"
                                validate={required}
                                multiLine={true}
                                rows={1}
@@ -184,7 +196,7 @@ class Form extends Component {
 const style = {
     textAlign : "center"
 };
-Form = reduxForm({form: 'employerRegistration'})(Form);
+Form = reduxForm({form: 'employeeRegistration'})(Form);
 
 
 export default Form;

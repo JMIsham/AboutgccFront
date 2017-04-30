@@ -11,6 +11,7 @@ export default function* rootSaga(){
         fork(authSaga.watchLoginSucceeded),
         fork(authSaga.watchLogoutCalled),
         fork(register.watchEmployerRegister),
+        fork(register.watchEmployeeRegister),
         fork(Admin.watchGetAllEmployers),
         fork(register.watchEmployerUsername),
         fork(register.watchEmployerEmail),

@@ -1,5 +1,6 @@
 
 export const EMPLOYER_REGISTRATION_REQUESTED="employer-registration";
+export const EMPLOYEE_REGISTRATION_REQUESTED="employee-registration";
 
 export const LOGIN_REQUESTED="login";
 export const LOGIN_SUCCEEDED= 'login-successful';
@@ -89,4 +90,13 @@ export const EMPLOYER_EMAIL_INVALID = "employer-email-invalid";
 export const EMPLOYER_EMAIL_CHANGED = "employer-email-changed";
 export const EMPLOYER_USERNAME_INVALID = "employer-username-invalid";
 export const EMPLOYER_USERNAME_CHANGED = "employer-username-changed";
+
+export const EMPLOYEE_EMAIL_INVALID = "employee-email-invalid";
+export const EMPLOYEE_EMAIL_CHANGED = "employee-email-changed";
+export const EMPLOYEE_USERNAME_INVALID = "employee-username-invalid";
+export const EMPLOYEE_USERNAME_CHANGED = "employee-username-changed";
+export const EMPLOYEE_NIC_INVALID = "employee-nic-invalid";
+export const EMPLOYEE_NIC_CHANGED = "employee-nic-changed";
+export const EMPLOYEE_CONTACT_NUMBER_INVALID = "employee-contact-number-invalid";
+export const EMPLOYEE_CONTACT_NUMBER_CHANGED = "employee-contact-number-changed";
 

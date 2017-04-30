@@ -4,6 +4,7 @@ import {reducer as fromReducer} from 'redux-form';
 import userReducer from './UserReducer';
 import loginFormReducer from './LoginFormReducer';
 import employerForm from './EmployerFormReducer';
+import employeeForm from './EmployeeFormReducer';
 import adminReducer from './adminReducer';
 import EmployerReducer from './EmployerReducer';
 import common from './commonReducer';
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   loginForm:loginFormReducer,
   routing: routerReducer,
   employerForm:employerForm,
+  employeeForm:employeeForm,
   adminData:adminReducer,
   employerReducer:EmployerReducer,
   common:common,

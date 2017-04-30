@@ -56,6 +56,33 @@ export async function registerEmployer(formData){
     const data= await response.json();
     return [response,data];
 }
+export async function registerEmployee(formData){
+    console.log("called Registration");
+    const url = "http://localhost/aboutgcc/web/app_dev.php/employee";
+    const request = {
+        method: "POST",
+        mode: "cors",
+        headers:{
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(
+            {   "username":formData.username,
+                "password":formData.password,
+                "email":formData.email,
+                "firstName":formData.firstName,
+                "lastName":formData.lastName,
+                "contactNum": formData.contactNumber,
+                "nicNumber":formData.nic,
+                "doorAddress":formData.doorAddress,
+                "country":formData.location,
+                "aboutMe":formData.aboutMe
+            })
+    };
+    console.log(request);
+    const response = await fetch(url,request);
+    const data= await response.json();
+    return [response,data];
+}
 
 export async function adminGetAllEmployer(token){
     const url="http://127.0.0.1/aboutgcc/web/app_dev.php/admin/employers";

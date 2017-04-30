@@ -23,6 +23,36 @@ export function* doEmployerRegister(action){
 
 }
 
+export function* watchEmployeeRegister(){
+    yield takeLatest(types.EMPLOYEE_REGISTRATION_REQUESTED,doEmployeeRegister);
+}
+export function* doEmployeeRegister(action){
+    const responses = yield call(api.registerEmployee,action.payload);
+    if(responses[0].status===406){
+        if(responses[1].indexOf("USERNAME_EXISTS")!=-1){
+            yield put({
+                type:types.EMPLOYEE_USERNAME_INVALID
+            })
+        }
+        if(responses[1].indexOf("EMAIL_EXISTS")!=-1){
+            yield put({
+                type:types.EMPLOYEE_EMAIL_INVALID
+            })
+        }
+        if(responses[1].indexOf("NIC_EXISTS")!=-1){
+            yield put({
+                type:types.EMPLOYEE_NIC_INVALID
+            })
+        }
+        if(responses[1].indexOf("CONTACT_NUMBER_EXISTS")!=-1){
+            yield put({
+                type:types.EMPLOYEE_CONTACT_NUMBER_INVALID
+            })
+        }
+    }
+
+}
+
 export function* watchEmployerRegister(){
     yield takeLatest(types.EMPLOYER_REGISTRATION_REQUESTED,doEmployerRegister);
 }

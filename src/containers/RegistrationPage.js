@@ -3,6 +3,7 @@
  */
 import React, {Component} from 'react';
 import Employer from '../components/CompanyRegisterForm';
+import Employee from '../components/EmployeeRegistrationForm';
 import {connect} from 'react-redux';
 import * as types from "../constants/actionTypes";
 import SwipeableViews from 'react-swipeable-views';
@@ -32,19 +33,40 @@ class RegistrationPage extends Component{
     }
 
     handleEmployerUsernameChange(){
-        this.props.dispatch(
-            {
+        this.props.dispatch({
                 type:types.EMPLOYER_USERNAME_CHANGED,
-
-            }
-        );
+            });
     }
     handleEmployerEmailChange(){
-        this.props.dispatch(
-            {
+        this.props.dispatch({
                 type:types.EMPLOYER_EMAIL_CHANGED,
-            }
-        )
+            });
+    }
+    handleEmployee(formData){
+        console.log(formData);
+        this.props.dispatch({
+            type:types.EMPLOYEE_REGISTRATION_REQUESTED,
+            payload: formData
+        });
+    }
+    handleEmployeeUsernameChange(){
+        this.props.dispatch({
+                type:types.EMPLOYEE_USERNAME_CHANGED,
+            });
+    }
+    handleEmployeeEmailChange(){
+        this.props.dispatch({
+                type:types.EMPLOYEE_EMAIL_CHANGED,
+            });
+    }handleEmployeeNICChange(){
+        this.props.dispatch({
+                type:types.EMPLOYEE_NIC_CHANGED,
+            });
+    }
+    handleEmployeeContactNumberChange(){
+        this.props.dispatch({
+                type:types.EMPLOYEE_CONTACT_NUMBER_CHANGED,
+            });
     }
     render(){
 
@@ -71,7 +93,17 @@ class RegistrationPage extends Component{
                                     />
                                 </div>
                                 <div>
-                                    Under Construction
+                                    <Employee
+                                        onSubmit = {this.handleEmployee.bind(this)}
+                                        handleUserNameChange = {this.handleEmployeeUsernameChange.bind(this)}
+                                        handleEmailChanged = {this.handleEmployeeEmailChange.bind(this)}
+                                        handleNicChanged = {this.handleEmployeeNICChange.bind(this)}
+                                        handleContactNumChange = {this.handleEmployeeContactNumberChange.bind(this)}
+                                        usernameError = {this.props.employeeForm.usrnameError}
+                                        emailError = {this.props.employeeForm.emailError}
+                                        nicError = {this.props.employeeForm.nicError}
+                                        contactNumError = {this.props.employeeForm.contactNumberError}
+                                    />
                                 </div>
 
                             </SwipeableViews>
@@ -104,7 +136,8 @@ const styles = {
 const mapStateToProps=(state)=>{
   return(
       {
-          employerForm:state.employerForm
+          employerForm:state.employerForm,
+          employeeForm:state.employeeForm
       }
   );
 };
