@@ -207,7 +207,7 @@ class CompanyPostMore extends Component{
             case "Kuwait":
                 return(
                     <div className="ui label" data-tooltip={name} data-position="right center" style={{paddingTop:"1px",paddingRight:"1px",paddingLeft:"6px"}}>
-                        <i className="qw flag"></i>
+                        <i className="kw flag"></i>
                     </div>
                 );
             case "Oman":
@@ -219,7 +219,7 @@ class CompanyPostMore extends Component{
             case "Qatar":
                 return(
                     <div className="ui label" data-tooltip={name} data-position="right center" style={{paddingTop:"1px",paddingRight:"1px",paddingLeft:"6px"}}>
-                        <i className="qt flag"></i>
+                        <i className="qa flag"></i>
                     </div>
                 );
             case "Saudi Arabia":

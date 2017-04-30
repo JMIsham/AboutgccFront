@@ -22,6 +22,7 @@ class UserPage extends Component{
         console.log(roles);
         if(roles.indexOf("ROLE_SUPER_ADMIN")!= -1) this.props.router.replace("/admin");
         if(roles.indexOf("ROLE_EMPLOYER")!= -1) this.props.router.replace("/employer");
+        if(roles.indexOf("ROLE_EMPLOYEE")!= -1) this.props.router.replace("/employee");
     }
     componentWillReceiveProps(nextProps){
         if(!this.props.user.loggedIn){

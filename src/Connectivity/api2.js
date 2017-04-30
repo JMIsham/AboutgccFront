@@ -187,8 +187,8 @@ export async function unblockUser(id,token){
         response.status
     );
 }
-export async function employerMoreInfo(id,token){
-    const url = "http://127.0.0.1/aboutgcc/web/app_dev.php/full_info_employer/"+id;
+export async function employerMoreInfo(id,token,type){
+    const url = type==1? "http://127.0.0.1/aboutgcc/web/app_dev.php/full_info_employer/"+id:"http://127.0.0.1/aboutgcc/web/app_dev.php/full_info_employee";
     const request={
         method:"GET",
         mode:"cors",

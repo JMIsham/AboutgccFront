@@ -32,6 +32,7 @@ class CompanyPage extends Component{
         this.props.dispatch({
             type:actionTypes.EMPLOYER_MORE_INFO_REQUESTED,
             payload:{
+                userType:1,
                 id:this.props.user.id,
                 token:this.props.user.token
             }
@@ -55,7 +56,7 @@ class CompanyPage extends Component{
         return(
             <div className="ui card centered" style={{maxWidth:"200px",minWidth:"100px",paddingTop:"5px"}}>
                 <div className="image">
-                    <img src="../images/isham.jpg" style={{backgroundColor:"red"}}/>
+                    <img src="https://scontent.fcmb3-1.fna.fbcdn.net/v/t1.0-1/p240x240/14516414_1796826027122985_1912927303627841408_n.jpg?oh=5b6ce630db456c674f2ae628166f4ef6&amp;oe=597532B5" style={{backgroundColor:"red"}}/>
                 </div>
                 <div className="content" >
                     <a className="header" > <i className="user icon"></i>{this.props.user.moreInfo.name}</a>

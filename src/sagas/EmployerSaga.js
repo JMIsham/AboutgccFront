@@ -5,35 +5,36 @@ import * as actionTypes from '../constants/actionTypes';
 import * as api from '../Connectivity/api2';
 import {call,put,takeLatest} from 'redux-saga/effects';
 import {push} from 'react-router-redux';
-
 export function * watchMoreInfo(){
     yield takeLatest(actionTypes.EMPLOYER_MORE_INFO_REQUESTED,doMoreInfo);
 }
 
 export function * doMoreInfo(action){
     try{
-    const token=action.payload.token;
-    const id=action.payload.id;
-    const response=yield call(api.employerMoreInfo,id,token);
-    if(!response){
+        const token=action.payload.token;
+        const id=action.payload.id;
+        const userType = action.payload.userType;
+        const response=yield call(api.employerMoreInfo,id,token,userType);
+        if(!response){
+            yield put({
+                type:actionTypes.EMPLOYER_MORE_INFO_UNAUTHERIZED
+            });
+            yield put(push('/logout'));
+        }else{
+            yield put({
+                type:actionTypes.EMPLOYER_MORE_INFO_SUCCEEDED,
+                payload:response
+            });
+        }}catch(e){
         yield put({
-            type:actionTypes.EMPLOYER_MORE_INFO_UNAUTHERIZED
-        });
-        yield put(push('/logout'));
-    }else{
-        yield put({
-            type:actionTypes.EMPLOYER_MORE_INFO_SUCCEEDED,
-            payload:response
-        });
-    }}catch(e){
-        yield put({
-           type:actionTypes.EMPLOYER_MORE_INFO_FAILED
+            type:actionTypes.EMPLOYER_MORE_INFO_FAILED
         });
         yield put(push('/logout'));
     }
 
 
 }
+
 export function * watchAllPosts(){
     yield takeLatest(actionTypes.EMPLOYER_ALL_POSTS_REQUESTED,doAllPosts);
 }

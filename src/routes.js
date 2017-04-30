@@ -16,6 +16,7 @@ import AdminJobseekers from './containers/AdminJobseekers';
 import AdminPosts from './containers/AdminPosts';
 import AdminMoreEmployer from './containers/AdminMoreEmployer';
 import CompanyPage from './containers/CompanyPage';
+import EmployeePage from './containers/JobseekerPage';
 import CompanyPosts from './containers/CompanyJobPosts';
 import CompanyPostMore from './containers/CompanyPostMore';
 
@@ -37,6 +38,11 @@ export default (
           <IndexRoute component={CompanyPosts}/>
           <Route path="posts" component={CompanyPosts}/>
           <Route path="post-more" component={CompanyPostMore}/>
+      </Route>
+      <Route path="employee" component={EmployeePage} >
+          {/*<IndexRoute component={CompanyPosts}/>*/}
+          {/*<Route path="application" component={CompanyPosts}/>*/}
+          {/*<Route path="application-more" component={CompanyPostMore}/>*/}
       </Route>
       <Route path="register" components={RegistrationPage}/>
       <Route path="*" component={NotFoundPage}/>
