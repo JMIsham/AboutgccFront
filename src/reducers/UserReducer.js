@@ -45,7 +45,14 @@ export default function userReducer(state =initialState.user,action ){
             newState=objectAssign({},state);
             newState.moreInfo=action.payload[0];
             return newState;
-
+        case (actionTypes.USER_DP_SUCCEEDED):
+            newState=objectAssign({},state);
+            newState.moreInfo.dp=action.payload;
+            return newState;
+        case (actionTypes.EMPLOYEE_CV_UPDATE_SUCCEEDED):
+            newState=objectAssign({},state);
+            newState.moreInfo.cv=action.payload;
+            return newState;
         default:
             return state
     }

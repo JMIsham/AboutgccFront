@@ -418,3 +418,63 @@ export async function employerPostToggleView(token,id,status){
         response.status
     );
 }
+export async function changeDP(token,file,user){
+    var form = new FormData();
+    form.append("dp", file);
+    const url = user=="EMPLOYER"? "http://127.0.0.1/aboutgcc/web/app_dev.php/set-dp-employer":"http://127.0.0.1/aboutgcc/web/app_dev.php/set-dp-employee";
+    const request={
+        method:"POST",
+        mode:"cors",
+        processData: false,
+        contentType: false,
+        mimeType: "multipart/form-data",
+        headers:{
+            'Authorization':'Bearer '+token,
+            'processData': false,
+            'contentType': false,
+            'mimeType': "multipart/form-data"
+        },
+        body:form
+
+    };
+    console.log(request);
+    const response= await fetch(url,request);
+    const data=await response.json();
+    if(response.status==200){
+        return data;
+    }
+    throw new ApiError(
+        data.message||response.statusText,
+        response.status
+    );
+}
+export async function changeCV(token,file){
+    var form = new FormData();
+    form.append("cv", file);
+    const url = "http://127.0.0.1/aboutgcc/web/app_dev.php/set-cv-employee";
+    const request={
+        method:"POST",
+        mode:"cors",
+        processData: false,
+        contentType: false,
+        mimeType: "multipart/form-data",
+        headers:{
+            'Authorization':'Bearer '+token,
+            'processData': false,
+            'contentType': false,
+            'mimeType': "multipart/form-data"
+        },
+        body:form
+
+    };
+    console.log(request);
+    const response= await fetch(url,request);
+    const data=await response.json();
+    if(response.status==200){
+        return data;
+    }
+    throw new ApiError(
+        data.message||response.statusText,
+        response.status
+    );
+}

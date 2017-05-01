@@ -2,6 +2,14 @@
 export const EMPLOYER_REGISTRATION_REQUESTED="employer-registration";
 export const EMPLOYEE_REGISTRATION_REQUESTED="employee-registration";
 
+export const USER_DP_REQUESTED = "user-dp-requested";
+export const USER_DP_SUCCEEDED = "user-dp-succeeded";
+export const USER_DP_FAILED = "user-dp-failed";
+
+export const EMPLOYEE_CV_UPDATE_REQUESTED = "employer-cv-update-requested";
+export const EMPLOYEE_CV_UPDATE_SUCCEEDED = "employer-cv-update-succeeded";
+export const EMPLOYEE_CV_UPDATE_FAILED = "employer-cv-update-failed";
+
 export const LOGIN_REQUESTED="login";
 export const LOGIN_SUCCEEDED= 'login-successful';
 export const LOGIN_FAILED = 'login-failed';

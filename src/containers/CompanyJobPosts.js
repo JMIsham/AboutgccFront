@@ -23,6 +23,7 @@ class CompanyJobPosts extends Component{
     }
 
     handleSubmit(formData){
+        this.setState({open: false});
         this.props.dispatch({
             type:actionTypes.EMPLOYER_NEW_POST_REQUESTED,
             payload:{

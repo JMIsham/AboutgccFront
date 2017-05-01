@@ -4,6 +4,7 @@ import * as register from './Registration.Saga';
 import * as Admin from './AdminSaga';
 import * as Employer from './EmployerSaga';
 import * as Common from './CommonSaga';
+import * as Employee from './EmployeeSaga';
 import {fork} from 'redux-saga/effects';
 export default function* rootSaga(){
     yield [
@@ -26,6 +27,8 @@ export default function* rootSaga(){
         fork(Employer.watchPostDelete),
         fork(Employer.watchPostToggleView),
         fork(Common.watchTags),
+        fork(Common.watchDP),
+        fork(Employee.watchCVUpdate),
 
 
     ];

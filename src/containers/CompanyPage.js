@@ -6,6 +6,11 @@ import * as actionTypes from '../constants/actionTypes';
 import Paper from 'material-ui/Paper';
 import CompanyJobPosts from  './CompanyJobPosts';
 import jwtDecode from 'jwt-decode';
+import Dropzone from 'react-dropzone';
+import FlatButton from 'material-ui/FlatButton';
+import Dialog from 'material-ui/Dialog';
+
+
 class CompanyPage extends Component{
 
     constructor(props) {
@@ -14,7 +19,24 @@ class CompanyPage extends Component{
             postsClicked:true,
             profileClicked:false,
             loginClicked:false,
+            open:false,
+            files: []
         };
+    }
+    onDrop(files, rejected) {
+        this.setState({
+            files
+        });
+    }
+    handleDP(){
+        this.props.dispatch({
+            type:actionTypes.USER_DP_REQUESTED,
+            payload:{
+                file:this.state.files[0],
+                token:this.props.user.token,
+                user:"EMPLOYER"
+            }
+        })
     }
     loadPage(){
         try{
@@ -27,7 +49,19 @@ class CompanyPage extends Component{
 
 
     }
+    handleOpen(){
+        this.setState({
+            open:true
+        })
+    }
+    handleClose(){
+        this.setState({
+            open:false,
+            files:[]
+        });
 
+
+    }
     componentWillMount(){
         this.props.dispatch({
             type:actionTypes.EMPLOYER_MORE_INFO_REQUESTED,
@@ -38,6 +72,7 @@ class CompanyPage extends Component{
             }
         });
     }
+
     handleAllPosts(){
         this.setState({
             postsClicked:true,
@@ -55,8 +90,8 @@ class CompanyPage extends Component{
         try{
         return(
             <div className="ui card centered" style={{maxWidth:"200px",minWidth:"100px",paddingTop:"5px"}}>
-                <div className="image">
-                    <img src="https://scontent.fcmb3-1.fna.fbcdn.net/v/t1.0-1/p240x240/14516414_1796826027122985_1912927303627841408_n.jpg?oh=5b6ce630db456c674f2ae628166f4ef6&amp;oe=597532B5" style={{backgroundColor:"red"}}/>
+                <div className="image" data-tooltip="Click to Change DP" data-position="bottom center" onClick={this.handleOpen.bind(this)}>
+                    <img src={"http://localhost/aboutGccAsserts/DPs/"+this.props.user.moreInfo.dp} style={{backgroundColor:"red"}}/>
                 </div>
                 <div className="content" >
                     <a className="header" > <i className="user icon"></i>{this.props.user.moreInfo.name}</a>
@@ -93,8 +128,28 @@ class CompanyPage extends Component{
         }
 
     }
+    displayPreview(){
+        try {
+           return <img src={this.state.files[0].preview} width="200px" high="200px"/>
+        }
+        catch (e){
+            return <img src={"http://localhost/aboutGccAsserts/DPs/"+this.props.user.moreInfo.dp} width="200px" high="200px"/>
+        }
+    }
     render(){
         // this.loadPage();
+        const actions = [
+            <FlatButton
+                label="Close"
+                primary={true}
+                onTouchTap={this.handleClose.bind(this)}
+            />,
+            <FlatButton
+                label="Update"
+                primary={true}
+                onTouchTap={this.handleDP.bind(this)}
+            />
+        ];
         return(
             <div style={{backgroundColor:"#eeeeee",minHeight:"800px",paddingTop:"20px"}}>
                 <Container fluid>
@@ -113,6 +168,25 @@ class CompanyPage extends Component{
 
                     </Row>
                 </Container>
+                <Dialog
+                    title="Edit DP"
+                    actions={actions}
+                    modal={false}
+                    open={this.state.open}
+                    onRequestClose={this.handleClose.bind(this)}
+                    autoScrollBodyContent={true}
+                >
+                    Drop your DP or Click to select one
+                    <section>
+                        <div className="dropzone">
+                            <Dropzone
+                                accept="image/jpeg, image/png"
+                                onDrop={this.onDrop.bind(this)}>
+                                {this.displayPreview()}
+                            </Dropzone>
+                        </div>
+                    </section>
+                </Dialog>
             </div>
 
         )

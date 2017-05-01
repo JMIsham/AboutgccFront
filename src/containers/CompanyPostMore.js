@@ -312,7 +312,7 @@ class CompanyPostMore extends Component{
                     <div style={{maxWidth:"400px",margin:"20px"}}>
                     </div>
                     <Dialog
-                        title="New Post"
+                        title="Edit Post"
                         actions={EditDetailsActions}
                         modal={false}
                         open={this.state.DetailsEdtOpen}

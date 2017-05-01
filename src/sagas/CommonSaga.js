@@ -31,6 +31,24 @@ export function * doTags(){
             type:actionTypes.FETCH_TAGS_FAILED
         });
     }
-
-
 }
+export function * watchDP() {
+    yield takeLatest(actionTypes.USER_DP_REQUESTED,doDP);
+}
+export function * doDP(action){
+    try{
+        const file = action.payload.file;
+        const token = action.payload.token;
+        const user = action.payload.user;
+        const response=yield call(api2.changeDP,token,file,user);
+            yield put({
+                type:actionTypes.USER_DP_SUCCEEDED,
+                payload:response
+            });
+        }catch(e){
+        yield put({
+            type:actionTypes.USER_DP_FAILED
+        });
+    }
+}
+
