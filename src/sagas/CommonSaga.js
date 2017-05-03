@@ -52,3 +52,53 @@ export function * doDP(action){
     }
 }
 
+export function * watchAllPosts(){
+    yield takeLatest(actionTypes.HOMEPAGE_REQUESTED,doAllPosts);
+}
+export function * doAllPosts(action) {
+    try{
+
+        const response=yield call(api2.posts);
+        if(!response){
+            yield put({
+                type:actionTypes.FETCH_ALL_POSTS_SUCCEEDED,
+                payload:[]
+            });
+        }
+        else{
+            yield put({
+                type:actionTypes.FETCH_ALL_POSTS_SUCCEEDED,
+                payload:response
+            });
+        }}catch(e){
+        yield put({
+            type:actionTypes.FETCH_ALL_POSTS_FAILED
+        });
+    }
+}
+export function * watchPostMoreDetails(){
+    yield takeLatest(actionTypes.POST_MORE_DETAILS_REQUESTED,doPostMoreDetails);
+}
+export function * doPostMoreDetails(action){
+    try{
+        const postId = action.payload;
+        console.log(postId);
+        const response=yield call(api2.postFulDetails,postId);
+        console.log(response);
+        if(!response){
+            yield put({
+                type:actionTypes.POST_MORE_DETAILS_FAILED
+
+            });
+        }
+        else{
+            yield put({
+                type:actionTypes.POST_MORE_DETAILS_SUCCEEDED,
+                payload:response
+            });
+        }}catch(e){
+        yield put({
+            type:actionTypes.POST_MORE_DETAILS_FAILED
+        });
+    }
+}

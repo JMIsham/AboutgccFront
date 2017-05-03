@@ -27,7 +27,7 @@ export default function userReducer(state =initialState.user,action ){
             return newState;
 
         case(actionTypes.LOGOUT_COMPLETED):
-            //when logged out returns to thee initial state
+            //when logged out returns to the initial state
             return initialState.user;
 
         case (actionTypes.LOGIN_FAILED):

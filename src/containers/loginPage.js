@@ -48,12 +48,8 @@ class LoginPage extends React.Component{
             <div style={styles.mainDiv} >
                 <Container fluid>
                     <Row>
-                        <Col lg={4}>
-                        </Col>
-                        <Col  lg={4}>
                             <MatLoginForm onSubmit = {this.doLogin.bind(this)} handleFormChange={this.handleLoginDataChange.bind(this)} hasError={this.props.loginForm.loginError}/>
 
-                        </Col>
                     </Row>
                 </Container>
             </div>

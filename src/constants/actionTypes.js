@@ -2,6 +2,19 @@
 export const EMPLOYER_REGISTRATION_REQUESTED="employer-registration";
 export const EMPLOYEE_REGISTRATION_REQUESTED="employee-registration";
 
+export const HOMEPAGE_REQUESTED = "homepage-requested";
+
+export const FETCH_ALL_POSTS_SUCCEEDED = "fetch-all-posts-succeeded";
+export const FETCH_ALL_POSTS_FAILED = "fetch-all-posts-failed";
+
+export const POST_MORE_DETAILS_REQUESTED = "post-more-details-requested";
+export const POST_MORE_DETAILS_SUCCEEDED = "post-more-details-succeeded";
+export const POST_MORE_DETAILS_FAILED = "post-more-details-failed";
+
+export const JOB_APPLICATION_REQUESTED = "job-application-requested";
+export const JOB_APLICATION_SUCCEEDED = "job-application-succeeded";
+export const JOB_APPLICATION_FAILED = "job-application-failed";
+
 export const USER_DP_REQUESTED = "user-dp-requested";
 export const USER_DP_SUCCEEDED = "user-dp-succeeded";
 export const USER_DP_FAILED = "user-dp-failed";

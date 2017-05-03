@@ -478,3 +478,76 @@ export async function changeCV(token,file){
         response.status
     );
 }
+export async function posts(){
+    const url = "http://127.0.0.1/aboutgcc/web/app_dev.php/posts";
+    const request={
+        method:"GET",
+        mode:"cors",
+        headers:{
+            'Content-Type': 'application/json',
+        }
+    };
+    const response= await fetch(url,request);
+    const data=await response.json();
+    if(response.status==200){
+        console.log(data);
+        return data;
+    }
+    else if(response.status==204){
+        return false;
+    }
+    throw new ApiError(
+        data.message||response.statusText,
+        response.status
+    );
+}
+export async function postFulDetails(id){
+    const url = "http://localhost/aboutgcc/web/app_dev.php/post-full-details/"+id;
+    const request={
+        method:"GET",
+        mode:"cors",
+        headers:{
+            'Content-Type': 'application/json',
+        }
+    };
+    console.log("calling!!!!!!!!!!",request);
+    const response= await fetch(url,request);
+    const data=await response.json();
+    if(response.status==200){
+        console.log(data);
+        return data;
+    }
+    else if(response.status==204){
+        return false;
+    }
+    throw new ApiError(
+        data.message||response.statusText,
+        response.status
+    );
+}
+export async function employeeAplly(token,postId){
+    const url = "http://localhost/aboutgcc/web/app_dev.php/post-employee/apply/"+postId;
+    const request={
+        method:"GET",
+        mode:"cors",
+        headers:{
+            'Content-Type': 'application/json',
+            'Authorization':'Bearer '+token
+        }
+    };
+    console.log(request);
+    const response= await fetch(url,request);
+    const data=await response.json();
+    if(response.status==200){
+        return true;
+    }
+    else if(response.status==200){
+        return false;
+    }else if(response.status==401){
+        return "logout";
+    }
+    throw new ApiError(
+        data.message||response.statusText,
+        response.status
+    );
+}

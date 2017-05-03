@@ -28,7 +28,10 @@ export default function* rootSaga(){
         fork(Employer.watchPostToggleView),
         fork(Common.watchTags),
         fork(Common.watchDP),
+        fork(Common.watchAllPosts),
+        fork(Common.watchPostMoreDetails),
         fork(Employee.watchCVUpdate),
+        fork(Employee.watchApplication),
 
 
     ];

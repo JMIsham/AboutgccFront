@@ -3,7 +3,8 @@
  */
 import React,{Component} from 'react';
 import {connect} from 'react-redux';
-import * as actionTypes from '../constants/actionTypes'
+import * as actionTypes from '../constants/actionTypes';
+import {withRouter} from 'react-router';
 
 class LogoutPage extends Component{
 
@@ -11,6 +12,7 @@ class LogoutPage extends Component{
         this.props.dispatch({
            type: actionTypes.LOGOUT_REQUESTED
         });
+        this.props.router.replace("/");
     };
     render(){
         return null;
@@ -22,5 +24,5 @@ const mapStateToProps=(state)=>{
        pageState:state
     });
 };
-
+LogoutPage = withRouter(LogoutPage);
 export default connect(mapStateToProps)(LogoutPage);

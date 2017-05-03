@@ -65,6 +65,5 @@ export function *doLogoutCalled(){
     yield put({
             type:types.LOGOUT_COMPLETED
         });
-    yield put(push('/'));
 }
 

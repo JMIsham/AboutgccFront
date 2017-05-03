@@ -24,3 +24,33 @@ export function * doUpdateCV(action){
         });
     }
 }
+
+export function * watchApplication(){
+    yield takeLatest(actionTypes.JOB_APPLICATION_REQUESTED,doApplication);
+}
+export function * doApplication(action){
+    try{
+        const token = action.payload.token;
+        const postId = action.payload.postID;
+        const response = yield call(api.employeeAplly,token,postId);
+        if(response=="logout"){
+            yield put({
+                type:actionTypes.LOGOUT_REQUESTED
+            });
+        }
+        else if(response){
+            yield put({
+                type:actionTypes.JOB_APLICATION_SUCCEEDED
+            });
+        }
+        else {
+            yield put({
+                type:actionTypes.JOB_APPLICATION_FAILED
+            });
+        }
+    }catch (e){
+        yield put({
+            type:actionTypes.JOB_APPLICATION_FAILED
+        });
+    }
+}
