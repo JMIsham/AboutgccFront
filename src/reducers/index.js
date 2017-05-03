@@ -8,6 +8,7 @@ import employeeForm from './EmployeeFormReducer';
 import adminReducer from './adminReducer';
 import EmployerReducer from './EmployerReducer';
 import common from './commonReducer';
+import EmployeeReducer from './EmployeeReducer'
 
 const rootReducer = combineReducers({
   form: fromReducer,
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   employeeForm:employeeForm,
   adminData:adminReducer,
   employerReducer:EmployerReducer,
+  employeeReducer:EmployeeReducer,
   common:common,
 
 });

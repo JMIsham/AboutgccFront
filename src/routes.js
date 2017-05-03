@@ -20,6 +20,7 @@ import EmployeePage from './containers/JobseekerPage';
 import CompanyPosts from './containers/CompanyJobPosts';
 import CompanyPostMore from './containers/CompanyPostMore';
 import ViewPost from './components/viewPost';
+import JobseekerApplication from './containers/JobseekerApplications';
 
 export default (
   <Route path="/" component={App}>
@@ -41,7 +42,7 @@ export default (
           <Route path="post-more" component={CompanyPostMore}/>
       </Route>
       <Route path="employee" component={EmployeePage} >
-          {/*<IndexRoute component={CompanyPosts}/>*/}
+          <IndexRoute component={JobseekerApplication}/>
           {/*<Route path="application" component={CompanyPosts}/>*/}
           {/*<Route path="application-more" component={CompanyPostMore}/>*/}
       </Route>

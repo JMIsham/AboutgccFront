@@ -194,6 +194,7 @@ class JobseekerPage extends Component{
     }
     render(){
         // this.loadPage();
+        try{
         const actions = [
             <FlatButton
                 label="Close"
@@ -274,9 +275,12 @@ class JobseekerPage extends Component{
                         </div>
                     </section>
                 </Dialog>
-            </div>
+            </div>)}
+            catch (e){
+                return    <div className="ui active dimmer"><div className="ui text loader huge">loading page</div></div>;
+        }
 
-        )
+
     }
 }
 const mapStateToProps=(state)=>{

@@ -125,3 +125,7 @@ export const EMPLOYEE_ALL_APPLICATIONS_REQUSTED = "employee-all-applications-req
 export const EMPLOYEE_ALL_APPLICATIONS_SUCCEEDED = "employee-all-applications-succeeded";
 export const EMPLOYEE_ALL_APPLICATIONS_FAILED= "employee-all-applications-failed";
 
+export const EMPLOYEE_CANCEL_APPLICATION_REQUESTED = "employee-cancel-application-requested";
+export const EMPLOYEE_CANCEL_APPLICATION_SUCCEEDED = "employee-cancel-application-succeeded";
+export const EMPLOYEE_CANCEL_APPLICATION_FAILED = "employee-cancel-application-failed";
+
