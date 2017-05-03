@@ -54,3 +54,34 @@ export function * doApplication(action){
         });
     }
 }
+
+export function * watchAllApplications(){
+    yield takeLatest(actionTypes.EMPLOYEE_ALL_APPLICATIONS_REQUSTED,doAllApplications);
+}
+export function * doAllApplications(action){
+    try{
+        const token = action.payload.token;
+        const response = yield call(api.employeeAllApplication,token);
+        if(response=="logout"){
+            yield put({
+                type:actionTypes.LOGOUT_REQUESTED
+            });
+        }
+        else if(response){
+            yield put({
+                type:actionTypes.EMPLOYEE_ALL_APPLICATIONS_SUCCEEDED,
+                payload:response
+            });
+        }
+        else {
+            yield put({
+                type:actionTypes.EMPLOYEE_ALL_APPLICATIONS_FAILED
+            });
+        }
+
+    }catch (e){
+        yield put({
+            type:actionTypes.EMPLOYEE_ALL_APPLICATIONS_FAILED
+        });
+    }
+}

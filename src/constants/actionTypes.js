@@ -121,3 +121,7 @@ export const EMPLOYEE_NIC_CHANGED = "employee-nic-changed";
 export const EMPLOYEE_CONTACT_NUMBER_INVALID = "employee-contact-number-invalid";
 export const EMPLOYEE_CONTACT_NUMBER_CHANGED = "employee-contact-number-changed";
 
+export const EMPLOYEE_ALL_APPLICATIONS_REQUSTED = "employee-all-applications-requested";
+export const EMPLOYEE_ALL_APPLICATIONS_SUCCEEDED = "employee-all-applications-succeeded";
+export const EMPLOYEE_ALL_APPLICATIONS_FAILED= "employee-all-applications-failed";
+

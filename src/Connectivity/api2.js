@@ -551,3 +551,30 @@ export async function employeeAplly(token,postId){
         response.status
     );
 }
+
+export async function employeeAllApplication(token){
+    const url = "http://localhost/aboutgcc/web/app_dev.php/post-employee/get-all-applications";
+    const request={
+        method:"GET",
+        mode:"cors",
+        headers:{
+            'Content-Type': 'application/json',
+            'Authorization':'Bearer '+token
+        }
+    };
+    console.log(request);
+    const response= await fetch(url,request);
+    const data=await response.json();
+    if(response.status==200){
+        return data;
+    }
+    else if(response.status==200){
+        return false;
+    }else if(response.status==401){
+        return "logout";
+    }
+    throw new ApiError(
+        data.message||response.statusText,
+        response.status
+    );
+}
