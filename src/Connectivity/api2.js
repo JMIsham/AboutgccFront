@@ -552,6 +552,35 @@ export async function employeeAplly(token,postId){
     );
 }
 
+export async function employeeCancelApplication(token,applicationId){
+    const url = "http://localhost/aboutgcc/web/app_dev.php/post-employee/cancel/"+applicationId;
+    const request={
+        method:"GET",
+        mode:"cors",
+        headers:{
+            'Content-Type': 'application/json',
+            'Authorization':'Bearer '+token
+        }
+    };
+    console.log(request);
+    const response= await fetch(url,request);
+    const data=await response.json();
+    if(response.status==200){
+        return true;
+    }
+    else if(response.status==406){
+        return false;
+    }else if(response.status==401){
+        return "logout";
+    }
+    else{
+    throw new ApiError(
+        data.message||response.statusText,
+        response.status
+    );
+    }
+}
+
 export async function employeeAllApplication(token){
     const url = "http://localhost/aboutgcc/web/app_dev.php/post-employee/get-all-applications";
     const request={
@@ -566,9 +595,11 @@ export async function employeeAllApplication(token){
     const response= await fetch(url,request);
     const data=await response.json();
     if(response.status==200){
+        console.log("calling Correctly");
         return data;
     }
-    else if(response.status==200){
+    else if(response.status==406){
+        console.log("calling Wrongly");
         return false;
     }else if(response.status==401){
         return "logout";

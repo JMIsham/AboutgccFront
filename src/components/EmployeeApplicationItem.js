@@ -5,6 +5,7 @@ import React,{Component} from 'react';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import {withRouter} from 'react-router';
+import {connect} from 'react-redux';
 import * as actionTypes from '../constants/actionTypes';
 
 class EmployeeApplicationItem extends Component{
@@ -17,9 +18,12 @@ class EmployeeApplicationItem extends Component{
 
     callHandleDelete(){
         this.handleClose();
+        console.log("deleting!!");
         this.props.dispatch({
             type:actionTypes.EMPLOYEE_CANCEL_APPLICATION_REQUESTED,
             payload:{
+                token:this.props.user.token,
+                applicationId:this.props.application.application_id
             }
         });
     }
@@ -121,4 +125,9 @@ class EmployeeApplicationItem extends Component{
             </div>);
     }
 }
-export default EmployeeApplicationItem;
+const mapStateToProps = (state)=>{
+    return({
+        user:state.user
+    });
+};
+export default connect(mapStateToProps)(EmployeeApplicationItem);

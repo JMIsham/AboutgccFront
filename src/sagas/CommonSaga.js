@@ -90,7 +90,7 @@ export function * doPostMoreDetails(action){
                 type:actionTypes.POST_MORE_DETAILS_FAILED
 
             });
-        }
+            yield put(push('/'));        }
         else{
             yield put({
                 type:actionTypes.POST_MORE_DETAILS_SUCCEEDED,
@@ -99,6 +99,8 @@ export function * doPostMoreDetails(action){
         }}catch(e){
         yield put({
             type:actionTypes.POST_MORE_DETAILS_FAILED
+
         });
+        yield put(push('/'));
     }
 }

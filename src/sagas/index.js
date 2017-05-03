@@ -33,6 +33,7 @@ export default function* rootSaga(){
         fork(Employee.watchCVUpdate),
         fork(Employee.watchApplication),
         fork(Employee.watchAllApplications),
+        fork(Employee.watchCancelApplication),
 
 
     ];

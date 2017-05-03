@@ -85,3 +85,57 @@ export function * doAllApplications(action){
         });
     }
 }
+export function * watchCancelApplication(){
+    yield takeLatest(actionTypes.EMPLOYEE_CANCEL_APPLICATION_REQUESTED,doCancelApplication);
+}
+export function * doCancelApplication(action){
+    try{
+        const token = action.payload.token;
+        const applicationId = action.payload.applicationId;
+        const response = yield call(api.employeeCancelApplication,token,applicationId);
+        if(response=="logout"){
+            yield put({
+                type:actionTypes.LOGOUT_REQUESTED
+            });
+            yield put({
+                type:actionTypes.EMPLOYEE_ALL_APPLICATIONS_REQUSTED,
+                payload:{
+                    token:token
+                }
+            });
+        }
+        else if(response){
+            yield put({
+                type:actionTypes.EMPLOYEE_CANCEL_APPLICATION_SUCCEEDED
+            });
+            yield put({
+                type:actionTypes.EMPLOYEE_ALL_APPLICATIONS_REQUSTED,
+                payload:{
+                    token:token
+                }
+            });
+
+        }
+        else {
+            yield put({
+                type:actionTypes.EMPLOYEE_CANCEL_APPLICATION_FAILED
+            });
+            yield put({
+                type:actionTypes.EMPLOYEE_ALL_APPLICATIONS_REQUSTED,
+                payload:{
+                    token:token
+                }
+            });
+        }
+    }catch (e){
+        yield put({
+            type:actionTypes.EMPLOYEE_CANCEL_APPLICATION_FAILED
+        });
+        yield put({
+            type:actionTypes.EMPLOYEE_ALL_APPLICATIONS_REQUSTED,
+            payload:{
+                token:token
+            }
+        });
+    }
+}

@@ -150,6 +150,7 @@ class CompanyPage extends Component{
                 onTouchTap={this.handleDP.bind(this)}
             />
         ];
+        try{
         return(
             <div style={{backgroundColor:"#eeeeee",minHeight:"800px",paddingTop:"20px"}}>
                 <Container fluid>
@@ -189,7 +190,9 @@ class CompanyPage extends Component{
                 </Dialog>
             </div>
 
-        )
+        )}catch (e){
+            return    <div className="ui active dimmer"><div className="ui text loader huge">loading page</div></div>;
+        }
     }
 }
 const mapStateToProps=(state)=>{
