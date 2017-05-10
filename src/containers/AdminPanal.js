@@ -6,12 +6,15 @@ import {withRouter} from 'react-router';
 import {connect} from 'react-redux'
 import jwtDecode from 'jwt-decode'
 import Drawer from 'material-ui/Drawer';
-import Divider from 'material-ui/Divider';
-import MenuItem from 'material-ui/MenuItem';
 import {Link} from 'react-router';
-import FlatButton from 'material-ui/FlatButton';
+import {cyan100,cyan500} from 'material-ui/styles/colors';
+import EmployerIcon from 'material-ui/svg-icons/action/account-balance';
+import PostIcon from 'material-ui/svg-icons/action/work';
+import ApplicationIcon from 'material-ui/svg-icons/action/note-add';
+import JobSeekerIcon from 'material-ui/svg-icons/action/assignment-ind';
 import IconButton from 'material-ui/IconButton';
-import ActionHome from 'material-ui/svg-icons/action/home';
+
+import Apply from 'material-ui/svg-icons/action/note-add';
 
 
 class AdminPanal extends Component{
@@ -31,15 +34,33 @@ class AdminPanal extends Component{
         this.loadPage();
         return(
             <div>
-                <Drawer open={true} openSecondary={true}  >
+                <Drawer open={true} openSecondary={true} width={"82px"} >
                         <div style={{background:'#37474F',minHeight:'100%'}}>
-                            <Link to="/admin"><FlatButton label="Applications"    labelStyle = {{color :"#00bcd4"}} style={{width:'100%',height:'55px'}}></FlatButton></Link>
-                            <Link to="/admin/employers"><FlatButton label="Employers"    labelStyle = {{color :"#00bcd4"}} style={{width:'100%',height:'55px'}}></FlatButton></Link>
-                            <Link to="/admin/posts"><FlatButton label="Posts"    labelStyle = {{color :"#00bcd4"}} style={{width:'100%',height:'55px'}}></FlatButton></Link>
-                            <Link to="/admin/jobseekers"><FlatButton label="Job Seekers"    labelStyle = {{color :"#00bcd4"}} style={{width:'100%',height:'55px'}}></FlatButton></Link>
+                            <Link to="/admin" >
+                                <IconButton tooltip="Applications" tooltipPosition="bottom-right" iconStyle={{width:"40px",height:"40px"}} style={{marginTop:"55px",width:"80px",height:"80px"}}>
+                                    <ApplicationIcon color={cyan500} hoverColor={cyan100} />
+                                </IconButton>
+                            </Link>
+                            <Link to="/admin/posts">
+                                <IconButton tooltip="Posts"  tooltipPosition="bottom-right" iconStyle={{width:"40px",height:"40px"}} style={{marginTop:"10px",width:"80px",height:"80px"}}>
+                                    <PostIcon color={cyan500} hoverColor={cyan100}/>
+                                </IconButton>
+                            </Link>
+                            <Link to="/admin/employers">
+                                <IconButton tooltip="Employers" tooltipPosition="bottom-right" iconStyle={{width:"40px",height:"40px"}} style={{marginTop:"10px",width:"80px",height:"80px"}}>
+                                    <EmployerIcon color={cyan500} hoverColor={cyan100}  />
+                                </IconButton>
+                            </Link>
+                            <Link to="/admin/jobseekers">
+                                <IconButton tooltip="JobSeekers" tooltipPosition="bottom-right" iconStyle={{width:"40px",height:"40px"}} style={{marginTop:"10px",width:"80px",height:"80px"}}>
+                                    <JobSeekerIcon color={cyan500} hoverColor={cyan100} />
+                                </IconButton>
+                            </Link>
+
                         </div>
                 </Drawer>
-                <div >
+                <div style={{marginRight:"80px"}}>
+
                     {this.props.children}
 
                 </div>

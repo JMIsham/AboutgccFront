@@ -98,14 +98,23 @@ export function * doAllowPost(action){
         const id = action.payload.postId;
         const employerID = action.payload.employerID;
         const response=yield call(api.allowPost,id,token);
+        if(employerID===undefined){
             yield put({
-                    type:actionTypes.GET_SPECIFIC_EMPLOUER_REQUESTED,
-                    payload:{
-                        id:employerID,
-                        token:token
-                    }});
+                type:actionTypes.ADMIN_ALL_POSTS_REQUESTED,
+                payload:{
+                    token:token
+                }});
+        }
+        else{
+            yield put({
+                type:actionTypes.GET_SPECIFIC_EMPLOUER_REQUESTED,
+                payload:{
+                    id:employerID,
+                    token:token
+                }});
+        }
 
-        yield put(push('/admin/employer/'+employerID));
+
     }catch(e){
     yield put(push('/logout'));
     }
@@ -121,12 +130,22 @@ export function * doRejectPost(action){
         const id = action.payload.postId;
         const employerID = action.payload.employerID;
         const response=yield call(api.blockPost,id,token);
-        yield put({
+        if(employerID===undefined){
+            yield put({
+                type:actionTypes.ADMIN_ALL_POSTS_REQUESTED,
+                payload:{
+                    token:token
+                }});
+        }
+        else{
+            yield put({
                 type:actionTypes.GET_SPECIFIC_EMPLOUER_REQUESTED,
                 payload:{
                     id:employerID,
                     token:token
                 }});
+        }
+
 
     }catch(e){
     yield put(push('/logout'));

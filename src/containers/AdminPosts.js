@@ -23,7 +23,6 @@ class AdminPosts extends Component{
             type:actionTypes.ADMIN_ALLOW_POST_REQUESTED,
             payload:{
                 postId:postId,
-                employerID:this.props.params.id,
                 token:this.props.user.token
             }
         });
@@ -33,7 +32,6 @@ class AdminPosts extends Component{
             type:actionTypes.ADMIN_BLOCK_POST_REQUESTED,
             payload:{
                 postId:postId,
-                employerID:this.props.params.id,
                 token:this.props.user.token
             }
         });

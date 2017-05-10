@@ -3,6 +3,7 @@
  */
 import React,{Component} from 'react';
 import {withRouter} from "react-router";
+import {getCountry} from '../containers/Country'
 class postItem extends Component{
     handleMore(){
         this.props.router.push("view-post/"+this.props.post.id);
@@ -66,7 +67,7 @@ class postItem extends Component{
         return(
         <div className="card" onClick={this.handleMore.bind(this)} style={{backgroundColor:"#90a4ae"}}>
             <div className="content">
-                <div className="header">{post.subject}{this.setCountry()} </div>
+                <div className="header">{post.subject}{getCountry(this.props.post.c_name)} </div>
 
                 <div className="description">
                     <h4>Apply before : {post.expire_date}</h4>

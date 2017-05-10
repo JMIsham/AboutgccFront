@@ -3,6 +3,7 @@
  */
 import React,{Component} from 'react';
 import FlatButton from 'material-ui/FlatButton';
+import {getCountry} from '../containers/Country'
 
 class EmployerListItem extends Component{
     //this class renders out individual abstract details of the employers
@@ -22,6 +23,7 @@ class EmployerListItem extends Component{
                 return  <span className="ui left ribbon red  label">Blocked</span>;
         }
     }
+
     render(){
         return(
 
@@ -29,7 +31,7 @@ class EmployerListItem extends Component{
                     <div className="content" onClick={this.redirect.bind(this)}>
                         <img className="right floated mini ui image" src={"http://localhost/aboutGccAsserts/DPs/"+this.props.data.dp}/>
                             <div className="header">
-                                <a onClick={this.redirect.bind(this)} className="header">{this.props.data.name}</a>
+                                {this.props.data.name}
                             </div>
                             <div className="meta">
                                 {this.loadlable(this.props.data.enabled)}
