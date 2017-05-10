@@ -633,4 +633,28 @@ export async function allowPost(id,token){
         data.message||response.statusText,
         response.status
     );
+}export async function blockPost(id,token){
+    const url = "http://127.0.0.1/aboutgcc/web/app_dev.php/post-admin/suspend/"+id;
+    const request={
+        method:"GET",
+        mode:"cors",
+        headers:{
+            'Content-Type': 'application/json',
+            'Authorization':'Bearer '+token
+        }
+    };
+    const response= await fetch(url,request);
+    const data=await response.json();
+    console.log(data);
+    if(response.status==200){
+        console.log(data);
+        return data;
+    }
+    else if(response.status==204){
+        return false;
+    }
+    throw new ApiError(
+        data.message||response.statusText,
+        response.status
+    );
 }

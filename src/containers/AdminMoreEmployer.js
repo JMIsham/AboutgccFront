@@ -25,13 +25,21 @@ class AdminMoreEmployer extends Component{
     handleAllow(postId){
         this.props.dispatch({
             type:actionTypes.ADMIN_ALLOW_POST_REQUESTED,
-            payload:postId
+            payload:{
+                postId:postId,
+                employerID:this.props.params.id,
+                token:this.props.user.token
+            }
         });
     }
     handleReject(postId){
         this.props.dispatch({
             type:actionTypes.ADMIN_BLOCK_POST_REQUESTED,
-            payload:postId
+            payload:{
+                postId:postId,
+                employerID:this.props.params.id,
+                token:this.props.user.token
+            }
         });
     }
     handleRedirect(employerID){

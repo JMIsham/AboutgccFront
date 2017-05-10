@@ -12,21 +12,15 @@ export function* doGetAllEmployers(action){
         const token=action.payload.token;
         const response=yield call(api.adminGetAllEmployer,token);
         if(!response){
-            yield put(
-                {
+            yield put({
                     type:actionTypes.ALL_EMPLOYER_SUCCESS,
                     payload:[]
-                }
-            )
-        }
+                })}
         else{
-            yield put(
-                {
+            yield put({
                     type:actionTypes.ALL_EMPLOYER_SUCCESS,
                     payload:response
-                }
-            )
-        }
+                })}
     }catch(e){
         yield put(push('/logout'));
     }
@@ -45,12 +39,11 @@ export function * doSpecificEmployer(action){
     const token=action.payload.token;
     const id = action.payload.id;
     const response=yield call(api.getSpecificEmployer,id,token);
-    yield put(
-        {
+    yield put({
             type:actionTypes.GET_SPECIFIC_EMPLOUER_SUCCEEDED,
             payload:response
-        }
-    )}catch(e){
+        })
+    }catch(e){
     yield put(push('/logout'));
     }
 }
@@ -64,14 +57,11 @@ export function * doBlockUser(action){
         const token=action.payload.token;
         const id = action.payload.id;
         const response=yield call(api.blockUser,id,token);
-        yield put(
-            {
+        yield put({
                 type:actionTypes.REQUEST_GET_ALL_EMPLOYER,
                 payload:{
                     token:token
-                }
-            }
-        );
+                }});
         yield put(push('/admin/employers'));
     }catch(e){
         yield put(push('/logout'));
@@ -86,14 +76,11 @@ export function * doUnblockUser(action){
         const token=action.payload.token;
         const id = action.payload.id;
         const response=yield call(api.unblockUser,id,token);
-        yield put(
-        {
+        yield put({
             type:actionTypes.REQUEST_GET_ALL_EMPLOYER,
             payload:{
                 token:token
-            }
-        }
-        );
+            }});
         yield put(push('/admin/employers'));
     }catch(e){
     yield put(push('/logout'));
@@ -108,17 +95,40 @@ export function * watchAllowPost(){
 export function * doAllowPost(action){
     try{
         const token=action.payload.token;
-        const id = action.payload;
+        const id = action.payload.postId;
+        const employerID = action.payload.employerID;
         const response=yield call(api.allowPost,id,token);
-        yield put(
-        {
-            type:actionTypes.REQUEST_GET_ALL_EMPLOYER,
-            payload:{
-                token:token
-            }
-        }
-        );
-        yield put(push('/admin/employers'));
+            yield put({
+                    type:actionTypes.GET_SPECIFIC_EMPLOUER_REQUESTED,
+                    payload:{
+                        id:employerID,
+                        token:token
+                    }});
+
+        yield put(push('/admin/employer/'+employerID));
+    }catch(e){
+    yield put(push('/logout'));
+    }
+}
+
+export function * watchRejectPost(){
+
+    yield takeLatest(actionTypes.ADMIN_BLOCK_POST_REQUESTED,doRejectPost);
+}
+
+export function * doRejectPost(action){
+    try{
+        const token=action.payload.token;
+        const id = action.payload.postId;
+        const employerID = action.payload.employerID;
+        const response=yield call(api.blockPost,id,token);
+        yield put({
+                type:actionTypes.GET_SPECIFIC_EMPLOUER_REQUESTED,
+                payload:{
+                    id:employerID,
+                    token:token
+                }});
+
     }catch(e){
     yield put(push('/logout'));
     }

@@ -40,7 +40,7 @@ class EmployerListItem extends Component{
                             </div>
                     </div>
                     <div className="extra content">
-                        <div className="ui buttons">
+                        <div className="ui two buttons">
                             <div onClick={this.handle.bind(this)} className={this.props.data.enabled=="1"?"ui basic red button":"ui basic green button"}>{this.props.data.enabled=="1"?"Block This Employer":"Activate This Employer"}</div>
                         </div>
                     </div>
