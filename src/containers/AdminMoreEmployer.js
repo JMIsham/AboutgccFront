@@ -5,10 +5,10 @@ import React,{Component} from 'react';
 import {connect} from 'react-redux';
 import * as actionTypes from '../constants/actionTypes';
 import {withRouter} from 'react-router';
+import MenueItem from '../components/AdminPostListItem';
 
 class AdminMoreEmployer extends Component{
     componentWillMount(){
-        console.log("props at component will mount",this.props);
         this.props.dispatch(
             {
                 type:actionTypes.GET_SPECIFIC_EMPLOUER_REQUESTED,
@@ -19,10 +19,39 @@ class AdminMoreEmployer extends Component{
             }
         );
     }
+    handleMore(postId){
+
+    }
+    handleAllow(postId){
+        this.props.dispatch({
+            type:actionTypes.ADMIN_ALLOW_POST_REQUESTED,
+            payload:postId
+        });
+    }
+    handleReject(postId){
+        this.props.dispatch({
+            type:actionTypes.ADMIN_BLOCK_POST_REQUESTED,
+            payload:postId
+        });
+    }
+    handleRedirect(employerID){
+        this.props.router.push("/admin/employer/"+employerID);
+
+    }
     makeData(){
         try{
-            console.log(this.props.data[0]);
-            const employer = this.props.data[0];
+            const posts = this.props.allPosts;
+            const listItems = posts.map((post) =>
+                <MenueItem
+                    key={post.id}
+                    post={post}
+                    handleMore={this.handleMore.bind(this)}
+                    handleAllow={this.handleAllow.bind(this)}
+                    handleReject = {this.handleReject.bind(this)}
+                    handleRedirect={this.handleRedirect.bind(this)}
+                />
+            );
+            const employer = this.props.data;
             return(
                 <div>
                     <h4 className="ui horizontal divider header">
@@ -80,12 +109,16 @@ class AdminMoreEmployer extends Component{
                         </div>
                     </div>
                 </div>
-            </div>
+                </div>
                     <h4 className="ui horizontal divider header">
                         <i className="suitcase icon"></i>
                         Job Offers by this company
-
                     </h4>
+                    <div className="ui  column grid" style={{margin:"10px"}}>
+                        <div  className="column">
+                            {listItems}
+                        </div>
+                    </div>
                 </div>);
 
             }catch (e){
@@ -95,9 +128,11 @@ class AdminMoreEmployer extends Component{
 
     }
     render(){
-        console.log(this.props);
-
-        return this.makeData();
+        return (
+            <div style={{padding:"20px",maxWidth:"800px"}}>
+                {this.makeData()}
+            </div>
+            );
     }
 
 }
@@ -105,6 +140,7 @@ AdminMoreEmployer=withRouter(AdminMoreEmployer);
 const mapStateToProps=(state)=>{
   return({
       data:state.adminData.currentemployer,
+      allPosts:state.adminData.currentemployerPosts,
       user:state.user
   });
 };

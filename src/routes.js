@@ -43,7 +43,7 @@ export default (
       </Route>
       <Route path="employee" component={EmployeePage} >
           <IndexRoute component={JobseekerApplication}/>
-          <Route path="application" component={JobseekerApplication}/>
+          <Route path="applications" component={JobseekerApplication}/>
       </Route>
       <Route path="view-post/:id" component={ViewPost}/>
       <Route path="register" components={RegistrationPage}/>

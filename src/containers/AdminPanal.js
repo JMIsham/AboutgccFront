@@ -39,7 +39,7 @@ class AdminPanal extends Component{
                             <Link to="/admin/jobseekers"><FlatButton label="Job Seekers"    labelStyle = {{color :"#00bcd4"}} style={{width:'100%',height:'55px'}}></FlatButton></Link>
                         </div>
                 </Drawer>
-                <div style={{maxWidth:"850px",padding:'20px'}}>
+                <div >
                     {this.props.children}
 
                 </div>

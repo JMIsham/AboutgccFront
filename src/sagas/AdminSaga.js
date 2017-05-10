@@ -100,3 +100,27 @@ export function * doUnblockUser(action){
     }
 }
 
+export function * watchAllowPost(){
+
+    yield takeLatest(actionTypes.ADMIN_ALLOW_POST_REQUESTED,doAllowPost);
+}
+
+export function * doAllowPost(action){
+    try{
+        const token=action.payload.token;
+        const id = action.payload;
+        const response=yield call(api.allowPost,id,token);
+        yield put(
+        {
+            type:actionTypes.REQUEST_GET_ALL_EMPLOYER,
+            payload:{
+                token:token
+            }
+        }
+        );
+        yield put(push('/admin/employers'));
+    }catch(e){
+    yield put(push('/logout'));
+    }
+}
+

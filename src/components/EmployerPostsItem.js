@@ -50,6 +50,8 @@ class EmployerPostsItem extends Component{
                 return  <span className="ui right ribbon label">Pending</span>;
             case "4":
                 return  <span className="ui right ribbon label">Edited</span>;
+            case "5":
+                return  <span className="ui right ribbon red label">Rejected</span>;
 
         }
     }

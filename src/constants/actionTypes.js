@@ -129,3 +129,15 @@ export const EMPLOYEE_CANCEL_APPLICATION_REQUESTED = "employee-cancel-applicatio
 export const EMPLOYEE_CANCEL_APPLICATION_SUCCEEDED = "employee-cancel-application-succeeded";
 export const EMPLOYEE_CANCEL_APPLICATION_FAILED = "employee-cancel-application-failed";
 
+export const ADMIN_ALLOW_POST_REQUESTED = "admin-allow-post-requested";
+export const ADMIN_ALLOW_POST_SUCCEEDED = "admin-allow-post-succeeded";
+export const ADMIN_ALLOW_POST_FAILED = "admin-allow-post-failed";
+
+export const ADMIN_BLOCK_POST_REQUESTED = "admin-block-post-requested";
+export const ADMIN_BLOCK_POST_SUCCEEDED = "admin-block-post-succeeded";
+export const ADMIN_BLOCK_POST_FAILED = "admin-block-post-failed";
+
+export const ADMIN_MORE_POST_REQUESTED = "admin-more-post-requested";
+export const ADMIN_MORE_POST_SUCCEEDED = "admin-more-post-succeeded";
+export const ADMIN_MORE_POST_FAILED = "admin-more-post-failed";
+

@@ -99,18 +99,8 @@ class JobseekerPage extends Component{
             }
         });
     }
-    handleAllPosts(){
-        this.setState({
-            postsClicked:true,
-            profileClicked:false,
-            loginClicked:false,
-        });
-
-    }
-    DisplayPage(){
-        if(this.state.postsClicked){
-            return <CompanyJobPosts/>;
-        }
+    handleApplicationsRequested(){
+        this.props.router.push("/employee/applications")
     }
     displayPreview(){
         try {
@@ -159,7 +149,7 @@ class JobseekerPage extends Component{
                     </div>
                     <div className="extra content">
                         <div style={{textAlign:"center",padding:"10px"}}>
-                            <a>
+                            <a onClick={this.handleApplicationsRequested.bind(this)}>
                                 <i className="file text icon"></i>
                                 My Applications
                             </a>

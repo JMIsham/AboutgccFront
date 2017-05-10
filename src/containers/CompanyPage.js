@@ -60,7 +60,9 @@ class CompanyPage extends Component{
             files:[]
         });
 
-
+    }
+    handleJobPosts(){
+        this.props.router.push("/employer/posts")
     }
     componentWillMount(){
         this.props.dispatch({
@@ -101,7 +103,7 @@ class CompanyPage extends Component{
                 </div>
                 <div className="extra content">
                     <div style={{textAlign:"center",padding:"10px"}}>
-                        <a  selected={true}>
+                        <a  onClick={this.handleJobPosts.bind(this)}>
                             <i className="suitcase icon"></i>
                             Job Posts
                         </a>

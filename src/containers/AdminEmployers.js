@@ -51,8 +51,11 @@ class AdminEmployers extends Component{
 
     render(){
         return(
-            <div style={{marginTop:'15px',marginRight:'200px'}} >
-                {this.makeList()}
+            <div style={{marginTop:'15px',}}  >
+                <div className="ui link cards">
+                    {this.makeList()}
+                </div>
+
                 </div>
         );
     }

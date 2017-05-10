@@ -14,22 +14,37 @@ class EmployerListItem extends Component{
     redirect(e){
         this.props.handleMore(this.props.data.id);
     }
+    loadlable(status){
+        switch (status){
+            case "1":
+                return  <span  className="ui left ribbon green  label">Activated</span>;
+            case "0":
+                return  <span className="ui left ribbon red  label">Blocked</span>;
+        }
+    }
     render(){
         return(
-            <div className="ui items segment" style={{margin:'20px', maxWidth:'600px'}}>
-                <div className="item">
-                    <div className="content">
-                        <div className="ui icon button ui right floated " data-tooltip={this.props.data.enabled==1? "block this user":"activate this user"} style={{padding:'5px',marginTop:'30px'}}><i  onClick={this.handle.bind(this)} className={this.props.data.enabled==1? "minus circle icon large":"check circle icon large"}> </i></div>
 
-                        <a onClick={this.redirect.bind(this)} className="header">{this.props.data.name}</a>
-                        <div className="meta">
-                            <div>{this.props.data.email}</div>
-                            <div>{this.props.data.contact_num}</div>
-                            <div>{this.props.data.enabled==1? "Enabled":"Disabled"}</div>
+                <div className="blue card" style={{marginLeft:"15px"}} >
+                    <div className="content" onClick={this.redirect.bind(this)}>
+                        <img className="right floated mini ui image" src={"http://localhost/aboutGccAsserts/DPs/"+this.props.data.dp}/>
+                            <div className="header">
+                                <a onClick={this.redirect.bind(this)} className="header">{this.props.data.name}</a>
+                            </div>
+                            <div className="meta">
+                                {this.loadlable(this.props.data.enabled)}
+                            </div>
+                            <div className="description" >
+                                <div style={{textColor:"#ffffff"}}>{this.props.data.email}</div>
+                                <div style={{textColor:"#ffffff"}}>{this.props.data.contact_num}</div>
+                            </div>
+                    </div>
+                    <div className="extra content">
+                        <div className="ui buttons">
+                            <div onClick={this.handle.bind(this)} className={this.props.data.enabled=="1"?"ui basic red button":"ui basic green button"}>{this.props.data.enabled=="1"?"Block This Employer":"Activate This Employer"}</div>
                         </div>
                     </div>
                 </div>
-            </div>
         )
     }
 }
