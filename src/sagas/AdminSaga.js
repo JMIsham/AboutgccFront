@@ -112,7 +112,6 @@ export function * doAllowPost(action){
 }
 
 export function * watchRejectPost(){
-
     yield takeLatest(actionTypes.ADMIN_BLOCK_POST_REQUESTED,doRejectPost);
 }
 
@@ -133,4 +132,24 @@ export function * doRejectPost(action){
     yield put(push('/logout'));
     }
 }
-
+export function * watchGetAllPosts(){
+    yield takeLatest(actionTypes.ADMIN_ALL_POSTS_REQUESTED,doGetAllPosts)
+}
+export function * doGetAllPosts(action){
+    try{
+        const token=action.payload.token;
+        const response=yield call(api.adminGetAllPost,token);
+        if(!response){
+            yield put({
+                type:actionTypes.ADMIN_ALL_POSTS_SUCCEEDED,
+                payload:[]
+            })}
+        else{
+            yield put({
+                type:actionTypes.ADMIN_ALL_POSTS_SUCCEEDED,
+                payload:response
+            })}
+    }catch(e){
+        yield put(push('/logout'));
+    }
+}

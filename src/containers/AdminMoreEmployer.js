@@ -123,8 +123,10 @@ class AdminMoreEmployer extends Component{
                         Job Offers by this company
                     </h4>
                     <div className="ui  column grid" style={{margin:"10px"}}>
-                        <div  className="column">
-                            {listItems}
+                        <div  className="column ">
+                            <div className="ui cards">
+                                {listItems}
+                            </div>
                         </div>
                     </div>
                 </div>);
