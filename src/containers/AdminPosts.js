@@ -16,7 +16,7 @@ class AdminPosts extends Component{
         });
     }
     handleMore(postId){
-
+        this.props.router.push("/admin/post/"+postId);
     }
     handleAllow(postId){
         this.props.dispatch({
@@ -41,7 +41,7 @@ class AdminPosts extends Component{
 
     }
     makepage(){
-        // try{
+        try{
             const posts = this.props.adminData.allPosts;
             const listItems = posts.map((post) =>
                 <MenueItem
@@ -61,9 +61,9 @@ class AdminPosts extends Component{
                 </div>
             </div>);
 
-        // }catch (e){
-        //
-        // }
+        }catch (e){
+            return    <div className="ui active dimmer"><div className="ui text loader huge">loading Posts</div></div>;
+        }
     }
     render(){
         return(

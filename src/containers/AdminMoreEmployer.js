@@ -20,6 +20,7 @@ class AdminMoreEmployer extends Component{
         );
     }
     handleMore(postId){
+            this.props.router.push("/admin/post/"+postId);
 
     }
     handleAllow(postId){

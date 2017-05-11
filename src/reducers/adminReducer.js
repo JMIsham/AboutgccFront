@@ -18,6 +18,7 @@ export default function adminReducer(state={},action){
             newState.employersRequestPending=false;
             newState.employers=action.payload;
             return newState;
+
         case actionTypes.GET_SPECIFIC_EMPLOUER_REQUESTED:
             newState=objectAssign({},state);
             newState.currentemployer=undefined;
@@ -28,9 +29,20 @@ export default function adminReducer(state={},action){
             newState.currentemployer=action.payload[0][0];
             newState.currentemployerPosts=action.payload[1];
             return newState;
+
         case actionTypes.ADMIN_ALL_POSTS_SUCCEEDED:
             newState=objectAssign({},state);
             newState.allPosts=action.payload;
+            return newState;
+
+        case actionTypes.ADMIN_SPECIFIC_POST_REQUESTED:
+            newState=objectAssign({},state);
+            newState.currentPost=undefined;
+            return newState;
+
+        case actionTypes.ADMIN_SPECIFIC_POST_SUCCEEDED:
+            newState=objectAssign({},state);
+            newState.currentPost=action.payload[0];
             return newState;
         default:
             return state;

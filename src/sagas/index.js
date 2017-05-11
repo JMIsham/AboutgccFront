@@ -22,6 +22,7 @@ export default function* rootSaga(){
         fork(Admin.watchAllowPost),
         fork(Admin.watchRejectPost),
         fork(Admin.watchGetAllPosts),
+        fork(Admin.watchSpecificPost),
         fork(Employer.watchMoreInfo),
         fork(Employer.watchAllPosts),
         fork(Employer.watchCreatePost),

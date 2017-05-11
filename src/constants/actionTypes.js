@@ -144,3 +144,8 @@ export const ADMIN_MORE_POST_FAILED = "admin-more-post-failed";
 export const ADMIN_ALL_POSTS_REQUESTED = "admin-all-posts-requested";
 export const ADMIN_ALL_POSTS_SUCCEEDED = "admin-all-posts-succeeded";
 export const ADMIN_ALL_POSTS_FAILED = "admin-all-posts-failed";
+
+export const ADMIN_SPECIFIC_POST_REQUESTED = "admin-specific-post-requested";
+export const ADMIN_SPECIFIC_POST_SUCCEEDED = "admin-specific-post-succeeded";
+export const ADMIN_SPECIFIC_POST_FAILED = "admin-specific-post-failed";
+

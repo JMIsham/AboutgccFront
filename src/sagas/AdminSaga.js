@@ -97,8 +97,17 @@ export function * doAllowPost(action){
         const token=action.payload.token;
         const id = action.payload.postId;
         const employerID = action.payload.employerID;
+        const fromMore = action.payload.more;
         const response=yield call(api.allowPost,id,token);
-        if(employerID===undefined){
+        if(fromMore){
+            yield put({
+                type:actionTypes.ADMIN_SPECIFIC_POST_REQUESTED,
+                payload:{
+                    token:token,
+                    id:id
+                }});
+        }
+        else if(employerID===undefined){
             yield put({
                 type:actionTypes.ADMIN_ALL_POSTS_REQUESTED,
                 payload:{
@@ -129,8 +138,17 @@ export function * doRejectPost(action){
         const token=action.payload.token;
         const id = action.payload.postId;
         const employerID = action.payload.employerID;
+        const fromMore = action.payload.more;
         const response=yield call(api.blockPost,id,token);
-        if(employerID===undefined){
+        if(fromMore){
+            yield put({
+                type:actionTypes.ADMIN_SPECIFIC_POST_REQUESTED,
+                payload:{
+                    token:token,
+                    id:id
+                }});
+        }
+        else if(employerID===undefined){
             yield put({
                 type:actionTypes.ADMIN_ALL_POSTS_REQUESTED,
                 payload:{
@@ -168,6 +186,29 @@ export function * doGetAllPosts(action){
                 type:actionTypes.ADMIN_ALL_POSTS_SUCCEEDED,
                 payload:response
             })}
+    }catch(e){
+        yield put(push('/logout'));
+    }
+}
+export function * watchSpecificPost(){
+
+    yield takeLatest(actionTypes.ADMIN_SPECIFIC_POST_REQUESTED,doSpecificPost);
+}
+
+export function * doSpecificPost(action){
+    try{
+        const token=action.payload.token;
+        const id = action.payload.id;
+        const response=yield call(api.getSpecificPost,id,token);
+        if(!response || response==204){
+            yield put(push('/admin/posts'));
+        }
+        else{
+            yield put({
+                type:actionTypes.ADMIN_SPECIFIC_POST_SUCCEEDED,
+                payload:response
+            })
+        }
     }catch(e){
         yield put(push('/logout'));
     }

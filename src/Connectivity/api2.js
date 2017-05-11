@@ -684,5 +684,30 @@ export async function allowPost(id,token){
         response.status
     );
 }
+export async function getSpecificPost(id,token){
+    const url = "http://127.0.0.1/aboutgcc/web/app_dev.php/post-admin/get-post/"+id;
+    const request={
+        method:"GET",
+        mode:"cors",
+        headers:{
+            'Content-Type': 'application/json',
+            'Authorization':'Bearer '+token
+        }
+    };
+    const response= await fetch(url,request);
+    const data=await response.json();
+    console.log(data);
+    if(response.status==200){
+        console.log(data);
+        return data;
+    }
+    else if(response.status==404){
+        return false;
+    }
+    throw new ApiError(
+        data.message||response.statusText,
+        response.status
+    );
 
+}
 

@@ -22,7 +22,7 @@ class AdminEmployers extends Component{
             );
             return listItems;
         }catch (e){
-            return    <div className="ui active loader huge"></div>;
+            return    <div className="ui active dimmer"><div className="ui text loader huge">loading Employers</div></div>;
         }
     }
     //this method blocks/unblocks a given employer

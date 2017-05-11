@@ -6,7 +6,7 @@ import {getCountry} from '../containers/Country';
 class AdminPostListItem extends Component{
 
     callHandleMore(){
-        console.log("will be redirected");
+       this.props.handleMore(this.props.post.id)
     }
 
     callAllow(){
