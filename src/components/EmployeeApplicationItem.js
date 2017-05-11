@@ -68,11 +68,11 @@ class EmployeeApplicationItem extends Component{
 
     loadApplicationlable(status){
         switch (status){
-            case "2":
-                return  <span className="ui right ribbon green  label">Accepted</span>;
-            case "3":
-                return  <span className="ui right ribbon red  label">Rejected</span>;
             case "1":
+                return  <span className="ui right ribbon green  label">Accepted</span>;
+            case "2":
+                return  <span className="ui right ribbon red  label">Rejected</span>;
+            case "3":
                 return  <span className="ui right ribbon label">Pending</span>;
         }
     }
@@ -120,7 +120,7 @@ class EmployeeApplicationItem extends Component{
                     open={this.state.open}
                     onRequestClose={this.handleClose}
                 >
-                    This action will permanently delete this post!
+                    This action will permanently delete this post!!
                 </Dialog>
             </div>);
     }

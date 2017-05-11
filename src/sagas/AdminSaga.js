@@ -320,6 +320,23 @@ export function * doRejectApplication(action){
         yield put(push('/logout'));
     }
 }
+export function * watchSpecificEmployee(){
 
+    yield takeLatest(actionTypes.ADMIN_SPECIFIC_EMPLOYEE_REQUESTED,doSpecificEmployee);
+}
+
+export function * doSpecificEmployee(action){
+    try{
+        const token=action.payload.token;
+        const employeeID = action.payload.employeeID;
+        const response=yield call(api.getSpecificEmployee,employeeID,token);
+        yield put({
+            type:actionTypes.ADMIN_SPECIFIC_EMPLOYEE_SUCCEEDED,
+            payload:response
+        })
+    }catch(e){
+        yield put(push('/logout'));
+    }
+}
 
 

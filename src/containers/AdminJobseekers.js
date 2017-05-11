@@ -26,7 +26,7 @@ class AdminJobseekers extends Component{
         });
     }
     redirectToEmployee(employeeId){
-        console.log("will be redirected to",employeeId);
+        this.props.router.push("/admin/jobseeker/"+employeeId);
     }
     makePage(){
         try{
@@ -41,7 +41,7 @@ class AdminJobseekers extends Component{
             );
             return listItems;
         }catch (e){
-            return    <div className="ui active dimmer"><div className="ui text loader huge">loading Employees</div></div>;
+            return    <div className="ui active dimmer"><div className="ui text loader huge">loading Job Seekers</div></div>;
         }
 
 

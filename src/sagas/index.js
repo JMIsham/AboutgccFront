@@ -17,6 +17,7 @@ export default function* rootSaga(){
         fork(register.watchEmployerUsername),
         fork(register.watchEmployerEmail),
         fork(Admin.watchSpecificEmployer),
+        fork(Admin.watchSpecificEmployee),
         fork(Admin.watchBlockUser),
         fork(Admin.watchUnblockUser),
         fork(Admin.watchAllowPost),

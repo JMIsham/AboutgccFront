@@ -17,16 +17,20 @@ class AdminApplications extends Component{
         });
     }
     makePage(){
-        const applications=this.props.adminData.allApplications;
-        const listItems = applications.map((application) =>
-            <ListItem
-                key={application.id}
-                data={application}
-            />
-        );
-        return(<div className="ui cards">
-            {listItems}
-        </div>)
+        try {
+            const applications = this.props.adminData.allApplications;
+            const listItems = applications.map((application) =>
+                <ListItem
+                    key={application.id}
+                    data={application}
+                />
+            );
+            return (<div className="ui cards">
+                {listItems}
+            </div>);
+        }catch (e){
+            return    <div className="ui active dimmer"><div className="ui text loader huge">loading Job Applications</div></div>;
+        }
     }
     render(){
         return(
