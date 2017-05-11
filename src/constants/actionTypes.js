@@ -149,3 +149,22 @@ export const ADMIN_SPECIFIC_POST_REQUESTED = "admin-specific-post-requested";
 export const ADMIN_SPECIFIC_POST_SUCCEEDED = "admin-specific-post-succeeded";
 export const ADMIN_SPECIFIC_POST_FAILED = "admin-specific-post-failed";
 
+export const ADMIN_ALL_EMPLOYEES_REQUESTED = "admin-all-employees-requested";
+export const ADMIN_ALL_EMPLOYEES_SUCCEEDED = "admin-all-employees-succeeded";
+export const ADMIN_ALL_EMPLOYEES_FAILED = "admin-all-employees-failed";
+
+export const ADMIN_SPECIFIC_EMPLOYEE_REQUESTED = "admin-specific-employee-requested";
+export const ADMIN_SPECIFIC_EMPLOYEE_SUCCEEDED = "admin-specific-employee-succeeded";
+export const ADMIN_SPECIFIC_EMPLOYEE_FAILED = "admin-specific-employee-failed";
+
+export const ADMIN_BLOCK_UNBLOCK_EMPLOYEE_REQUESTED = "admin-block-unblock-employee-requested";
+export const ADMIN_BLOCK_UNBLOCK_EMPLOYEE_SUCCEEDED = "admin-block-unblock-employee-succeeded";
+export const ADMIN_BLOCK_UNBLOCK_EMPLOYEE_FAILED = "admin-block-unblock-employee-failed";
+
+export const ADMIN_GET_ALL_APPLICATIONS_REQUESTED = "admin-get-all-applications-requested";
+export const ADMIN_GET_ALL_APPLICATIONS_FAILED = "admin-get-all-applications-failed";
+export const ADMIN_GET_ALL_APPLICATIONS_SUCCEEDED = "admin-get-all-applications-succeeded";
+
+export const ADMIN_ACCEPT_APPLICATION_REQUESTED = "admin-accept-application-requested";
+export const ADMIN_REJECT_APPLICATION_REQUESTED = "admin-reject-application-requested";
+

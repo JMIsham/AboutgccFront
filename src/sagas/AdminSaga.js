@@ -66,7 +66,8 @@ export function * doBlockUser(action){
     }catch(e){
         yield put(push('/logout'));
     }
-}export function * watchUnblockUser(){
+}
+export function * watchUnblockUser(){
 
     yield takeLatest(actionTypes.UNBLOCK_USER_REQUESTED,doUnblockUser);
 }
@@ -213,3 +214,112 @@ export function * doSpecificPost(action){
         yield put(push('/logout'));
     }
 }
+export function* doGetAllEmployees(action){
+    try{
+        const token=action.payload.token;
+        const response=yield call(api.adminGetAllEmployee,token);
+        if(!response){
+            yield put({
+                type:actionTypes.ADMIN_ALL_EMPLOYEES_SUCCEEDED,
+                payload:[]
+            })}
+        else{
+            yield put({
+                type:actionTypes.ADMIN_ALL_EMPLOYEES_SUCCEEDED,
+                payload:response
+            })}
+    }catch(e){
+        yield put(push('/logout'));
+    }
+}
+export function* watchGetAllEmployees(){
+    yield takeLatest(actionTypes.ADMIN_ALL_EMPLOYEES_REQUESTED,doGetAllEmployees)
+}
+export function * watchBlockUnblockEmployee(){
+    yield takeLatest(actionTypes.ADMIN_BLOCK_UNBLOCK_EMPLOYEE_REQUESTED,doBlockUnblockEmployee);
+}
+
+export function * doBlockUnblockEmployee(action){
+    try{
+        const token=action.payload.token;
+        const id = action.payload.id;
+        const block=action.payload.status==="1";
+        const response=yield call(api.blockUnblockEmployee,id,token,block);
+        yield put({
+            type:actionTypes.REQUEST_GET_ALL_EMPLOYER,
+            payload:{
+                token:token
+            }});
+        yield put(push('/admin/jobseekers'));
+    }catch(e){
+        yield put(push('/logout'));
+    }
+}
+export function * watchGetAllApplications(){
+    yield takeLatest(actionTypes.ADMIN_GET_ALL_APPLICATIONS_REQUESTED,doGetAllApplications)
+}
+export function * doGetAllApplications(action){
+    try{
+        const token=action.payload.token;
+        const response=yield call(api.adminGetAllApplications,token);
+        if(!response){
+            yield put({
+                type:actionTypes.ADMIN_GET_ALL_APPLICATIONS_SUCCEEDED,
+                payload:[]
+            })}
+        else{
+            yield put({
+                type:actionTypes.ADMIN_GET_ALL_APPLICATIONS_SUCCEEDED,
+                payload:response
+            })}
+    }catch(e){
+        yield put(push('/logout'));
+    }
+}
+export function * watchAcceptApplication(){
+
+    yield takeLatest(actionTypes.ADMIN_ACCEPT_APPLICATION_REQUESTED,doAcceptApplication);
+}
+
+export function * doAcceptApplication(action){
+    try{
+        const token=action.payload.token;
+        const applicationId = action.payload.applicationId;
+        const allApplications=action.payload.allApplications;
+        const response=yield call(api.acceptApplication,applicationId,token);
+        if(allApplications){
+            yield put({
+                type:actionTypes.ADMIN_GET_ALL_APPLICATIONS_REQUESTED,
+                payload:{
+                    token:token
+                }});
+        }
+    }catch(e){
+        yield put(push('/logout'));
+    }
+}
+export function * watchRejectApplication(){
+
+    yield takeLatest(actionTypes.ADMIN_REJECT_APPLICATION_REQUESTED,doRejectApplication);
+}
+
+export function * doRejectApplication(action){
+    try{
+        const token=action.payload.token;
+        const applicationId = action.payload.applicationId;
+        const allApplications=action.payload.allApplications;
+        const response=yield call(api.rejectApplication,applicationId,token);
+        if(allApplications){
+            yield put({
+                type:actionTypes.ADMIN_GET_ALL_APPLICATIONS_REQUESTED,
+                payload:{
+                    token:token
+                }});
+        }
+    }catch(e){
+        yield put(push('/logout'));
+    }
+}
+
+
+

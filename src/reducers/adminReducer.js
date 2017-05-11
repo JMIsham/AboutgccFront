@@ -44,6 +44,17 @@ export default function adminReducer(state={},action){
             newState=objectAssign({},state);
             newState.currentPost=action.payload[0];
             return newState;
+
+        case actionTypes.ADMIN_ALL_EMPLOYEES_SUCCEEDED:
+            newState=objectAssign({},state);
+            newState.allEmployees = action.payload;
+            return newState;
+        case actionTypes.ADMIN_GET_ALL_APPLICATIONS_SUCCEEDED:
+            newState=objectAssign({},state);
+            newState.allApplications = action.payload;
+            return newState;
+
+
         default:
             return state;
     }
