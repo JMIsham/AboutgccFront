@@ -31,8 +31,9 @@ class JobSeekerApplications extends Component{
         try{
         return (
             <div style={{padding:"15px"}}>
+                <h1>All Applications</h1>
                 {this.createList()}
-                <h1>these are the applications</h1>
+
             </div>)}catch (e){
             return    <div className="ui active dimmer"><div className="ui text loader huge">loading Applications</div></div>;
         }

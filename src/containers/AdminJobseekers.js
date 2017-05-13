@@ -6,7 +6,18 @@ import {withRouter} from 'react-router';
 import {connect} from 'react-redux';
 import * as actionTypes from '../constants/actionTypes';
 import ListItem from '../components/EmployeeListItem';
+import SearchInput, {createFilter} from 'react-search-input/lib/index';
+
 class AdminJobseekers extends Component{
+    constructor(props){
+        super(props);
+        this.state={
+            searchTerm:''
+        }
+    }
+    searchUpdated (term) {
+        this.setState({searchTerm: term})
+    }
     componentWillMount(){
        this.props.dispatch({
            type:actionTypes.ADMIN_ALL_EMPLOYEES_REQUESTED,
@@ -31,7 +42,9 @@ class AdminJobseekers extends Component{
     makePage(){
         try{
             const employees = this.props.adminData.allEmployees;
-            const listItems = employees.map((employee) =>
+            const KEYS_TO_FILTERS=['contact_num','first_name','last_name','email'];
+            const filteredEmployees = employees.filter(createFilter(this.state.searchTerm, KEYS_TO_FILTERS));
+            const listItems = filteredEmployees.map((employee) =>
                 <ListItem
                     key={employee.id}
                     data={employee}
@@ -39,7 +52,13 @@ class AdminJobseekers extends Component{
                     handleMore={this.redirectToEmployee.bind(this)}
                 />
             );
-            return listItems;
+            return (
+                <div className="ui link cards">
+                    {listItems}
+                    {filteredEmployees.length===0? <h1>No Results Found :(</h1>:undefined}
+
+                </div>
+            );
         }catch (e){
             return    <div className="ui active dimmer"><div className="ui text loader huge">loading Job Seekers</div></div>;
         }
@@ -50,11 +69,12 @@ class AdminJobseekers extends Component{
     render(){
         return(
             <div >
-                jobseekers
                 <div style={{marginTop:'15px',}}  >
-                    <div className="ui link cards">
-                        {this.makePage()}
+                    <div className="ui  segment" style={{maxWidth:"600px",margin:"20px"}}>
+                        <SearchInput className='search-input ui input focus fluid' onChange={this.searchUpdated.bind(this)} />
                     </div>
+                        {this.makePage()}
+
                 </div>
             </div>
         );

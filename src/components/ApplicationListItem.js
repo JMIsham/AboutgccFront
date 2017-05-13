@@ -58,7 +58,7 @@ class ApplicationListItem extends Component{
             <div className="content">
                 <img className="right floated mini ui image" src={"http://localhost/aboutGccAsserts/DPs/"+this.props.data.dp}/>
                 <div className="header" data-tooltip="More Details" data-position="top center">
-                    <Link to={"/admin/employee/"+this.props.data.employee_id}>{this.props.data.first_name+" "+this.props.data.last_name}</Link>
+                    <Link to={"/admin/jobseeker/"+this.props.data.user_id}>{this.props.data.first_name+" "+this.props.data.last_name}</Link>
                 </div>
                 <div className="meta">
                     <div data-tooltip="Load CV" data-position="top left">{this.getCVLink()}</div>

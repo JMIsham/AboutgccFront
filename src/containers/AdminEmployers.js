@@ -6,13 +6,26 @@ import {withRouter} from 'react-router';
 import {connect} from 'react-redux';
 import EmployerListItem from '../components/EmployerListItem';
 import * as actionTypes from '../constants/actionTypes';
+import SearchInput, {createFilter} from 'react-search-input/lib/index';
+
 
 class AdminEmployers extends Component{
     //this method gets data from backend
+    constructor(props){
+        super(props);
+        this.state={
+            searchTerm:''
+        }
+    }
+    searchUpdated (term) {
+        this.setState({searchTerm: term})
+    }
     makeList(){
         try{
             const employers = this.props.adminData.employers;
-            const listItems = employers.map((employer) =>
+            const KEYS_TO_FILTERS=['contact_num','name','email'];
+            const filteredEmployers = employers.filter(createFilter(this.state.searchTerm, KEYS_TO_FILTERS));
+            const listItems = filteredEmployers.map((employer) =>
                 <EmployerListItem
                     key={employer.id}
                     data={employer}
@@ -20,7 +33,14 @@ class AdminEmployers extends Component{
                     handleMore={this.redirectToEmployer.bind(this)}
                 />
             );
-            return listItems;
+            return (
+                <div className="ui link cards" style={{margin:"0 auto"}}>
+                    {listItems}
+                    {filteredEmployers.length===0? <h1>No Results Found :(</h1>:undefined}
+                </div>
+
+
+        );
         }catch (e){
             return    <div className="ui active dimmer"><div className="ui text loader huge">loading Employers</div></div>;
         }
@@ -52,11 +72,11 @@ class AdminEmployers extends Component{
     render(){
         return(
             <div style={{marginTop:'15px',}}  >
-                <div className="ui link cards">
-                    {this.makeList()}
+                <div className="ui  segment" style={{maxWidth:"600px",margin:"20px"}}>
+                    <SearchInput className='search-input ui input focus fluid' onChange={this.searchUpdated.bind(this)} />
                 </div>
-
-                </div>
+                {this.makeList()}
+            </div>
         );
     }
 

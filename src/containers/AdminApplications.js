@@ -6,8 +6,18 @@ import {withRouter} from 'react-router';
 import {connect} from 'react-redux';
 import * as actionTypes from '../constants/actionTypes';
 import ListItem from '../components/ApplicationListItem';
-class AdminApplications extends Component{
+import SearchInput, {createFilter} from 'react-search-input/lib/index';
 
+class AdminApplications extends Component{
+    constructor(props){
+        super(props);
+        this.state={
+            searchTerm:''
+        }
+    }
+    searchUpdated (term) {
+        this.setState({searchTerm: term})
+    }
     componentWillMount(){
         this.props.dispatch({
             type:actionTypes.ADMIN_GET_ALL_APPLICATIONS_REQUESTED,
@@ -19,7 +29,9 @@ class AdminApplications extends Component{
     makePage(){
         try {
             const applications = this.props.adminData.allApplications;
-            const listItems = applications.map((application) =>
+            const KEYS_TO_FILTERS=['first_name','last_name','subject'];
+            const filteredApplications = applications.filter(createFilter(this.state.searchTerm, KEYS_TO_FILTERS));
+            const listItems = filteredApplications.map((application) =>
                 <ListItem
                     key={application.id}
                     data={application}
@@ -27,6 +39,7 @@ class AdminApplications extends Component{
             );
             return (<div className="ui cards">
                 {listItems}
+                {filteredApplications.length===0? <h1>No Results Found :(</h1>:undefined}
             </div>);
         }catch (e){
             return    <div className="ui active dimmer"><div className="ui text loader huge">loading Job Applications</div></div>;
@@ -36,6 +49,9 @@ class AdminApplications extends Component{
         return(
             <div style={{margin:"20px"}} >
                 applications
+                <div className="ui  segment" style={{maxWidth:"600px",margin:"20px"}}>
+                    <SearchInput className='search-input ui input focus fluid' onChange={this.searchUpdated.bind(this)} />
+                </div>
                 {this.makePage()}
             </div>
         );

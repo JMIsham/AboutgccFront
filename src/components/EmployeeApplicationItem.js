@@ -97,7 +97,7 @@ class EmployeeApplicationItem extends Component{
                 <div className="content">
                     {this.loadApplicationlable(application.application_status)}
                     <div className="header" >
-                        <a href={"view-post/"+application.id} target="_blank">{application.subject}</a>
+                        <a href={"/view-post/"+application.id} target="_blank">{application.subject}</a>
                         {this.setStatus(application.status)}
                     </div>
                     <div className="meta">

@@ -65,7 +65,7 @@ class postItem extends Component{
     render(){
         const post = this.props.post;
         return(
-        <div className="card" onClick={this.handleMore.bind(this)} style={{backgroundColor:"#90a4ae"}}>
+        <div className="blue card" onClick={this.handleMore.bind(this)} style={{background:"ffff00"}} >
             <div className="content">
                 <div className="header">{post.subject}{getCountry(this.props.post.c_name)} </div>
 

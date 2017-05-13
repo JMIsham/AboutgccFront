@@ -75,9 +75,9 @@ class RegistrationPage extends Component{
             <div style={style}>
                 <Container fluid>
                     <Row>
-                        <Col lg={4}>
+                        <Col lg={2}>
                         </Col>
-                        <Col  lg={4}>
+                        <Col  lg={8}>
                             <Tabs onChange={this.handleSwipe.bind(this)} value={this.state.slideIndex} >
                                 <Tab label="Employer Registration" value={0} buttonStyle={{backgroundColor:"#37474f", fontColor:"#000000"}}/>
                                 <Tab label="JobSeeker Registration" value={1} buttonStyle={{fontColor:"#37474f",backgroundColor:"#37474f",}}/>

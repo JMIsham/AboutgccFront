@@ -8,6 +8,7 @@ import * as actionTypes from '../constants/actionTypes';
 import {getCountry} from './Country';
 import {Link} from 'react-router';
 class AdminMorePost extends Component{
+
     componentWillMount(){
         this.props.dispatch({
             type:actionTypes.ADMIN_SPECIFIC_POST_REQUESTED,
@@ -135,7 +136,7 @@ class AdminMorePost extends Component{
     }
     render(){
         return (
-            <div style={{margin:"40px",marginTop:"80px"}}>
+            <div style={{margin:"40px auto",marginTop:"80px"}}>
                 {this.makePage()}
             </div>
             );

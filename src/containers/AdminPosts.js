@@ -6,7 +6,18 @@ import {withRouter} from 'react-router';
 import {connect} from 'react-redux';
 import * as actionTypes from '../constants/actionTypes';
 import MenueItem from '../components/AdminPostListItem';
+import SearchInput, {createFilter} from 'react-search-input/lib/index';
+
 class AdminPosts extends Component{
+    constructor(props){
+        super(props);
+        this.state={
+            searchTerm:''
+        }
+    }
+    searchUpdated (term) {
+        this.setState({searchTerm: term})
+    }
     componentWillMount(){
         this.props.dispatch({
             type:actionTypes.ADMIN_ALL_POSTS_REQUESTED,
@@ -43,7 +54,9 @@ class AdminPosts extends Component{
     makepage(){
         try{
             const posts = this.props.adminData.allPosts;
-            const listItems = posts.map((post) =>
+            const KEYS_TO_FILTERS=['about_job','com_name','country_name','expire_date','initiated_date','subject','tags.name'];
+            const filteredPosts = posts.filter(createFilter(this.state.searchTerm, KEYS_TO_FILTERS));
+            const listItems = filteredPosts.map((post) =>
                 <MenueItem
                     key={post.id}
                     post={post}
@@ -55,8 +68,12 @@ class AdminPosts extends Component{
             );
             return(<div className="ui  column grid" style={{margin:"10px"}}>
                 <div  className="column ">
+                    <div className="ui  segment" style={{maxWidth:"600px",margin:"20px"}}>
+                        <SearchInput className='search-input ui input focus fluid' onChange={this.searchUpdated.bind(this)} />
+                    </div>
                     <div className="ui cards">
                         {listItems}
+                        {filteredPosts.length===0? <h1>No Results Found :(</h1>:undefined}
                     </div>
                 </div>
             </div>);
