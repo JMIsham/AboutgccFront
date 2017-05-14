@@ -7,6 +7,8 @@ import {connect} from 'react-redux';
 import * as actionTypes from '../constants/actionTypes';
 import MenueItem from '../components/AdminPostListItem';
 import SearchInput, {createFilter} from 'react-search-input/lib/index';
+import {Row,Col,Container}from 'react-grid-system';
+
 
 class AdminPosts extends Component{
     constructor(props){
@@ -66,17 +68,22 @@ class AdminPosts extends Component{
                     handleRedirect={this.handleRedirect.bind(this)}
                 />
             );
-            return(<div className="ui  column grid" style={{margin:"10px"}}>
-                <div  className="column ">
-                    <div className="ui  segment" style={{maxWidth:"600px",margin:"20px"}}>
-                        <SearchInput className='search-input ui input focus fluid' onChange={this.searchUpdated.bind(this)} />
+            return(
+
+                    <div  style={{marginTop:"40px"}}>
+                        <h2 className="ui horizontal divider header">
+                            <i className="suitcase icon"></i>
+                            {filteredPosts.length+" Job Posts"}
+                        </h2>
+                        <div className="ui  segment" >
+                            <SearchInput className='search-input ui input focus fluid' onChange={this.searchUpdated.bind(this)} />
+                        </div>
+                        <div className="ui cards">
+                            {listItems}
+                            {filteredPosts.length===0? <h1>No Results Found :(</h1>:undefined}
+                        </div>
                     </div>
-                    <div className="ui cards">
-                        {listItems}
-                        {filteredPosts.length===0? <h1>No Results Found :(</h1>:undefined}
-                    </div>
-                </div>
-            </div>);
+            );
 
         }catch (e){
             return    <div className="ui active dimmer"><div className="ui text loader huge">loading Posts</div></div>;
@@ -84,8 +91,18 @@ class AdminPosts extends Component{
     }
     render(){
         return(
-            <div style={{maxWidth:"800px"}}>
-                {this.makepage()}
+            <div >
+                <Container fluid>
+                    <Row>
+                        <Col lg={2} xs={2} >
+                        </Col>
+                        <Col lg={8} xs={8} >
+                            {this.makepage()}
+                        </Col>
+                        <Col lg={2} xs={2} >
+                        </Col>
+                    </Row>
+                </Container>
             </div>
         );
     }

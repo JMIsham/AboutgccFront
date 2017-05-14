@@ -37,10 +37,20 @@ class AdminApplications extends Component{
                     data={application}
                 />
             );
-            return (<div className="ui cards">
-                {listItems}
-                {filteredApplications.length===0? <h1>No Results Found :(</h1>:undefined}
-            </div>);
+            return (
+                <div>
+                    <h2 className="ui horizontal divider header">
+                        <i className="file text icon"></i>
+                        {filteredApplications.length+"Applications"}
+                    </h2>
+                    <div className="ui  segment" style={{maxWidth:"600px",margin:"20px"}}>
+                        <SearchInput className='search-input ui input focus fluid' onChange={this.searchUpdated.bind(this)} />
+                    </div>
+                    <div className="ui cards">
+                        {listItems}
+                        {filteredApplications.length===0? <h1>No Results Found :(</h1>:undefined}
+                    </div>
+                </div>);
         }catch (e){
             return    <div className="ui active dimmer"><div className="ui text loader huge">loading Job Applications</div></div>;
         }
@@ -48,10 +58,7 @@ class AdminApplications extends Component{
     render(){
         return(
             <div style={{margin:"20px"}} >
-                applications
-                <div className="ui  segment" style={{maxWidth:"600px",margin:"20px"}}>
-                    <SearchInput className='search-input ui input focus fluid' onChange={this.searchUpdated.bind(this)} />
-                </div>
+
                 {this.makePage()}
             </div>
         );

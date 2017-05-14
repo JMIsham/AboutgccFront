@@ -34,9 +34,18 @@ class AdminEmployers extends Component{
                 />
             );
             return (
-                <div className="ui link cards" style={{margin:"0 auto"}}>
-                    {listItems}
-                    {filteredEmployers.length===0? <h1>No Results Found :(</h1>:undefined}
+                <div>
+                    <h2 className="ui horizontal divider header">
+                        <i className="user icon"></i>
+                        {filteredEmployers.length+" Employers"}
+                    </h2>
+                    <div className="ui  segment" style={{maxWidth:"600px",margin:"20px"}}>
+                        <SearchInput className='search-input ui input focus fluid' onChange={this.searchUpdated.bind(this)} />
+                    </div>
+                    <div className="ui link cards" style={{margin:"0 auto"}}>
+                        {listItems}
+                        {filteredEmployers.length===0? <h1>No Results Found :(</h1>:undefined}
+                    </div>
                 </div>
 
 
@@ -72,9 +81,6 @@ class AdminEmployers extends Component{
     render(){
         return(
             <div style={{marginTop:'15px',}}  >
-                <div className="ui  segment" style={{maxWidth:"600px",margin:"20px"}}>
-                    <SearchInput className='search-input ui input focus fluid' onChange={this.searchUpdated.bind(this)} />
-                </div>
                 {this.makeList()}
             </div>
         );
