@@ -2,7 +2,7 @@
  * Created by Isham on 3/29/2017.
  */
 import React,{Component} from 'react';
-import {withRouter} from 'react-router';
+import {withRouter,Link} from 'react-router';
 import {connect} from 'react-redux';
 import {Row,Col,Container}from 'react-grid-system';
 import * as actionTypes from '../constants/actionTypes';
@@ -179,10 +179,10 @@ class JobseekerPage extends Component{
                             <div className="floating ui red label">20</div>
                         </div>
                         <div style={{textAlign:"center",padding:"10px"}}>
-                            <a>
+                            <Link to="/employee/profile">
                                 <i className="settings icon"></i>
                                 Profile Details
-                            </a>
+                            </Link>
                         </div>
                         <div style={{textAlign:"center",padding:"10px"}}>
                             <a onClick={this.handleOpenPassword.bind(this)}>

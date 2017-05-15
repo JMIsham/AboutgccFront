@@ -12,12 +12,44 @@ import EmployerIcon from 'material-ui/svg-icons/action/account-balance';
 import PostIcon from 'material-ui/svg-icons/action/work';
 import ApplicationIcon from 'material-ui/svg-icons/action/note-add';
 import JobSeekerIcon from 'material-ui/svg-icons/action/assignment-ind';
+import PasswordIcon from 'material-ui/svg-icons/action/lock';
 import IconButton from 'material-ui/IconButton';
+import * as actionTypes from '../constants/actionTypes';
+import ChangePassword from '../components/ChangePassword';
+import FlatButton from 'material-ui/FlatButton';
+import Dialog from 'material-ui/Dialog';
+
 
 import Apply from 'material-ui/svg-icons/action/note-add';
 
 
 class AdminPanal extends Component{
+    constructor(props){
+        super(props);
+        this.state={
+            openChangePassword:false
+        }
+    }
+    handleChangePassword(formData){
+        this.props.dispatch({
+            type:actionTypes.USER_CHANGE_PASSWORD_REQUESTED,
+            payload:{
+                formData:formData,
+                token:this.props.state.user.token
+            }
+        });
+    }
+    handleOpenPassword(){
+        this.setState({
+            openChangePassword:true
+        });
+    }
+    handleClosePassword(){
+        this.setState({
+            openChangePassword:false
+        });
+        this.props.dispatch({type:actionTypes.USER_CHANGE_PASSWORD_CLOSED});
+    }
     loadPage(){
         try{
             const roles=(jwtDecode(this.props.state.user.token)).roles;
@@ -32,9 +64,18 @@ class AdminPanal extends Component{
 
     render(){
         this.loadPage();
+        const passwordActions = [
+            <FlatButton
+                label="Close"
+                primary={true}
+                onTouchTap={this.handleClosePassword.bind(this)}
+            />
+        ];
+
         return(
+
             <div>
-                <Drawer open={true} openSecondary={true} width={"82px"} >
+                <Drawer open={true} openSecondary={true} width={"84px"} >
                         <div style={{background:'#37474F',minHeight:'100%'}}>
                             <Link to="/admin" >
                                 <IconButton tooltip="Applications" tooltipPosition="bottom-right" iconStyle={{width:"40px",height:"40px"}} style={{marginTop:"55px",width:"80px",height:"80px"}}>
@@ -56,6 +97,9 @@ class AdminPanal extends Component{
                                     <JobSeekerIcon color={cyan500} hoverColor={cyan100} />
                                 </IconButton>
                             </Link>
+                            <IconButton onTouchTap={this.handleOpenPassword.bind(this)} tooltip="Change Password" tooltipPosition="bottom-center" iconStyle={{width:"40px",height:"40px"}} style={{marginTop:"10px",width:"80px",height:"80px"}}>
+                                <PasswordIcon color={cyan500} hoverColor={cyan100} />
+                            </IconButton>
 
                         </div>
                 </Drawer>
@@ -64,6 +108,20 @@ class AdminPanal extends Component{
                     {this.props.children}
 
                 </div>
+                <Dialog
+                    title="Change Password"
+                    actions={passwordActions}
+                    modal={false}
+                    open={this.state.openChangePassword}
+                    onRequestClose={this.handleClosePassword.bind(this)}
+                    autoScrollBodyContent={true}
+                >
+                    <ChangePassword
+                        onSubmit={this.handleChangePassword.bind(this)}
+                        passwordError={this.props.state.user.wrongPassword}
+                        succeeded = {this.props.state.user.passwordChangeSucceeded}
+                    />
+                </Dialog>
 
             </div>
         );

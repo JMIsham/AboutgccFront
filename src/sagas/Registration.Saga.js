@@ -52,7 +52,16 @@ export function* watchEmployeeRegister(){
     yield takeLatest(types.EMPLOYEE_REGISTRATION_REQUESTED,doEmployeeRegister);
 }
 export function* doEmployeeRegister(action){
-    const responses = yield call(api.registerEmployee,action.payload);
+    const edit = action.payload.edit;
+    const id=action.payload.id;
+    const formData = action.payload.formData;
+    const token = action.payload.token;
+    var responses;
+    if(edit){
+        responses = yield call(api.editEmployeeInfo,formData,token)
+    }else{
+        responses = yield call(api.registerEmployee,action.payload);
+    }
     if(responses[0].status===406){
         if(responses[1].indexOf("USERNAME_EXISTS")!=-1){
             yield put({
@@ -74,6 +83,15 @@ export function* doEmployeeRegister(action){
                 type:types.EMPLOYEE_CONTACT_NUMBER_INVALID
             })
         }
+    }else{
+        yield put({
+            type:types.EMPLOYER_MORE_INFO_REQUESTED,
+            payload:{
+                userType:2,
+                id:id,
+                token:token
+            }
+        });
     }
 
 }

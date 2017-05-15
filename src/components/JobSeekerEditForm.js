@@ -17,13 +17,13 @@ const email = value => value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.tes
 const number = value => value && !/^[.+]+[0-9]{11,20}$/i.test(value) ? 'invalid contact number' : undefined;
 const username = value => value && !/^[A-Z0-9._%+-@]{3,100}$/i.test(value) ? 'invalid username' : undefined;
 const nic = value => value && !/^[0-9.v]{10}$/i.test(value) ? 'invalid nic' : undefined;
-class JobSeekerEditForm extends Component(){
+class JobSeekerEditForm extends Component{
 
     constructor(props) {
         super(props);
 
     }
-    serNameChanged(){
+    userNameChanged(){
         this.props.handleUserNameChange();
     }
     emailChanged(){
@@ -147,7 +147,7 @@ class JobSeekerEditForm extends Component(){
                         </div>
                         <div >
 
-                            <FlatButton type="submit"  labelStyle = {{color :"#2196f3",}} style={{ marginRight:'10px',marginLeft:"20px",}} disabled={submitting} label="Register" className="button-submit" />
+                            <FlatButton type="submit"  labelStyle = {{color :"#2196f3",}} style={{ marginRight:'10px',marginLeft:"20px",}} disabled={submitting} label="Update Info" className="button-submit" />
                             <FlatButton disabled={pristine || submitting} onClick={reset} label="Clear All"  secondary={true} />
 
                         </div>
@@ -161,13 +161,14 @@ JobSeekerEditForm = reduxForm({form: 'jobseekerEdit'})(JobSeekerEditForm);
 JobSeekerEditForm=connect(state => (
 {
     initialValues: {
-        companyName:state.user.moreInfo.name,
-        registrationNumber:state.user.moreInfo.reg_number,
+        firstName:state.user.moreInfo.first_name,
+        lastName:state.user.moreInfo.last_name,
+        nic:state.user.moreInfo.nic_number,
         location:parseInt(state.user.moreInfo.country_id),
         doorAddress:state.user.moreInfo.door_address,
         email:state.user.moreInfo.email,
         contactNumber:state.user.moreInfo.contact_num,
-        aboutUs:state.user.moreInfo.about_us,
+        aboutMe:state.user.moreInfo.about_me,
         username:state.user.moreInfo.username
 
     }
