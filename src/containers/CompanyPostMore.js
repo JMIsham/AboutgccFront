@@ -249,10 +249,10 @@ class CompanyPostMore extends Component{
                         </div>
                     </h4>
                     <div data-tooltip="Edit Tags" data-position="right center" style={{maxWidth:"40px"}}>
-                    <FloatingActionButton mini={true} backgroundColor={"#37474f"} onTouchTap={this.handleTagOpen.bind(this)}>
-                        <ModeEdit />
-                    </FloatingActionButton>
-                        </div>
+                        <FloatingActionButton mini={true} backgroundColor={"#37474f"} onTouchTap={this.handleTagOpen.bind(this)}>
+                            <ModeEdit />
+                        </FloatingActionButton>
+                    </div>
                     <div className="ui raised segment">
                         {post.tags.map((tag)=><span style={{margin:"5px"}} key={post.id+""+tag.tag_id} className="ui tag label">{tag.name}</span>)}
                     </div>

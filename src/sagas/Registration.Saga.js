@@ -5,9 +5,22 @@ import * as types from '../constants/actionTypes';
 import {takeLatest, call, put} from 'redux-saga/effects';
 import * as api from '../Connectivity/api2';
 import * as formValidation from '../Connectivity/form.api';
+import {push} from 'react-router-redux';
+
 
 export function* doEmployerRegister(action){
-    const responses = yield call(api.registerEmployer,action.payload);
+    const edit=action.payload.edit;
+    const token = action.payload.token;
+    const id=action.payload.id;
+    var responses;
+    if(edit){
+
+        responses = yield call(api.editEmployer,action.payload.data,token);
+    }
+    else{
+        responses = yield call(api.registerEmployer,action.payload);
+    }
+
     if(responses[0].status===406){
         if(responses[1].indexOf("USERNAME_EXISTS")!=-1){
             yield put({
@@ -19,6 +32,18 @@ export function* doEmployerRegister(action){
                 type:types.EMPLOYER_EMAIL_FAILED
             })
         }
+    }
+    if(edit){
+        yield put(
+            {
+                type:types.EMPLOYER_MORE_INFO_REQUESTED,
+                payload:{
+                    userType:1,
+                    id:id,
+                    token:token
+                }
+            }
+        );
     }
 
 }
@@ -98,4 +123,27 @@ export function * doEmployerEmail(action){
 
     }
 
+}
+export function * watchChangePassword(){
+    yield takeLatest(types.USER_CHANGE_PASSWORD_REQUESTED,doChangePassword);
+}
+export function * doChangePassword(action){
+    try{
+        const token = action.payload.token;
+        const formData = action.payload.formData;
+        const response = yield call(api.changeUserPassword,formData,token);
+        if(response===401){
+            yield put({
+                type:types.USER_CHANGE_PASSWORD_WRONG_PASSWORD
+            })
+        }
+        else{
+            yield put({
+                type:types.USER_CHANGE_PASSWORD_SUCCEEDED
+            })
+        }
+
+    }catch (e){
+        yield put(push('/logout'));
+    }
 }

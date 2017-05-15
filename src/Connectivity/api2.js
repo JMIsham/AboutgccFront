@@ -56,6 +56,32 @@ export async function registerEmployer(formData){
     const data= await response.json();
     return [response,data];
 }
+export async function editEmployer(formData,token){
+    console.log("called Registration");
+    const url = "http://localhost/aboutgcc/web/app_dev.php/edit-employer-info";
+    const request = {
+        method: "POST",
+        mode: "cors",
+        headers:{
+            'Content-Type': 'application/json',
+            'Authorization':'Bearer '+token
+        },
+        body: JSON.stringify(
+            {   "username":formData.username,
+                "email":formData.email,
+                "name":formData.companyName,
+                "contactNum": formData.contactNumber,
+                "RegNumber":formData.registrationNumber,
+                "doorAddress":formData.doorAddress,
+                "country":formData.location,
+                "aboutUs":formData.aboutUs
+            })
+    };
+    console.log(request);
+    const response = await fetch(url,request);
+    const data= await response.json();
+    return [response,data];
+}
 export async function registerEmployee(formData){
     console.log("called Registration");
     const url = "http://localhost/aboutgcc/web/app_dev.php/employee";
@@ -63,7 +89,8 @@ export async function registerEmployee(formData){
         method: "POST",
         mode: "cors",
         headers:{
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+
         },
         body: JSON.stringify(
             {   "username":formData.username,
@@ -856,6 +883,36 @@ export async function getSpecificEmployee(id,token){
     else if(response.status==204){
         return false;
     }
+    throw new ApiError(
+        data.message||response.statusText,
+        response.status
+    );
+
+}
+export async function changeUserPassword(formData,token){
+    const url = "http://localhost/aboutgcc/web/app_dev.php/user/change-password";
+    const request={
+        method: "PUT",
+        mode: "cors",
+        headers:{
+            'Content-Type': 'application/json',
+            'Authorization':'Bearer '+token
+        },
+        body :JSON.stringify({
+            'password' : formData.password,
+            'newPassword1' : formData.newPassword1,
+            'newPassword2' : formData.newPassword2
+
+        })
+    };
+    const response= await fetch(url,request);
+    const data=await response.json();
+    console.log(data);
+    if(response.status==200){
+        console.log(data);
+        return data;
+    }
+
     throw new ApiError(
         data.message||response.statusText,
         response.status

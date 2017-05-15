@@ -12,6 +12,8 @@ import jwtDecode from 'jwt-decode';
 import Dropzone from 'react-dropzone';
 import FlatButton from 'material-ui/FlatButton';
 import Dialog from 'material-ui/Dialog';
+import ChangePassword from '../components/ChangePassword';
+
 class JobseekerPage extends Component{
 
     constructor(props) {
@@ -22,6 +24,7 @@ class JobseekerPage extends Component{
             loginClicked:false,
             open:false,
             cvOpen:false,
+            openChangePassword:false,
             files: [],
             cvFiles: []
         };
@@ -34,6 +37,15 @@ class JobseekerPage extends Component{
     onCVDrop(cvFiles, rejected) {
         this.setState({
             cvFiles
+        });
+    }
+    handleChangePassword(formData){
+        this.props.dispatch({
+            type:actionTypes.USER_CHANGE_PASSWORD_REQUESTED,
+            payload:{
+                formData:formData,
+                token:this.props.user.token
+            }
         });
     }
     handleDP(){
@@ -78,6 +90,17 @@ class JobseekerPage extends Component{
         });
     }
 
+    handleOpenPassword(){
+        this.setState({
+            openChangePassword:true
+        });
+    }
+    handleClosePassword(){
+        this.setState({
+            openChangePassword:false
+        });
+        this.props.dispatch({type:actionTypes.USER_CHANGE_PASSWORD_CLOSED});
+    }
     openCv(){
         this.setState({
            cvOpen:true
@@ -162,9 +185,9 @@ class JobseekerPage extends Component{
                             </a>
                         </div>
                         <div style={{textAlign:"center",padding:"10px"}}>
-                            <a>
+                            <a onClick={this.handleOpenPassword.bind(this)}>
                                 <i className="protect icon"></i>
-                                Login Details
+                                Change Password
                             </a>
                         </div>
                         <div style={{textAlign:"center",padding:"10px"}}>
@@ -197,6 +220,14 @@ class JobseekerPage extends Component{
                 onTouchTap={this.handleDP.bind(this)}
             />
         ];
+            const passwordActions = [
+                <FlatButton
+                    label="Close"
+                    primary={true}
+                    onTouchTap={this.handleClosePassword.bind(this)}
+                />
+            ];
+
         const cvActions=[
             <FlatButton
                 label="Close"
@@ -264,6 +295,21 @@ class JobseekerPage extends Component{
                             </Dropzone>
                         </div>
                     </section>
+                </Dialog>
+                <Dialog
+                    title="Change Password"
+                    actions={passwordActions}
+                    modal={false}
+                    open={this.state.openChangePassword}
+                    onRequestClose={this.handleClosePassword.bind(this)}
+                    autoScrollBodyContent={true}
+                >
+                    <ChangePassword
+                        onSubmit={this.handleChangePassword.bind(this)}
+                        passwordError={this.props.user.wrongPassword}
+                        succeeded = {this.props.user.passwordChangeSucceeded}
+                    />
+
                 </Dialog>
             </div>)}
             catch (e){

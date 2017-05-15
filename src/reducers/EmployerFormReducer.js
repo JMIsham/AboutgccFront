@@ -27,7 +27,11 @@ export default function EmployerFormReducer(state={},action){
             newState = objectAssign({}, state);
             newState.emailError = undefined;
             return newState;
-
+        case actionTypes.EMPLOYER_REGISTRATION_REQUESTED:
+            newState = objectAssign({}, state);
+            newState.emailError = undefined;
+            newState.usrnameError = undefined;
+            return newState;
         default:
             return state;
     }

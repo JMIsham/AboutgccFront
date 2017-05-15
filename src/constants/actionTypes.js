@@ -2,6 +2,11 @@
 export const EMPLOYER_REGISTRATION_REQUESTED="employer-registration";
 export const EMPLOYEE_REGISTRATION_REQUESTED="employee-registration";
 
+export const USER_CHANGE_PASSWORD_REQUESTED = "user-change-password-requested";
+export const USER_CHANGE_PASSWORD_SUCCEEDED = "user-change-password-succeeded";
+export const USER_CHANGE_PASSWORD_WRONG_PASSWORD = "user-change-password-wrong-password";
+export const USER_CHANGE_PASSWORD_CLOSED = "user-change-password-closed";
+
 export const HOMEPAGE_REQUESTED = "homepage-requested";
 
 export const FETCH_ALL_POSTS_SUCCEEDED = "fetch-all-posts-succeeded";

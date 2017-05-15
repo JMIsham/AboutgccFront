@@ -97,6 +97,7 @@ class CompanyJobPosts extends Component{
                     <FloatingActionButton mini={true} backgroundColor={"#37474f"} onTouchTap={this.handleOpen.bind(this)}>
                         <ContentAdd />
                     </FloatingActionButton>
+
                 </div>
 
                 <div className="floating ui black label">{(this.props.allPosts).length}</div>
@@ -124,6 +125,9 @@ class CompanyJobPosts extends Component{
                     {this.loadPosts()}
                     </div>
                 </div>
+                <div>
+
+                </div>
                 <Dialog
                     title="New Post"
                     actions={actions}
@@ -144,7 +148,9 @@ class CompanyJobPosts extends Component{
 const mapStateToProps=(state)=>{
     return({
         user:state.user,
-        allPosts:state.employerReducer.AllPosts
+        allPosts:state.employerReducer.AllPosts,
+        employerForm:state.employerForm
+
     });
 };
 CompanyJobPosts=withRouter(CompanyJobPosts);

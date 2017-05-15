@@ -53,6 +53,28 @@ export default function userReducer(state =initialState.user,action ){
             newState=objectAssign({},state);
             newState.moreInfo.cv=action.payload;
             return newState;
+        case (actionTypes.USER_CHANGE_PASSWORD_WRONG_PASSWORD):
+            newState=objectAssign({},state);
+            newState.wrongPassword="Wrong Password";
+            newState.passwordChangeSucceeded=undefined;
+
+            return newState;
+        case (actionTypes.USER_CHANGE_PASSWORD_SUCCEEDED):
+            newState=objectAssign({},state);
+            newState.wrongPassword=undefined;
+            newState.passwordChangeSucceeded="Succeeded";
+            return newState;
+        case (actionTypes.USER_CHANGE_PASSWORD_REQUESTED):
+            newState=objectAssign({},state);
+            newState.wrongPassword=undefined;
+            newState.passwordChangeSucceeded=undefined;
+            return newState;
+        case (actionTypes.USER_CHANGE_PASSWORD_CLOSED):
+            newState=objectAssign({},state);
+            newState.wrongPassword=undefined;
+            newState.passwordChangeSucceeded=undefined;
+            return newState;
+
         default:
             return state
     }
